@@ -15,6 +15,24 @@ export default function databaseGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "input",
+        name: "port",
+        message: "What port should Drizzle Studio run on for this database?",
+        validate: (input: string) => {
+          const port = parseInt(input);
+          if (isNaN(port)) {
+            return "Port must be a valid number";
+          }
+          if (!input.startsWith("55")) {
+            return "Drizzle Studio ports must start with 55 (e.g., 5500, 5501, 5502)";
+          }
+          if (port < 5500 || port > 5599) {
+            return "Drizzle Studio ports must be between 5500-5599";
+          }
+          return true;
+        },
+      },
+      {
+        type: "input",
         name: "deps",
         message:
           "Enter a space separated list of dependencies you would like to install",

@@ -15,6 +15,24 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "input",
+        name: "port",
+        message: "What port should this frontend app run on?",
+        validate: (input: string) => {
+          const port = parseInt(input);
+          if (isNaN(port)) {
+            return "Port must be a valid number";
+          }
+          if (!input.startsWith("4")) {
+            return "Frontend app ports must start with 4 (e.g., 4000, 4001, 4002)";
+          }
+          if (port < 4000 || port > 4999) {
+            return "Frontend app ports must be between 4000-4999";
+          }
+          return true;
+        },
+      },
+      {
+        type: "input",
         name: "deps",
         message:
           "Enter a space separated list of dependencies you would like to install",

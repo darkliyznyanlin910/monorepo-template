@@ -15,6 +15,24 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "input",
+        name: "port",
+        message: "What port should this backend service run on?",
+        validate: (input: string) => {
+          const port = parseInt(input);
+          if (isNaN(port)) {
+            return "Port must be a valid number";
+          }
+          if (!input.startsWith("3")) {
+            return "Backend service ports must start with 3 (e.g., 3000, 3001, 3002)";
+          }
+          if (port < 3000 || port > 3999) {
+            return "Backend service ports must be between 3000-3999";
+          }
+          return true;
+        },
+      },
+      {
+        type: "input",
         name: "deps",
         message:
           "Enter a space separated list of dependencies you would like to install",

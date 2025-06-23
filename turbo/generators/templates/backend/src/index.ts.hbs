@@ -11,4 +11,4 @@ const app = new Hono()
   )
   .get("/", (c) => c.json({ message: "Hello, world!" }));
 export type AppType = typeof app;
-serve({ port: 3000, fetch: app.fetch });
+serve({ port: {{ port }}, fetch: app.fetch });
