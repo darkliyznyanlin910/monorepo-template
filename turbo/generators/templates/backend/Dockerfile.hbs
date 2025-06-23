@@ -32,5 +32,5 @@ WORKDIR /repo
 
 COPY --from=builder /repo/apps/{{ name }}/dist /repo/apps/{{ name }}/dist
 
-EXPOSE 3000
+EXPOSE {{ port }}
 CMD ["node", "/repo/apps/{{ name }}/dist/index.cjs"]
