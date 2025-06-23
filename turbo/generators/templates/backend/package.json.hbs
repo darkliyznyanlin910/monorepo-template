@@ -1,0 +1,38 @@
+{
+  "name": "@repo/{{ name }}",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.cjs",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "pnpm with-env tsx watch src/index.ts",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "with-env": "dotenv -e ../../.env"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@repo/prettier-config",
+  "dependencies": {
+    "@hono/node-server": "^1.14.4",
+    "@repo/auth": "workspace:^",
+    "@repo/db-auth": "workspace:^",
+    "@repo/service-discovery": "workspace:^",
+    "@t3-oss/env-core": "catalog:",
+    "better-auth": "1.2.9",
+    "hono": "^4.8.2",
+    "zod": "catalog:"
+  }
+}

@@ -80,6 +80,92 @@ monorepo-template/
 - **@repo/tailwind-config**: Tailwind configurations for web and native
 - **@repo/tsconfig**: TypeScript configurations for different project types
 
+## 🎨 Code Generation
+
+This monorepo includes Turbo generators for quickly scaffolding new packages and applications with consistent structure and configuration.
+
+### Available Generators
+
+#### Package Generator
+
+Create new internal packages in the `packages/` directory:
+
+```bash
+pnpm turbo gen package
+```
+
+**Features:**
+
+- Generates TypeScript package with ESLint and Prettier configuration
+- Automatically installs specified dependencies with latest versions
+- Creates basic `src/index.ts` entry point
+- Includes proper workspace configuration
+
+#### Frontend Generator
+
+Create new frontend applications in the `apps/` directory:
+
+```bash
+pnpm turbo gen frontend
+```
+
+**Features:**
+
+- Full React 19 + Vite + TanStack Router setup
+- Tailwind CSS with custom theme configuration
+- TypeScript with strict configuration
+- ESLint and Prettier pre-configured
+- Responsive layout with dark/light theme support
+- Custom fonts (Helvetica Neue family)
+- Development and build scripts ready
+
+#### Backend Generator
+
+Create new backend services in the `apps/` directory:
+
+```bash
+pnpm turbo gen backend
+```
+
+**Features:**
+
+- Hono framework setup with TypeScript
+- Environment validation with Zod
+- ESLint and Prettier configuration
+- Build and development scripts
+- Basic server structure ready
+
+#### Database Generator
+
+Create new database packages in the `databases/` directory:
+
+```bash
+pnpm turbo gen database
+```
+
+**Features:**
+
+- Drizzle ORM setup with PostgreSQL
+- Environment variable configuration
+- Database schema with TypeScript types
+- Client connection management
+- Slug generation for environment variables (replaces `-` with `_` and capitalizes)
+
+### Post-Generation Instructions
+
+Each generator provides specific next steps:
+
+- **Backend services**: Guidance to register the new service in the service discovery system
+- **Frontend apps**: Instructions for service integration if needed
+- **Database packages**: Schema setup and migration instructions with environment variable guidance
+
+### Generator Benefits
+
+- **Consistency**: All generated code follows the same patterns and configurations
+- **Speed**: Skip boilerplate setup and jump straight to business logic
+- **Best Practices**: Generated code includes proper TypeScript, linting, and formatting setup
+- **Integration**: Automatically configured to work with the monorepo's shared tooling
+
 ## 🚦 Getting Started
 
 ### Prerequisites
@@ -210,11 +296,12 @@ Services communicate through:
 
 1. **Install dependencies**: `pnpm install`
 2. **Set up environment**: Copy and configure `.env`
-3. **Start development**: `pnpm dev`
-4. **Make changes**: Edit code with full TypeScript support
-5. **Quality checks**: Run `pnpm lint` and `pnpm typecheck`
-6. **Database changes**: Use `pnpm db:push` and `pnpm db:studio`
-7. **Build**: `pnpm build` for production builds
+3. **Generate new packages/apps**: Use `pnpm turbo gen <type>` for scaffolding
+4. **Start development**: `pnpm dev`
+5. **Make changes**: Edit code with full TypeScript support
+6. **Quality checks**: Run `pnpm lint` and `pnpm typecheck`
+7. **Database changes**: Use `pnpm db:push` and `pnpm db:studio`
+8. **Build**: `pnpm build` for production builds
 
 ## 🎯 Best Practices
 

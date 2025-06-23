@@ -1,5 +1,5 @@
 {
-  "name": "@repo/frontend",
+  "name": "@repo/{{ name }}",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,7 +9,7 @@
   "scripts": {
     "build": "pnpm with-env tsc -b && pnpm with-env vite build",
     "preview": "pnpm with-env vite preview",
-    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules .tanstack",
     "dev": "pnpm with-env vite",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",

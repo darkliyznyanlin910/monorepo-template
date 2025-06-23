@@ -1,9 +1,7 @@
 import { serve } from "@hono/node-server";
+import { getBaseUrl, SERVICES } from "@repo/service-discovery";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-
-import { authMiddleware } from "@repo/auth/middleware";
-import { getBaseUrl, SERVICES } from "@repo/service-discovery";
 
 import { auth } from "~/auth";
 
