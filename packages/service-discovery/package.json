@@ -7,7 +7,6 @@
     ".": "./src/index.ts",
     "./env": "./src/env.ts"
   },
-  "license": "MIT",
   "scripts": {
     "build": "pnpm with-env tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",

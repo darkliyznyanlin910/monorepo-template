@@ -54,6 +54,11 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
+        path: "apps/{{ name }}/Dockerfile",
+        templateFile: "templates/frontend/Dockerfile.hbs",
+      },
+      {
+        type: "add",
         path: "apps/{{ name }}/eslint.config.js",
         templateFile: "templates/backend/eslint.config.js.hbs",
       },

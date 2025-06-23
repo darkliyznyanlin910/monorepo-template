@@ -6,9 +6,9 @@
   "exports": {
     ".": "./src/index.ts"
   },
-  "license": "MIT",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.cjs",
+    "build:docker": "docker build -t repo-auth-service:latest -f Dockerfile ../../",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "pnpm with-env tsx watch src/index.ts",
     "format": "prettier --check . --ignore-path ../../.gitignore",

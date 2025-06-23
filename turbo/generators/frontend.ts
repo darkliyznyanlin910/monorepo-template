@@ -54,6 +54,11 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
+        path: "apps/{{ name }}/Dockerfile",
+        templateFile: "templates/frontend/Dockerfile.hbs",
+      },
+      {
+        type: "add",
         path: "apps/{{ name }}/index.html",
         templateFile: "templates/frontend/index.html.hbs",
       },

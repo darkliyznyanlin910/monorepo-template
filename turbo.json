@@ -43,6 +43,10 @@
     "ui-add": {
       "cache": false,
       "interactive": true
+    },
+    "build:docker": {
+      "cache": false,
+      "persistent": false
     }
   },
   "globalEnv": ["AUTH_POSTGRES_URL", "AUTH_SECRET", "PORT"],
