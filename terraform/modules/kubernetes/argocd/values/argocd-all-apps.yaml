@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: all-apps
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    # https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/darkliyznyanlin910/monorepo-template
+    targetRevision: HEAD
+    path: kubernetes/appsets
+    directory:
+      include: "${appsets_include}"

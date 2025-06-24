@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - repo: https://cloudnative-pg.github.io/charts
+    name: cloudnative-pg
+    # https://artifacthub.io/packages/helm/cloudnative-pg/cloudnative-pg
+    version: 0.23.2
+    releaseName: cloudnative-pg
+    namespace: cnpg-operator
+    # https://github.com/cloudnative-pg/charts/blob/main/charts/cloudnative-pg/values.yaml
+    valuesInline: {}
+
+patches:
+  - target:
+      kind: CustomResourceDefinition
+      name: ".*"
+    patch: |-
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1sync-options
+        value: ServerSideApply=true
