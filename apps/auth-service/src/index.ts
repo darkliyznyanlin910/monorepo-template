@@ -1,7 +1,8 @@
 import { serve } from "@hono/node-server";
-import { getBaseUrl, SERVICES } from "@repo/service-discovery";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+
+import { getBaseUrl, SERVICES } from "@repo/service-discovery";
 
 import { auth } from "~/auth";
 
@@ -19,6 +20,14 @@ app.use(
   }),
 );
 
+app.get("/health", (c) =>
+  c.json({
+    ok: true,
+    service: "auth-service",
+    timestamp: new Date().toISOString(),
+  }),
+);
+
 app.on(["POST", "GET"], "/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
@@ -27,3 +36,5 @@ serve({
   port: 3000,
   fetch: app.fetch,
 });
+
+console.log("🚀 auth-service running on http://localhost:3000");
