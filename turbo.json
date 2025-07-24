@@ -50,7 +50,11 @@
     },
     "test": {
       "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/vitest.config.ts"],
+      "dependsOn": ["transit", "@repo/vitest#build"],
       "outputs": ["coverage.json"]
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
     }
   },
   "globalEnv": ["AUTH_POSTGRES_URL", "AUTH_SECRET", "PORT"],

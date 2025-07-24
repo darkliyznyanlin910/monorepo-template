@@ -1,10 +1,12 @@
 {
   "name": "@repo/vitest",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./base": "./src/configs/base-config.ts",
-    "./ui": "./src/configs/ui-config.ts"
+    ".": "./dist/index.js",
+    "./base": "./dist/configs/base-config.js",
+    "./ui": "./dist/configs/ui-config.js"
   },
   "scripts": {
     "build": "tsc",
