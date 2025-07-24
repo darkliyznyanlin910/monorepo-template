@@ -15,7 +15,8 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../env/.env --"
+    "with-env": "dotenv -e ../../env/.env --",
+    "test": "vitest run"
   },
   "dependencies": {
     "@repo/service-discovery": "workspace:*",
@@ -24,7 +25,8 @@
     "hono": "^4.8.2",
     "next-themes": "^0.4.6",
     "react": "catalog:react19",
-    "react-dom": "catalog:react19"
+    "react-dom": "catalog:react19",
+    "vitest": "catalog:vitest"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -32,6 +34,7 @@
     "@repo/tailwind-config": "workspace:*",
     "@repo/tsconfig": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@repo/vitest": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "@tanstack/router-devtools": "^1.99.9",
     "@tanstack/router-plugin": "^1.99.12",

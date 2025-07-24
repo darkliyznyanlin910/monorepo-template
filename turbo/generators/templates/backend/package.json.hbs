@@ -14,12 +14,14 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../.env"
+    "with-env": "dotenv -e ../../.env",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/tsconfig": "workspace:*",
+    "@repo/vitest": "workspace:*",
     "dotenv-cli": "^7.4.2",
     "esbuild": "^0.24.2",
     "eslint": "catalog:",
@@ -36,6 +38,7 @@
     "@t3-oss/env-core": "catalog:",
     "better-auth": "1.2.9",
     "hono": "^4.8.2",
+    "vitest": "catalog:vitest",
     "zod": "catalog:"
   }
 }

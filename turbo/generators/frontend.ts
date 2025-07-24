@@ -168,6 +168,16 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
         templateFile: "templates/frontend/public/fonts/HelveticaNeueThin.otf",
       },
       {
+        type: "add",
+        path: "apps/{{ name }}/vitest.config.ts",
+        templateFile: "templates/frontend/vitest.config.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/tests/math.test.ts",
+        templateFile: "templates/tests/math.test.ts.hbs",
+      },
+      {
         type: "modify",
         path: "apps/{{ name }}/package.json",
         async transform(content, answers) {

@@ -50,6 +50,16 @@ export default function packageGenerator(plop: PlopTypes.NodePlopAPI): void {
         template: "export const name = '{{ name }}';",
       },
       {
+        type: "add",
+        path: "packages/{{ name }}/vitest.config.ts",
+        templateFile: "templates/package/vitest.config.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "packages/{{ name }}/tests/math.test.ts",
+        templateFile: "templates/tests/math.test.ts.hbs",
+      },
+      {
         type: "modify",
         path: "packages/{{ name }}/package.json",
         async transform(content, answers) {

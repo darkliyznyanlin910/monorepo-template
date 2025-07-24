@@ -32,11 +32,11 @@
     "//#clean": {
       "cache": false
     },
-    "push": {
+    "db:push": {
       "cache": false,
       "interactive": true
     },
-    "studio": {
+    "db:studio": {
       "cache": false,
       "persistent": true
     },
@@ -47,6 +47,10 @@
     "build:docker": {
       "cache": false,
       "persistent": false
+    },
+    "test": {
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/vitest.config.ts"],
+      "outputs": ["coverage.json"]
     }
   },
   "globalEnv": ["AUTH_POSTGRES_URL", "AUTH_SECRET", "PORT"],

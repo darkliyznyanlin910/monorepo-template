@@ -55,7 +55,7 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "add",
         path: "apps/{{ name }}/Dockerfile",
-        templateFile: "templates/frontend/Dockerfile.hbs",
+        templateFile: "templates/backend/Dockerfile.hbs",
       },
       {
         type: "add",
@@ -81,6 +81,16 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
         type: "add",
         path: "apps/{{ name }}/src/env.ts",
         templateFile: "templates/backend/src/env.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/vitest.config.ts",
+        templateFile: "templates/backend/vitest.config.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/tests/math.test.ts",
+        templateFile: "templates/tests/math.test.ts.hbs",
       },
       {
         type: "modify",

@@ -21,6 +21,10 @@ catalogs:
     react-dom: 19.1.0
     "@types/react": ^19.1.6
     "@types/react-dom": ^19.1.5
+  vitest:
+    vitest: ^3.2.4
+    "@vitest/coverage-istanbul": ^3.2.4
+    "@vitest/ui": ^3.2.4
 onlyBuiltDependencies:
   - bufferutil
   - core-js-pure
