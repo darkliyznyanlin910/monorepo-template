@@ -16,7 +16,8 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "input",
         name: "port",
-        message: "What port should this backend service run on?",
+        message:
+          "What port should this backend service run on? Between 3000-3999",
         validate: (input: string) => {
           const port = parseInt(input);
           if (isNaN(port)) {

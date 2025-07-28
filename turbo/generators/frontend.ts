@@ -16,7 +16,8 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "input",
         name: "port",
-        message: "What port should this frontend app run on?",
+        message:
+          "What port should this frontend app run on? Even number between 4000 and 4998",
         validate: (input: string) => {
           const port = parseInt(input);
           if (isNaN(port)) {
@@ -44,6 +45,10 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
           if (answers.name.startsWith("@repo/")) {
             answers.name = answers.name.replace("@repo/", "");
           }
+        }
+        if ("port" in answers && typeof answers.port === "string") {
+          (answers as Record<string, unknown>).backendPort =
+            parseInt(answers.port) + 1;
         }
         return "Config sanitized";
       },
@@ -146,6 +151,16 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
         type: "add",
         path: "apps/{{ name }}/src/routes/index.tsx",
         templateFile: "templates/frontend/src/routes/index.tsx.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/server/env.ts",
+        templateFile: "templates/frontend/server/env.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/server/index.ts",
+        templateFile: "templates/frontend/server/index.ts.hbs",
       },
       {
         type: "add",
