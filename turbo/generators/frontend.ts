@@ -212,7 +212,7 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
             `   1. If this frontend needs to call backend services, register any new services:`,
           );
           console.log(
-            `      File: ${path.join(process.cwd(), "packages", "service-discovery", "src", "index.ts")}`,
+            `      File: ${path.join(process.cwd(), "packages", "service-discovery", "src", "config.ts")}`,
           );
           console.log(`   2. Add service names to the SERVICES array`);
           console.log(

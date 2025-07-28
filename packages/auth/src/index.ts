@@ -8,6 +8,7 @@ import { db } from "@repo/db-auth/client";
 export function initAuth(options: {
   baseUrl: string;
   secret: string | undefined;
+  trustedOrigins?: string[];
 }) {
   const config = {
     database: drizzleAdapter(db, {
@@ -20,7 +21,7 @@ export function initAuth(options: {
         path: "/docs",
       }),
     ],
-    trustedOrigins: ["expo://"],
+    trustedOrigins: options.trustedOrigins,
   } satisfies BetterAuthOptions;
 
   return betterAuth(config);

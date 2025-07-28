@@ -1,14 +1,14 @@
 {
-  "name": "@repo/{{ name }}",
+  "name": "@repo/{{name}}",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/types.ts"
   },
   "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.cjs",
-    "build:docker": "docker build -t repo-{{ name }}:latest -f Dockerfile ../../",
+    "build:docker": "docker build -t repo-{{name}}:latest -f Dockerfile ../../",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "pnpm with-env tsx watch src/index.ts",
     "format": "prettier --check . --ignore-path ../../.gitignore",
@@ -32,9 +32,11 @@
   "prettier": "@repo/prettier-config",
   "dependencies": {
     "@hono/node-server": "^1.14.4",
+    "@hono/zod-openapi": "^1.0.2",
     "@repo/auth": "workspace:^",
     "@repo/db-auth": "workspace:^",
     "@repo/service-discovery": "workspace:^",
+    "@scalar/hono-api-reference": "^0.9.12",
     "@t3-oss/env-core": "catalog:",
     "better-auth": "1.2.9",
     "hono": "^4.8.2",

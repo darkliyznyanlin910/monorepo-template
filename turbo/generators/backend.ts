@@ -84,6 +84,21 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
+        path: "apps/{{ name }}/src/factory.ts",
+        templateFile: "templates/backend/src/factory.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/src/routes/hello.ts",
+        templateFile: "templates/backend/src/routes/hello.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/src/types.ts",
+        templateFile: "templates/backend/src/types.ts.hbs",
+      },
+      {
+        type: "add",
         path: "apps/{{ name }}/vitest.config.ts",
         templateFile: "templates/backend/vitest.config.ts.hbs",
       },
@@ -127,7 +142,7 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
             `   1. Register your new service in the service discovery:`,
           );
           console.log(
-            `      File: ${path.join(process.cwd(), "packages", "service-discovery", "src", "index.ts")}`,
+            `      File: ${path.join(process.cwd(), "packages", "service-discovery", "src", "config.ts")}`,
           );
           console.log(`   2. Add "${answers.name}" to the SERVICES array`);
           console.log(
