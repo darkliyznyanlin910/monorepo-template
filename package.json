@@ -27,7 +27,7 @@
     "test": "turbo run test",
     "test:projects": "vitest run",
     "test:projects:watch": "vitest --watch",
-    "view-report": "turbo run view-report"
+    "test:view": "turbo run view-report"
   },
   "devDependencies": {
     "@repo/prettier-config": "workspace:*",

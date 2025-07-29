@@ -92,6 +92,11 @@ export default function databaseGenerator(plop: PlopTypes.NodePlopAPI): void {
         templateFile: "templates/db/src/schema.ts.hbs",
       },
       {
+        type: "add",
+        path: "databases/{{ name }}/tests/index.ts",
+        templateFile: "templates/db/tests/index.ts.hbs",
+      },
+      {
         type: "modify",
         path: "databases/{{ name }}/package.json",
         async transform(content, answers) {

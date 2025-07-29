@@ -22,7 +22,8 @@ const app = createApp()
   )
   .get("/", (c) => c.json({ message: "Hello, world!" }))
   .route("/hello", helloRoute);
-export type AppType = typeof app;
+
+export { app };
 
 serve({ port: {{ port }}, fetch: app.fetch });
 

@@ -1,6 +1,12 @@
+import path from "path";
 import { ViteUserConfig } from "vitest/config";
 
 export const sharedConfig: ViteUserConfig = {
+  resolve: {
+    alias: {
+      "~": path.resolve(process.cwd(), "src"),
+    },
+  },
   test: {
     globals: true,
     coverage: {

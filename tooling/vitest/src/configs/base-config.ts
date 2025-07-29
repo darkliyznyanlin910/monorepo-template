@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 export const baseConfig = defineConfig({
   test: {
     coverage: {
-      provider: "istanbul",
+      provider: "istanbul" as const,
       reporter: [
         [
           "json",
@@ -11,7 +11,7 @@ export const baseConfig = defineConfig({
             file: `../coverage.json`,
           },
         ],
-      ],
+      ] as const,
       enabled: true,
     },
   },

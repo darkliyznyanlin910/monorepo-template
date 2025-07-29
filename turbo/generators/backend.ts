@@ -17,17 +17,17 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
         type: "input",
         name: "port",
         message:
-          "What port should this backend service run on? Between 3000-3999",
+          "What port should this backend service run on? Between 3001-3999",
         validate: (input: string) => {
           const port = parseInt(input);
           if (isNaN(port)) {
             return "Port must be a valid number";
           }
           if (!input.startsWith("3")) {
-            return "Backend service ports must start with 3 (e.g., 3000, 3001, 3002)";
+            return "Backend service ports must start with 3 (e.g., 3001, 3002, 3003)";
           }
-          if (port < 3000 || port > 3999) {
-            return "Backend service ports must be between 3000-3999";
+          if (port < 3001 || port > 3999) {
+            return "Backend service ports must be between 3001-3999";
           }
           return true;
         },
@@ -107,6 +107,11 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
         type: "add",
         path: "apps/{{ name }}/tests/math.test.ts",
         templateFile: "templates/tests/math.test.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/{{ name }}/tests/api/hello.test.ts",
+        templateFile: "templates/backend/tests/api/hello.test.ts.hbs",
       },
       {
         type: "modify",

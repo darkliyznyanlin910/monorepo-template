@@ -17,6 +17,7 @@
     "view-report": "open coverage/report/index.html"
   },
   "dependencies": {
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "catalog:vitest"
   },
   "devDependencies": {
