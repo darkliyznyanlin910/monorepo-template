@@ -2,6 +2,7 @@ import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { jwt, openAPI, organization } from "better-auth/plugins";
+import { SocialProviders } from "better-auth/social-providers";
 
 import { db } from "@repo/db-auth/client";
 
@@ -9,6 +10,7 @@ export function initAuth(options: {
   baseUrl: string;
   secret: string | undefined;
   trustedOrigins?: string[];
+  socialProviders?: SocialProviders;
 }) {
   const config = {
     database: drizzleAdapter(db, {
@@ -43,6 +45,7 @@ export function initAuth(options: {
     user: {
       additionalFields: {},
     },
+    socialProviders: options.socialProviders,
   } satisfies BetterAuthOptions;
 
   return betterAuth(config);

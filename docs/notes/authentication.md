@@ -52,4 +52,8 @@ JWKs
 
 ## Organization
 
-Reference: [BetterAuth Docs](https://www.better-auth.com/docs/plugins/organization)
+Reference: [BetterAuth: Organization Plugin](https://www.better-auth.com/docs/plugins/organization)
+
+## Caching with Secondary Storage
+
+Reference: [BetterAuth: Secondary Storage Docs](https://www.better-auth.com/docs/reference/options#secondarystorage)
