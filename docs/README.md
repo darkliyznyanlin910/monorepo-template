@@ -105,11 +105,6 @@ When contributing to this project:
 - [Vitest](https://vitest.dev/) - Testing framework
 - [TanStack Router](https://tanstack.com/router) - Frontend routing
 
-### Community
-
-- [GitHub Issues](../../issues) - Bug reports and feature requests
-- [GitHub Discussions](../../discussions) - Questions and community help
-
 ---
 
 For specific implementation details, please refer to the individual documentation files linked above. Each guide provides comprehensive information about its respective topic with practical examples and best practices.

@@ -88,29 +88,13 @@ Isolated database configurations:
 
 ## 🔄 Service Communication
 
-### API Design
-
-Services communicate through RESTful APIs:
-
-```typescript
-// Service registration
-const serviceRegistry = {
-  auth: process.env.AUTH_SERVICE_URL,
-  order: process.env.ORDER_SERVICE_URL,
-};
-
-// Type-safe service calls
-const authClient = new AuthClient(serviceRegistry.auth);
-const user = await authClient.getUser(userId);
-```
-
 ### CORS Configuration
 
 Centralized CORS management for cross-service communication:
 
 ```typescript
 // Service discovery handles CORS
-const corsOrigins = getServiceOrigins();
+const corsOrigins = getTrustedOrigins();
 app.use(cors({ origin: corsOrigins }));
 ```
 

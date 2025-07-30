@@ -436,25 +436,6 @@ pnpm build
    - Vitest
    - Turborepo
 
-2. **Debug configuration** (`.vscode/launch.json`):
-   ```json
-   {
-     "version": "0.2.0",
-     "configurations": [
-       {
-         "name": "Debug Backend Service",
-         "type": "node",
-         "request": "launch",
-         "program": "${workspaceFolder}/apps/backend/auth/src/index.ts",
-         "runtimeArgs": ["-r", "tsx/cjs"],
-         "env": {
-           "NODE_ENV": "development"
-         }
-       }
-     ]
-   }
-   ```
-
 ### Common Issues
 
 #### Port Conflicts

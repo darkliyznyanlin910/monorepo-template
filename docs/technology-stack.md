@@ -28,7 +28,7 @@ This document provides a comprehensive overview of all technologies, frameworks,
 | ---------------------------------------------------------- | ------- | --------------------------------------------- |
 | [Hono](https://hono.dev/)                                  | Latest  | Ultra-fast web framework for APIs             |
 | [@hono/node-server](https://github.com/honojs/node-server) | Latest  | Node.js adapter for Hono                      |
-| [Zod](https://zod.dev/)                                    | 3.25.49 | Runtime type validation and schema definition |
+| [Zod](https://zod.dev/)                                    | 4.0.10  | Runtime type validation and schema definition |
 
 **Features:**
 
@@ -42,7 +42,7 @@ This document provides a comprehensive overview of all technologies, frameworks,
 | Technology                                  | Version | Purpose                         |
 | ------------------------------------------- | ------- | ------------------------------- |
 | [Better Auth](https://www.better-auth.com/) | 1.2.9   | Modern authentication solution  |
-| **OAuth Providers**                         | -       | Discord OAuth integration       |
+| **OAuth Providers**                         | -       | OAuth integration               |
 | **JWT**                                     | -       | Stateless authentication tokens |
 
 **Features:**
@@ -295,7 +295,7 @@ catalog:
   vitest: ^3.2.2
 
   # Validation
-  zod: ^3.25.49
+  zod: ^4.0.0
 ```
 
 **Benefits:**
