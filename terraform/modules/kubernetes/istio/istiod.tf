@@ -2,7 +2,7 @@
 # helm repo update
 # helm install my-istiod-release -n istio-system --create-namespace istio/istiod --set telemetry.enabled=true --set global.istioNamespace=istio-system
 resource "helm_release" "istiod" {
-  name = "itsa-singapore-istiod-release"
+  name = "singapore-istiod-release"
 
   repository       = "https://istio-release.storage.googleapis.com/charts"
   chart            = "istiod"

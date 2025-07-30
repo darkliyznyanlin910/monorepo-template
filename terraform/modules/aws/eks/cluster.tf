@@ -33,7 +33,7 @@ resource "aws_eks_cluster" "eks_cluster" {
   enabled_cluster_log_types = ["api", "authenticator", "audit", "scheduler", "controllerManager"]
 
   # Ensure that the IAM role policy attachment is created before the EKS cluster
-  depends_on = [aws_iam_role_policy_attachment.itsa_eks_cluster_AmazonEKSClusterPolicy]
+  depends_on = [aws_iam_role_policy_attachment.eks_cluster_AmazonEKSClusterPolicy]
 }
 
 # create an authentication token to communicate with the EKS Cluster

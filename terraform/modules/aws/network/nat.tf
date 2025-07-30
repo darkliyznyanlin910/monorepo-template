@@ -1,7 +1,7 @@
 resource "aws_eip" "nat" {
   domain = "vpc"
   tags = {
-    Name = "itsa-singapore-nat"
+    Name = "singapore-nat"
   }
 }
 
@@ -10,7 +10,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.public_subnet_1.id
 
   tags = {
-    Name = "itsa-singapore-nat"
+    Name = "singapore-nat"
   }
 
   depends_on = [

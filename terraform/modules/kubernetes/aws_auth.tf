@@ -8,7 +8,7 @@ resource "kubernetes_config_map" "aws_auth" {
     mapRoles = yamlencode([
       {
         # this allows the worker nodes to join the cluster
-        rolearn  = var.itsa_eks_nodes_role_arn
+        rolearn  = var.eks_nodes_role_arn
         username = "system:node:{{EC2PrivateDNSName}}"
         groups   = ["system:bootstrappers", "system:nodes"]
       },

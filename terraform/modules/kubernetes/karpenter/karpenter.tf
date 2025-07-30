@@ -11,23 +11,23 @@ resource "helm_release" "karpenter" {
   # provides karpenter permissions to manage nodes
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = aws_iam_role.itsa_karpenter_controller_role.arn
+    value = aws_iam_role.karpenter_controller_role.arn
   }
 
   set {
     name  = "clusterName"
-    value = var.itsa_singapore_eks_cluster_id
+    value = var.eks_cluster_id
   }
 
   set {
     name  = "clusterEndpoint"
-    value = var.itsa_singapore_eks_cluster_endpoint
+    value = var.eks_cluster_endpoint
   }
 
   # provides EC2 instances permissions upon launching
   set {
     name  = "aws.defaultInstanceProfile"
-    value = aws_iam_instance_profile.itsa_karpenter_profile.name
+    value = aws_iam_instance_profile.karpenter_profile.name
   }
 
 }

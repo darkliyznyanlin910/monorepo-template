@@ -3,6 +3,11 @@ variable "aws_account_id" {
   description = "AWS account ID"
 }
 
+variable "cluster_name" {
+  type        = string
+  description = "Cluster name"
+}
+
 variable "aws_profile" {
   type        = string
   description = "AWS profile"

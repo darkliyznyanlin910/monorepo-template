@@ -24,11 +24,11 @@ provider "aws" {
 # allow terraform to authenticate helm with the EKS cluster
 provider "helm" {
   kubernetes {
-    host                   = module.eks.itsa_singapore_eks_cluster_endpoint
-    cluster_ca_certificate = base64decode(module.eks.itsa_singapore_eks_cluster_certificate_authority_data)
+    host                   = module.eks.eks_cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.eks_cluster_certificate_authority_data)
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
-      args        = ["eks", "get-token", "--cluster-name", module.eks.itsa_singapore_eks_cluster_id]
+      args        = ["eks", "get-token", "--cluster-name", module.eks.eks_cluster_id]
       command     = "aws"
     }
   }
@@ -36,7 +36,7 @@ provider "helm" {
 
 # define kubeconfig for kubectl
 provider "kubernetes" {
-  host                   = module.eks.itsa_singapore_eks_cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks.itsa_singapore_eks_cluster_certificate_authority_data)
-  token                  = module.eks.itsa_singapore_eks_cluster_token
+  host                   = module.eks.eks_cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.eks_cluster_certificate_authority_data)
+  token                  = module.eks.eks_cluster_token
 }

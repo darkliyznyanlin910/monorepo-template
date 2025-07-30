@@ -1,5 +1,5 @@
 resource "helm_release" "prometheus_operator" {
-  name = "itsa-prometheus-operator-release"
+  name = "prometheus-operator-release"
 
   repository       = "https://prometheus-community.github.io/helm-charts"
   chart            = "kube-prometheus-stack"

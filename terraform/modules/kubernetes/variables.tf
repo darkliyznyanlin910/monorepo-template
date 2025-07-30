@@ -6,7 +6,7 @@ variable "iam_user_name" {
   type = string
 }
 
-variable "itsa_eks_nodes_role_arn" {
+variable "eks_nodes_role_arn" {
   type = string
 }
 

@@ -13,7 +13,7 @@ resource "aws_subnet" "public_subnet_1" {
   tags = {
     Name                                   = "${var.cluster_name}-public-subnet-1"
     "kubernetes.io/role/elb"               = "1"
-    "kubernetes.io/cluster/itsa-singapore-eks-cluster" = "owned"
+    "kubernetes.io/cluster/singapore-eks-cluster" = "owned"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_subnet" "public_subnet_2" {
   tags = {
     Name                                   = "${var.cluster_name}-public-subnet-2"
     "kubernetes.io/role/elb"               = "1"
-    "kubernetes.io/cluster/itsa-singapore-eks-cluster" = "owned"
+    "kubernetes.io/cluster/singapore-eks-cluster" = "owned"
   }
 }
 
@@ -39,7 +39,7 @@ resource "aws_subnet" "private_subnet_1" {
   tags = {
     Name                                   = "${var.cluster_name}-private-subnet-1"
     "kubernetes.io/role/internal-elb"      = "1"
-    "kubernetes.io/cluster/itsa-singapore-eks-cluster" = "owned"
+    "kubernetes.io/cluster/singapore-eks-cluster" = "owned"
   }
 }
 
@@ -51,6 +51,6 @@ resource "aws_subnet" "private_subnet_2" {
   tags = {
     Name                                   = "${var.cluster_name}-private-subnet-2"
     "kubernetes.io/role/internal-elb"      = "1"
-    "kubernetes.io/cluster/itsa-singapore-eks-cluster" = "owned"
+    "kubernetes.io/cluster/singapore-eks-cluster" = "owned"
   }
 }
