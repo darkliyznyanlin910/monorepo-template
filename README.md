@@ -45,7 +45,7 @@ packages/               # Shared packages
 ├── ui/                # React component library
 └── service-discovery/ # Service registry
 
-databases/              # Database packages
+orms/              # Database packages
 └── db-auth/           # Authentication database (Drizzle ORM)
 
 tooling/               # Development tooling

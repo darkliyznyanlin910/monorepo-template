@@ -224,7 +224,7 @@ pnpm turbo gen database
 **Generated structure:**
 
 ```
-databases/db-your-name/
+orms/db-your-name/
 ├── src/
 │   ├── index.ts
 │   ├── client.ts
@@ -269,7 +269,7 @@ databases/db-your-name/
 
 ### 2. Working with Databases
 
-1. **Modify schema** in `databases/*/src/schema.ts`
+1. **Modify schema** in `orms/*/src/schema.ts`
 
 2. **Push changes**:
 
@@ -285,7 +285,7 @@ databases/db-your-name/
 
 4. **Generate migrations** (production):
    ```bash
-   cd databases/db-auth
+   cd orms/db-auth
    pnpm drizzle-kit generate
    ```
 

@@ -277,7 +277,7 @@ export const Route = createFileRoute('/')({
 
 ## 🗄 Database Package Generator
 
-Create new database packages in the `databases/` directory with Drizzle ORM setup.
+Create new database packages in the `orms/` directory with Drizzle ORM setup.
 
 ### Usage
 
@@ -293,7 +293,7 @@ pnpm turbo gen database
 ### Generated Structure
 
 ```
-databases/db-your-name/
+orms/db-your-name/
 ├── src/
 │   ├── index.ts              # Main exports
 │   ├── client.ts             # Database client configuration
@@ -361,7 +361,7 @@ export const db = drizzle(client, { schema });
 3. **Push schema to database**:
 
    ```bash
-   cd databases/db-your-name
+   cd orms/db-your-name
    pnpm db:push
    ```
 

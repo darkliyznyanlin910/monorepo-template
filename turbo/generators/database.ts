@@ -53,52 +53,52 @@ export default function databaseGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
-        path: "databases/{{ name }}/package.json",
+        path: "orms/{{ name }}/package.json",
         templateFile: "templates/db/package.json.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/eslint.config.js",
+        path: "orms/{{ name }}/eslint.config.js",
         templateFile: "templates/db/eslint.config.js.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/tsconfig.json",
+        path: "orms/{{ name }}/tsconfig.json",
         templateFile: "templates/db/tsconfig.json.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/drizzle.config.ts",
+        path: "orms/{{ name }}/drizzle.config.ts",
         templateFile: "templates/db/drizzle.config.ts.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/src/index.ts",
+        path: "orms/{{ name }}/src/index.ts",
         templateFile: "templates/db/src/index.ts.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/src/env.ts",
+        path: "orms/{{ name }}/src/env.ts",
         templateFile: "templates/db/src/env.ts.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/src/client.ts",
+        path: "orms/{{ name }}/src/client.ts",
         templateFile: "templates/db/src/client.ts.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/src/schema.ts",
+        path: "orms/{{ name }}/src/schema.ts",
         templateFile: "templates/db/src/schema.ts.hbs",
       },
       {
         type: "add",
-        path: "databases/{{ name }}/tests/index.ts",
+        path: "orms/{{ name }}/tests/index.ts",
         templateFile: "templates/db/tests/index.ts.hbs",
       },
       {
         type: "modify",
-        path: "databases/{{ name }}/package.json",
+        path: "orms/{{ name }}/package.json",
         async transform(content, answers) {
           if ("deps" in answers && typeof answers.deps === "string") {
             const pkg = JSON.parse(content) as PackageJson;
@@ -123,7 +123,7 @@ export default function databaseGenerator(plop: PlopTypes.NodePlopAPI): void {
         if ("name" in answers && typeof answers.name === "string") {
           execSync("pnpm i", { stdio: "inherit" });
           execSync(
-            `pnpm prettier --write databases/${answers.name}/** --list-different`,
+            `pnpm prettier --write orms/${answers.name}/** --list-different`,
           );
           console.log("\n🎉 Database package scaffolded successfully!");
           console.log("\n📝 Next steps:");

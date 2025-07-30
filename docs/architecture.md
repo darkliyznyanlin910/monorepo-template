@@ -36,7 +36,7 @@ monorepo-template/
 │   │   ├── auth/           # Authentication service
 │   │   └── order/          # Order management service
 │   └── frontend/           # Frontend applications
-├── databases/              # Database configurations
+├── orms/              # Database configurations
 │   └── db-auth/           # Authentication database
 ├── packages/              # Shared packages
 │   ├── auth/             # Authentication utilities
@@ -78,7 +78,7 @@ Reusable code across services:
 - **@repo/ui**: React component library
 - **@repo/service-discovery**: Service registry and communication
 
-#### Database Packages (`databases/`)
+#### Database Packages (`orms/`)
 
 Isolated database configurations:
 

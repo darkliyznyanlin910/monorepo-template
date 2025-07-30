@@ -1,7 +1,7 @@
 packages:
   - apps/frontend/*
   - apps/backend/*
-  - databases/*
+  - orms/*
   - packages/*
   - tooling/*
 catalog:

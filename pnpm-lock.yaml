@@ -81,7 +81,7 @@ importers:
         version: link:../../../packages/auth
       '@repo/db-auth':
         specifier: workspace:^
-        version: link:../../../databases/db-auth
+        version: link:../../../orms/db-auth
       '@repo/service-discovery':
         specifier: workspace:^
         version: link:../../../packages/service-discovery
@@ -126,7 +126,7 @@ importers:
         specifier: 'catalog:'
         version: 5.8.3
 
-  databases/db-auth:
+  orms/db-auth:
     dependencies:
       '@t3-oss/env-core':
         specifier: 'catalog:'
@@ -173,7 +173,7 @@ importers:
     dependencies:
       '@repo/db-auth':
         specifier: workspace:^
-        version: link:../../databases/db-auth
+        version: link:../../orms/db-auth
       '@repo/service-discovery':
         specifier: workspace:*
         version: link:../service-discovery
