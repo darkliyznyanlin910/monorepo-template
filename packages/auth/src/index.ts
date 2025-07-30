@@ -1,7 +1,7 @@
 import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { openAPI } from "better-auth/plugins";
+import { jwt, openAPI, organization } from "better-auth/plugins";
 
 import { db } from "@repo/db-auth/client";
 
@@ -13,15 +13,36 @@ export function initAuth(options: {
   const config = {
     database: drizzleAdapter(db, {
       provider: "pg",
+      usePlural: true,
     }),
+
     baseURL: options.baseUrl,
     secret: options.secret,
+
     plugins: [
       openAPI({
         path: "/docs",
       }),
+      jwt(),
+      organization(),
     ],
+
+    onAPIError: {
+      throw: true,
+      onError: (error) => {
+        console.error("Auth error:", error);
+      },
+    },
     trustedOrigins: options.trustedOrigins,
+
+    emailAndPassword: {
+      enabled: true,
+    },
+
+    // Reference: https://www.better-auth.com/docs/reference/options#user
+    user: {
+      additionalFields: {},
+    },
   } satisfies BetterAuthOptions;
 
   return betterAuth(config);
