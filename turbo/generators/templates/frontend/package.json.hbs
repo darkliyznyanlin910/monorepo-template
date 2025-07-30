@@ -9,16 +9,16 @@
   "scripts": {
     "start": "NODE_ENV=production pnpm with-env node dist/index.cjs",
     "build": "pnpm with-env tsc -b && pnpm with-env vite build && esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
-    "build:docker": "docker build -t repo-{{ name }}:latest -f Dockerfile ../../",
+    "build:docker": "docker build -t repo-{{ name }}:latest -f Dockerfile ../../../",
     "preview": "pnpm with-env vite preview",
     "clean": "git clean -xdf .cache .turbo dist node_modules .tanstack",
     "dev:server": "pnpm with-env tsx watch server/index.ts",
     "dev:vite": "wait-on http://localhost:{{ backendPort }}/health && pnpm with-env vite",
     "dev": "concurrently \"pnpm dev:server\" \"pnpm dev:vite\"",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../env/.env --",
+    "with-env": "dotenv -e ../../../env/.env --",
     "test": "vitest run"
   },
   "dependencies": {
