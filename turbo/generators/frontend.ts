@@ -1,4 +1,5 @@
 import { execSync } from "node:child_process";
+import fs from "node:fs";
 import path from "node:path";
 import type { PlopTypes } from "@turbo/gen";
 
@@ -52,149 +53,157 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
         }
         return "Config sanitized";
       },
+      async () => {
+        // Create apps/frontend folder if it doesn't exist
+        const frontendDir = path.join(process.cwd(), "apps", "frontend");
+        if (!fs.existsSync(frontendDir)) {
+          fs.mkdirSync(frontendDir, { recursive: true });
+        }
+        return "Folder created";
+      },
       {
         type: "add",
-        path: "apps/{{ name }}/package.json",
+        path: "apps/frontend/{{ name }}/package.json",
         templateFile: "templates/frontend/package.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/Dockerfile",
+        path: "apps/frontend/{{ name }}/Dockerfile",
         templateFile: "templates/frontend/Dockerfile.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/index.html",
+        path: "apps/frontend/{{ name }}/index.html",
         templateFile: "templates/frontend/index.html.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/404.html",
+        path: "apps/frontend/{{ name }}/404.html",
         templateFile: "templates/frontend/404.html.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/.gitignore",
+        path: "apps/frontend/{{ name }}/.gitignore",
         templateFile: "templates/frontend/.gitignore.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/eslint.config.js",
+        path: "apps/frontend/{{ name }}/eslint.config.js",
         templateFile: "templates/frontend/eslint.config.js.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/postcss.config.cjs",
+        path: "apps/frontend/{{ name }}/postcss.config.cjs",
         templateFile: "templates/frontend/postcss.config.cjs.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tailwind.config.ts",
+        path: "apps/frontend/{{ name }}/tailwind.config.ts",
         templateFile: "templates/frontend/tailwind.config.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tsconfig.json",
+        path: "apps/frontend/{{ name }}/tsconfig.json",
         templateFile: "templates/frontend/tsconfig.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tsconfig.app.json",
+        path: "apps/frontend/{{ name }}/tsconfig.app.json",
         templateFile: "templates/frontend/tsconfig.app.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tsconfig.node.json",
+        path: "apps/frontend/{{ name }}/tsconfig.node.json",
         templateFile: "templates/frontend/tsconfig.node.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/turbo.json",
+        path: "apps/frontend/{{ name }}/turbo.json",
         templateFile: "templates/frontend/turbo.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/vite.config.ts",
+        path: "apps/frontend/{{ name }}/vite.config.ts",
         templateFile: "templates/frontend/vite.config.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/main.tsx",
+        path: "apps/frontend/{{ name }}/src/main.tsx",
         templateFile: "templates/frontend/src/main.tsx.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/index.css",
+        path: "apps/frontend/{{ name }}/src/index.css",
         templateFile: "templates/frontend/src/index.css.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/env.ts",
+        path: "apps/frontend/{{ name }}/src/env.ts",
         templateFile: "templates/frontend/src/env.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/vite-env.d.ts",
+        path: "apps/frontend/{{ name }}/src/vite-env.d.ts",
         templateFile: "templates/frontend/src/vite-env.d.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/routeTree.gen.ts",
+        path: "apps/frontend/{{ name }}/src/routeTree.gen.ts",
         templateFile: "templates/frontend/src/routeTree.gen.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/routes/__root.tsx",
+        path: "apps/frontend/{{ name }}/src/routes/__root.tsx",
         templateFile: "templates/frontend/src/routes/__root.tsx.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/routes/index.tsx",
+        path: "apps/frontend/{{ name }}/src/routes/index.tsx",
         templateFile: "templates/frontend/src/routes/index.tsx.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/server/env.ts",
+        path: "apps/frontend/{{ name }}/server/env.ts",
         templateFile: "templates/frontend/server/env.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/server/index.ts",
+        path: "apps/frontend/{{ name }}/server/index.ts",
         templateFile: "templates/frontend/server/index.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/public/vite.svg",
+        path: "apps/frontend/{{ name }}/public/vite.svg",
         templateFile: "templates/frontend/public/vite.svg",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/public/fonts/HelveticaNeueLight.otf",
+        path: "apps/frontend/{{ name }}/public/fonts/HelveticaNeueLight.otf",
         templateFile: "templates/frontend/public/fonts/HelveticaNeueLight.otf",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/public/fonts/HelveticaNeueMedium.otf",
+        path: "apps/frontend/{{ name }}/public/fonts/HelveticaNeueMedium.otf",
         templateFile: "templates/frontend/public/fonts/HelveticaNeueMedium.otf",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/public/fonts/HelveticaNeueThin.otf",
+        path: "apps/frontend/{{ name }}/public/fonts/HelveticaNeueThin.otf",
         templateFile: "templates/frontend/public/fonts/HelveticaNeueThin.otf",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/vitest.config.ts",
+        path: "apps/frontend/{{ name }}/vitest.config.ts",
         templateFile: "templates/frontend/vitest.config.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tests/math.test.ts",
+        path: "apps/frontend/{{ name }}/tests/math.test.ts",
         templateFile: "templates/tests/math.test.ts.hbs",
       },
       {
         type: "modify",
-        path: "apps/{{ name }}/package.json",
+        path: "apps/frontend/{{ name }}/package.json",
         async transform(content, answers) {
           if ("deps" in answers && typeof answers.deps === "string") {
             const pkg = JSON.parse(content) as PackageJson;
@@ -219,7 +228,7 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
         if ("name" in answers && typeof answers.name === "string") {
           execSync("pnpm i", { stdio: "inherit" });
           execSync(
-            `pnpm prettier --write apps/${answers.name}/** --list-different`,
+            `pnpm prettier --write apps/frontend/${answers.name}/** --list-different`,
           );
           console.log("\n🎉 Frontend app scaffolded successfully!");
           console.log("\n📝 Next steps:");

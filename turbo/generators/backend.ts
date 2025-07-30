@@ -50,72 +50,72 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
-        path: "apps/{{ name }}/package.json",
+        path: "apps/backend/{{ name }}/package.json",
         templateFile: "templates/backend/package.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/Dockerfile",
+        path: "apps/backend/{{ name }}/Dockerfile",
         templateFile: "templates/backend/Dockerfile.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/eslint.config.js",
+        path: "apps/backend/{{ name }}/eslint.config.js",
         templateFile: "templates/backend/eslint.config.js.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tsconfig.json",
+        path: "apps/backend/{{ name }}/tsconfig.json",
         templateFile: "templates/backend/tsconfig.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/turbo.json",
+        path: "apps/backend/{{ name }}/turbo.json",
         templateFile: "templates/backend/turbo.json.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/index.ts",
+        path: "apps/backend/{{ name }}/src/index.ts",
         templateFile: "templates/backend/src/index.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/env.ts",
+        path: "apps/backend/{{ name }}/src/env.ts",
         templateFile: "templates/backend/src/env.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/factory.ts",
+        path: "apps/backend/{{ name }}/src/factory.ts",
         templateFile: "templates/backend/src/factory.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/routes/hello.ts",
+        path: "apps/backend/{{ name }}/src/routes/hello.ts",
         templateFile: "templates/backend/src/routes/hello.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/src/types.ts",
+        path: "apps/backend/{{ name }}/src/types.ts",
         templateFile: "templates/backend/src/types.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/vitest.config.ts",
+        path: "apps/backend/{{ name }}/vitest.config.ts",
         templateFile: "templates/backend/vitest.config.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tests/math.test.ts",
+        path: "apps/backend/{{ name }}/tests/math.test.ts",
         templateFile: "templates/tests/math.test.ts.hbs",
       },
       {
         type: "add",
-        path: "apps/{{ name }}/tests/api/hello.test.ts",
+        path: "apps/backend/{{ name }}/tests/api/hello.test.ts",
         templateFile: "templates/backend/tests/api/hello.test.ts.hbs",
       },
       {
         type: "modify",
-        path: "apps/{{ name }}/package.json",
+        path: "apps/backend/{{ name }}/package.json",
         async transform(content, answers) {
           if ("deps" in answers && typeof answers.deps === "string") {
             const pkg = JSON.parse(content) as PackageJson;
@@ -140,7 +140,7 @@ export default function backendGenerator(plop: PlopTypes.NodePlopAPI): void {
         if ("name" in answers && typeof answers.name === "string") {
           execSync("pnpm i", { stdio: "inherit" });
           execSync(
-            `pnpm prettier --write apps/${answers.name}/** --list-different`,
+            `pnpm prettier --write apps/backend/${answers.name}/** --list-different`,
           );
           console.log("\n🎉 Backend app scaffolded successfully!");
           console.log("\n📝 Next steps:");

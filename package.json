@@ -11,7 +11,7 @@
     "build:docker": "turbo run build:docker",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
-    "auth:generate": "turbo -F @repo/auth generate",
+    "auth:generate": "turbo -F @repo/auth-common generate",
     "db:push": "turbo db:push",
     "db:studio": "turbo db:studio",
     "dev": "turbo watch dev --continue",

@@ -1,4 +1,4 @@
-import { initAuth } from "@repo/auth";
+import { initAuth } from "@repo/auth-common";
 import { getBaseUrl, getTrustedOrigins } from "@repo/service-discovery";
 
 import { env } from "~/env";

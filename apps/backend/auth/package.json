@@ -1,5 +1,5 @@
 {
-  "name": "@repo/auth-service",
+  "name": "@repo/auth",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -30,7 +30,7 @@
   "prettier": "@repo/prettier-config",
   "dependencies": {
     "@hono/node-server": "^1.14.4",
-    "@repo/auth": "workspace:^",
+    "@repo/auth-common": "workspace:^",
     "@repo/db-auth": "workspace:^",
     "@repo/service-discovery": "workspace:^",
     "@t3-oss/env-core": "catalog:",

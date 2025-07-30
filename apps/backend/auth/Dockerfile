@@ -8,7 +8,7 @@ RUN pnpm install -g turbo
 
 WORKDIR /repo
 COPY . .
-RUN turbo prune @repo/auth-service --docker
+RUN turbo prune @repo/auth --docker
 
 # Stage 2: Build
 FROM node:22-alpine AS builder
@@ -24,7 +24,7 @@ RUN pnpm install
 
 # Build the project
 WORKDIR /repo/apps/auth-service
-RUN pnpm turbo run build --filter=@repo/auth-service...
+RUN pnpm turbo run build --filter=@repo/auth...
 
 # Stage 3: Run
 FROM node:22-alpine AS runner
