@@ -2,312 +2,172 @@
 
 A modern, full-stack TypeScript monorepo template built with cutting-edge technologies for scalable development.
 
-## 🚀 Technology Stack
-
-### Core Infrastructure
-
-- **Package Management**: [pnpm](https://pnpm.io/) with workspaces
-- **Build System**: [Turborepo](https://turbo.build/) for optimized builds and caching
-- **Language**: [TypeScript](https://www.typescriptlang.org/) with strict configuration
-- **Node.js**: >= 22.14.0
-
-### Backend Technologies
-
-- **API Framework**: [Hono](https://hono.dev/) - Ultra-fast web framework
-- **Authentication**: [Better Auth](https://www.better-auth.com/) v1.2.9
-- **Database**: [PostgreSQL](https://www.postgresql.org/)
-- **ORM**: [Drizzle ORM](https://orm.drizzle.team/) v0.44.1 with Drizzle Kit
-- **Validation**: [Zod](https://zod.dev/) v3.25.49
-- **Server**: [@hono/node-server](https://github.com/honojs/node-server)
-
-### Frontend Technologies
-
-- **React**: v19.1.0 (latest)
-- **UI Framework**: [Radix UI](https://www.radix-ui.com/) components
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) v3.4.15
-- **Forms**: [React Hook Form](https://react-hook-form.com/) with [@hookform/resolvers](https://github.com/react-hook-form/resolvers)
-- **Theme**: [next-themes](https://github.com/pacocoursey/next-themes) for dark/light mode
-- **Icons**: [@radix-ui/react-icons](https://icons.radix-ui.com/)
-- **Styling Utils**: [class-variance-authority](https://cva.style/docs), [tailwind-merge](https://github.com/dcastil/tailwind-merge)
-- **Notifications**: [Sonner](https://sonner.emilkowal.ski/) for toast notifications
-
-### Development Tools
-
-- **Linting**: [ESLint](https://eslint.org/) v9.28.0 with custom configurations
-- **Formatting**: [Prettier](https://prettier.io/) v3.5.3
-- **Type Checking**: TypeScript v5.8.3
-- **Environment Variables**: [@t3-oss/env-core](https://env.t3.gg/) for validated env vars
-
-## 📁 Project Structure
-
-```
-monorepo-template/
-├── apps/                     # Application services
-│   └── auth-service/         # Authentication microservice
-├── databases/                # Database configurations
-│   └── db-auth/             # Authentication database
-├── packages/                 # Shared packages
-│   ├── auth/                # Auth utilities
-│   ├── service-discovery/   # Service discovery utilities
-│   └── ui/                  # Shared UI components
-└── tooling/                 # Development tooling
-    ├── eslint/              # ESLint configurations
-    ├── github/              # GitHub Actions
-    ├── prettier/            # Prettier configuration
-    ├── tailwind/            # Tailwind configurations
-    └── typescript/          # TypeScript configurations
-```
-
-## 🏗 Architecture
-
-### Microservices Architecture
-
-- **auth-service**: Handles authentication using Better Auth with Discord OAuth
-- **Service Discovery**: Manages service URLs and cross-service communication
-- **Database Layer**: Isolated database packages with Drizzle ORM
-
-### Shared Packages
-
-- **@repo/ui**: Reusable React components built on Radix UI
-- **@repo/auth**: Authentication utilities and types
-- **@repo/service-discovery**: Service registry and URL management
-- **@repo/db-auth**: Database schema and client for authentication
-
-### Development Tooling
-
-- **@repo/eslint-config**: Shared ESLint configurations (base, React, Next.js)
-- **@repo/prettier-config**: Unified code formatting
-- **@repo/tailwind-config**: Tailwind configurations for web and native
-- **@repo/tsconfig**: TypeScript configurations for different project types
-
-## 🎨 Code Generation
-
-This monorepo includes Turbo generators for quickly scaffolding new packages and applications with consistent structure and configuration.
-
-### Available Generators
-
-#### Package Generator
-
-Create new internal packages in the `packages/` directory:
-
-```bash
-pnpm turbo gen package
-```
-
-**Features:**
-
-- Generates TypeScript package with ESLint and Prettier configuration
-- Automatically installs specified dependencies with latest versions
-- Creates basic `src/index.ts` entry point
-- Includes proper workspace configuration
-
-#### Frontend Generator
-
-Create new frontend applications in the `apps/` directory:
-
-```bash
-pnpm turbo gen frontend
-```
-
-**Features:**
-
-- Full React 19 + Vite + TanStack Router setup
-- Tailwind CSS with custom theme configuration
-- TypeScript with strict configuration
-- ESLint and Prettier pre-configured
-- Responsive layout with dark/light theme support
-- Custom fonts (Helvetica Neue family)
-- Development and build scripts ready
-
-#### Backend Generator
-
-Create new backend services in the `apps/` directory:
-
-```bash
-pnpm turbo gen backend
-```
-
-**Features:**
-
-- Hono framework setup with TypeScript
-- Environment validation with Zod
-- ESLint and Prettier configuration
-- Build and development scripts
-- Basic server structure ready
-
-#### Database Generator
-
-Create new database packages in the `databases/` directory:
-
-```bash
-pnpm turbo gen database
-```
-
-**Features:**
-
-- Drizzle ORM setup with PostgreSQL
-- Environment variable configuration
-- Database schema with TypeScript types
-- Client connection management
-- Slug generation for environment variables (replaces `-` with `_` and capitalizes)
-
-### Post-Generation Instructions
-
-Each generator provides specific next steps:
-
-- **Backend services**: Guidance to register the new service in the service discovery system
-- **Frontend apps**: Instructions for service integration if needed
-- **Database packages**: Schema setup and migration instructions with environment variable guidance
-
-### Generator Benefits
-
-- **Consistency**: All generated code follows the same patterns and configurations
-- **Speed**: Skip boilerplate setup and jump straight to business logic
-- **Best Practices**: Generated code includes proper TypeScript, linting, and formatting setup
-- **Integration**: Automatically configured to work with the monorepo's shared tooling
-
-## 🚦 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js >= 22.14.0
-- pnpm >= 9.6.0
+- **Node.js** >= 22.14.0
+- **pnpm** >= 9.6.0
 
-### Installation
+### Installation & Setup
 
 ```bash
+# Clone and install
 pnpm install
+
+# Configure environment
+cp .env.example .env  # Edit with your configuration
+
+# Initialize database
+pnpm db:push
+
+# Start development
+pnpm dev
 ```
 
-### Environment Setup
+## 🏗 Architecture Overview
 
-Create a `.env` file in the root with:
+This monorepo implements a **microservices architecture** with:
 
-```env
-POSTGRES_URL=your_postgres_connection_string
-AUTH_DISCORD_ID=your_discord_client_id
-AUTH_DISCORD_SECRET=your_discord_client_secret
-AUTH_REDIRECT_PROXY_URL=your_redirect_url
-AUTH_SECRET=your_auth_secret
-PORT=3000
+- **Backend Services**: Hono-based APIs with Better Auth
+- **Frontend Apps**: React 19 with TanStack Router
+- **Shared Packages**: Reusable components and utilities
+- **Database Layer**: Drizzle ORM with PostgreSQL
+- **Development Tooling**: Unified ESLint, Prettier, TypeScript, and Vitest configs
+
+```
+apps/                    # Applications
+├── backend/            # Microservices (Hono + TypeScript)
+└── frontend/           # React applications
+
+packages/               # Shared packages
+├── auth/              # Authentication utilities
+├── ui/                # React component library
+└── service-discovery/ # Service registry
+
+databases/              # Database packages
+└── db-auth/           # Authentication database (Drizzle ORM)
+
+tooling/               # Development tooling
+├── eslint/           # Shared ESLint configs
+├── vitest/           # Testing framework setup
+└── typescript/       # TypeScript configurations
 ```
 
-### Development Commands
+## 🎨 Code Generation
+
+Quickly scaffold new code with Turbo generators:
 
 ```bash
-# Start all services in development mode
-pnpm dev
-
-# Build all packages
-pnpm build
-
-# Run linting
-pnpm lint
-pnpm lint:fix
-
-# Format code
-pnpm format
-pnpm format:fix
-
-# Type checking
-pnpm typecheck
-
-# Database operations
-pnpm db:push     # Push schema changes
-pnpm db:studio   # Open Drizzle Studio
-
-# Clean workspace
-pnpm clean
-pnpm clean:workspaces
+pnpm turbo gen package     # Create shared package
+pnpm turbo gen backend     # Create backend service
+pnpm turbo gen frontend    # Create React application
+pnpm turbo gen database    # Create database package
 ```
 
-## 🔧 Key Features
+Each generator creates production-ready code with:
 
-### Package Management
+- **Consistent configuration** (ESLint, Prettier, TypeScript)
+- **Testing setup** with Vitest
+- **Proper workspace integration**
+- **Docker configuration** for deployment
 
-- **Catalog Dependencies**: Centralized version management in `pnpm-workspace.yaml`
-- **Workspace Protocol**: Internal packages use `workspace:*` for optimal linking
-- **Built Dependencies**: Optimized handling of native dependencies
+## 🧪 Testing Framework
 
-### Build System
+Comprehensive testing setup with **Vitest**:
 
-- **Incremental Builds**: Turborepo caches and parallelizes builds
-- **Task Pipeline**: Proper dependency ordering with `^build` syntax
-- **Persistent Tasks**: Development servers run continuously
-- **Global Environment**: Shared environment variables across all apps
+```bash
+pnpm test:projects        # Run all tests
+pnpm test:projects:watch  # Watch mode
+```
 
-### Code Quality
+**Features:**
 
-- **Strict TypeScript**: Type-safe development with strict configurations
-- **ESLint Rules**:
-  - Turbo plugin for monorepo optimization
-  - Import sorting and consistency
-  - Restricted environment access (must use validated env)
-  - No unused variables/imports
-- **Prettier Integration**: Consistent code formatting across all packages
+- **Shared configurations** via `@repo/vitest`
+- **Coverage collection** across all packages
+- **API testing** with Hono testing utilities
+- **Frontend testing** with jsdom environment
 
-### Database
+## 📚 Documentation
 
-- **Type-Safe ORM**: Drizzle ORM with Zod validation
-- **Schema Management**: Version controlled database schemas
-- **Connection Pooling**: Optimized PostgreSQL connections
-- **Development Tools**: Drizzle Studio for database inspection
+For detailed information, see the comprehensive documentation:
 
-### Authentication
+| Guide                                           | Description                                |
+| ----------------------------------------------- | ------------------------------------------ |
+| **[📖 Complete Documentation](docs/)**          | **Main documentation hub**                 |
+| [🧪 Testing Framework](docs/testing.md)         | Vitest setup, patterns, and best practices |
+| [🏗 Architecture](docs/architecture.md)         | System design and microservices patterns   |
+| [🚀 Development Guide](docs/development.md)     | Workflow, tooling, and commands            |
+| [⚡ Technology Stack](docs/technology-stack.md) | Complete technology overview               |
+| [🎨 Code Generators](docs/generators.md)        | Using Turbo generators effectively         |
 
-- **Better Auth**: Modern authentication with Discord OAuth
-- **Type Safety**: Full TypeScript support
-- **CORS Configuration**: Proper cross-origin handling
-- **Service Integration**: Works seamlessly with service discovery
+## 💻 Essential Commands
 
-## 📦 Package Scripts
+```bash
+# Development
+pnpm dev                 # Start all services
+pnpm build               # Build all packages
+pnpm clean               # Clean build artifacts
 
-### Global Scripts (Root)
+# Code Quality
+pnpm lint                # Lint all packages
+pnpm format              # Format all code
+pnpm typecheck           # Type check all packages
 
-- `pnpm build` - Build all packages
-- `pnpm dev` - Start development servers
-- `pnpm lint` - Lint all packages
-- `pnpm format` - Format all packages
-- `pnpm typecheck` - Type check all packages
-- `pnpm db:push` - Push database schema
-- `pnpm db:studio` - Open database studio
+# Testing
+pnpm test:projects       # Run all tests
+pnpm test:projects:watch # Test in watch mode
 
-### Package-Specific Scripts
+# Database
+pnpm db:push             # Push schema changes
+pnpm db:studio           # Open Drizzle Studio
+```
 
-Each package includes:
+## 🔧 Key Technologies
 
-- `build` - Build the package
-- `dev` - Development mode
-- `lint` - ESLint checking
-- `format` - Prettier formatting
-- `typecheck` - TypeScript checking
-- `clean` - Clean build artifacts
+### Core Stack
 
-## 🔗 Service Communication
+- **[Turborepo](https://turbo.build/)** - Build system with caching
+- **[pnpm](https://pnpm.io/)** - Fast package manager
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
 
-Services communicate through:
+### Backend
 
-1. **Service Discovery**: Centralized service URL management
-2. **CORS Configuration**: Proper cross-origin request handling
-3. **Type-Safe APIs**: Shared types between services
-4. **Environment Variables**: Global configuration management
+- **[Hono](https://hono.dev/)** - Fast web framework
+- **[Better Auth](https://www.better-auth.com/)** - Authentication
+- **[Drizzle ORM](https://orm.drizzle.team/)** - Type-safe database
+- **[Zod](https://zod.dev/)** - Schema validation
 
-## 🧪 Development Workflow
+### Frontend
 
-1. **Install dependencies**: `pnpm install`
-2. **Set up environment**: Copy and configure `.env`
-3. **Generate new packages/apps**: Use `pnpm turbo gen <type>` for scaffolding
-4. **Start development**: `pnpm dev`
-5. **Make changes**: Edit code with full TypeScript support
-6. **Quality checks**: Run `pnpm lint` and `pnpm typecheck`
-7. **Database changes**: Use `pnpm db:push` and `pnpm db:studio`
-8. **Build**: `pnpm build` for production builds
+- **[React 19](https://react.dev/)** - UI framework
+- **[TanStack Router](https://tanstack.com/router)** - Type-safe routing
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first styling
+- **[Radix UI](https://www.radix-ui.com/)** - Accessible components
 
-## 🎯 Best Practices
+### Testing & Quality
 
-- Use the workspace protocol for internal dependencies
-- Follow the established directory structure
-- Leverage shared tooling configurations
-- Use environment validation with `@t3-oss/env-core`
-- Keep packages focused and cohesive
-- Use Turborepo's caching for optimal build performance
+- **[Vitest](https://vitest.dev/)** - Fast testing framework
+- **[ESLint](https://eslint.org/)** - Code linting
+- **[Prettier](https://prettier.io/)** - Code formatting
+
+## 🚀 Production Ready
+
+This template includes:
+
+- **🐳 Docker** configurations for all services
+- **☸️ Kubernetes** deployment with Terraform
+- **🔄 GitOps** with ArgoCD
+- **📊 Monitoring** with Prometheus & Grafana
+- **🔒 Security** with Istio service mesh
+
+## 📈 Next Steps
+
+1. **[Read the Documentation](docs/)** - Comprehensive guides and tutorials
+2. **Generate Your First Service** - `pnpm turbo gen backend`
+3. **Set Up Authentication** - Configure Discord OAuth
+4. **Deploy to Production** - Use included Terraform modules
+
+---
+
+**For detailed implementation guides, troubleshooting, and best practices, visit the [complete documentation](docs/).**
