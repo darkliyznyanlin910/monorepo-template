@@ -9,7 +9,7 @@ resource "helm_release" "argo_gateway" {
   chart            = "gateway"
   namespace        = "istio-system"
   create_namespace = true
-  version          = "1.21.0"
+  version          = var.istio_gateway_helm_version
   values = [
     {
       service = {

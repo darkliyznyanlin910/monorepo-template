@@ -41,7 +41,7 @@ resource "kubernetes_config_map" "aws_auth" {
 
 
 module "karpenter" {
-  source = "../modules/kubernetes/karpenter"
+  source = "../modules/aws/karpenter"
 
   eks_oidc_url = module.eks.eks_oidc_url
   eks_oidc_arn = module.eks.eks_oidc_arn

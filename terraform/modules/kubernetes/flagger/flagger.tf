@@ -5,7 +5,7 @@ resource "helm_release" "flagger" {
   chart            = "flagger"
   namespace        = "istio-system"
   create_namespace = false
-  version          = "1.36.1"
+  version          = var.flagger_helm_version
 
   values = [
     {

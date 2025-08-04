@@ -5,5 +5,5 @@ resource "helm_release" "loadtester" {
   chart            = "loadtester"
   namespace        = "istio-system"
   create_namespace = false
-  version          = "0.28.1"
+  version          = var.loadtester_helm_version
 }

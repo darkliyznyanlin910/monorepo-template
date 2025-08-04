@@ -23,3 +23,18 @@ variable "aws" {
   type = bool
   default = false
 }
+
+variable "istio_gateway_helm_version" {
+  type = string
+  default = "1.21.0"
+}
+
+variable "istiod_helm_version" {
+  type = string
+  default = "1.21.0"
+}
+
+variable "istio_base_helm_version" {
+  type = string
+  default = "1.21.0"
+}
