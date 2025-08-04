@@ -10,22 +10,19 @@ resource "helm_release" "argo_gateway" {
   namespace        = "istio-system"
   create_namespace = true
   version          = "1.21.0"
-
-  # Set the name of the service to be "istio-argo-gateway"
-  set {
-    name  = "service.name"
-    value = "istio-argo-gateway"
-  }
-
-  #  Deploy as a network load balancer
-  set {
-    name  = "service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-type"
-    value = "nlb"
-  }
+  values = [
+    {
+      service = {
+        name = "istio-argo-gateway"
+        annotations = var.aws ? {
+          "service.beta.kubernetes.io/aws-load-balancer-type" = "nlb"
+        } : {}
+      }
+    }
+  ]
 
   depends_on = [
     helm_release.istio_base,
     helm_release.istiod
   ]
-
 }

@@ -11,21 +11,19 @@ resource "helm_release" "grafana_gateway" {
   create_namespace = true
   version          = "1.21.0"
 
-  # Set the name of the service to be "istio-grafana-gateway"
-  set {
-    name  = "service.name"
-    value = "istio-grafana-gateway"
-  }
-
-  #  Deploy as a network load balancer
-  set {
-    name  = "service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-type"
-    value = "nlb"
-  }
+  values = [
+    {
+      service = {
+        name = "istio-grafana-gateway"
+        annotations = var.aws ? {
+          "service.beta.kubernetes.io/aws-load-balancer-type" = "nlb"
+        } : {}
+      }
+    }
+  ]
 
   depends_on = [
     helm_release.istio_base,
     helm_release.istiod
   ]
-
 }

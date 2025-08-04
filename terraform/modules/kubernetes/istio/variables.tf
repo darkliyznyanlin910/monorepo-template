@@ -17,3 +17,9 @@ variable "nlb_zone_id" {
   description = "NLB zone ID"
   type        = string
 }
+
+variable "aws" {
+  description = "AWS provider"
+  type = bool
+  default = false
+}

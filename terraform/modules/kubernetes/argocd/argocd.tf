@@ -5,14 +5,15 @@ resource "helm_release" "argocd" {
   version          = var.argocd_helm_version
   namespace        = "argocd"
   create_namespace = true
-  values = [
-    file("${path.module}/values/argocd.values.yaml")
-  ]
   # https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
-  set {
-    name  = "global.domain"
-    value = "argocd.${var.cluster_domain_public}"
-  }
+  values = [
+    file("${path.module}/values/argocd.values.yaml"),
+    {
+      global = {
+        domain = "argocd.${var.cluster_domain_public}"
+      }
+    }
+  ]
 }
 
 resource "kubernetes_manifest" "argocd_repositories" {

@@ -15,14 +15,30 @@ module "eks" {
   eks_kms_key_arn    = module.kms.eks_kms_key_arn
 }
 
-module "kubernetes" {
-  source = "../modules/kubernetes"
+resource "kubernetes_config_map" "aws_auth" {
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
 
-  # for IAM to access EKS
-  eks_nodes_role_arn = module.eks.eks_nodes_role_arn
-  aws_account_id          = var.aws_account_id
-  iam_user_name           = var.iam_user_name
+  data = {
+    mapRoles = yamlencode([
+      {
+        # this allows the worker nodes to join the cluster
+        rolearn  = module.eks.eks_nodes_role_arn
+        username = "system:node:{{EC2PrivateDNSName}}"
+        groups   = ["system:bootstrappers", "system:nodes"]
+      },
+      {
+        # maps IAM user for kubectl access
+        rolearn = "arn:aws:iam::${var.aws_account_id}:user/${var.iam_user_name}"
+        username = "${var.iam_user_name}"
+        groups = ["system:masters"]
+      }
+    ])
+  }
 }
+
 
 module "karpenter" {
   source = "../modules/kubernetes/karpenter"
@@ -43,11 +59,6 @@ module "argocd" {
   argocd_appsets_include = var.argocd_appsets_include
 }
 
-module "istio" {
-  source = "../modules/kubernetes/istio"
-  cluster_name = var.cluster_name
-}
-
 module "metrics_server" {
   source = "../modules/kubernetes/metrics_server"
 }
@@ -59,12 +70,3 @@ module "flagger" {
 module "operations" {
   source = "../modules/kubernetes/operations"
 }
-
-# DEPLOY MANUALLY after getting the NLB zone ID
-# module "route53" {
-#   source = "../modules/aws/route53"
-
-#   cluster_domain_public = var.cluster_domain_public
-#   hosted_zone_id        = var.hosted_zone_id
-#   nlb_zone_id           = var.nlb_zone_id
-# }
