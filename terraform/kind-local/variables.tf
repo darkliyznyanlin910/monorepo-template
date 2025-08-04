@@ -25,20 +25,26 @@ variable "kubernetes_version" {
   default = "v1.33.2"
 }
 
-# https://artifacthub.io/packages/helm/cilium/cilium
-variable "cilium_version" {
-  type    = string
-  default = "1.18.0"
+variable "argocd_repositories" {
+  type = list(object({
+    name                    = string
+    repo_name              = string
+    url                    = string
+    username = string
+    password = string
+  }))
+  description = "List of Git repositories to configure for ArgoCD"
+  default     = []
 }
 
-# https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/#prerequisites
-variable "gateway_api_version" {
-  type    = string
-  default = "v1.3.0"
+variable "argocd_repo_url" {
+  type        = string
+  description = "The URL of the Git repository to configure for ArgoCD"
+  nullable    = false
 }
 
-# https://artifacthub.io/packages/helm/traefik/traefik
-variable "traefik_helm_version" {
-  type    = string
-  default = "37.0.0"
+variable "argocd_appsets_path" {
+  type        = string
+  description = "The path to the appsets in the Git repository"
+  nullable    = false
 }

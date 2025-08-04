@@ -13,11 +13,6 @@ variable "cluster_domain_public" {
   type        = string
 }
 
-variable "nlb_zone_id" {
-  description = "NLB zone ID"
-  type        = string
-}
-
 variable "aws" {
   description = "AWS provider"
   type = bool

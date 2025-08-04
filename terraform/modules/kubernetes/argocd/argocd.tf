@@ -48,6 +48,8 @@ resource "kubernetes_manifest" "argocd_all_apps" {
   depends_on = [helm_release.argocd]
   manifest = templatefile("${path.module}/values/argocd-all-apps.yaml", {
     appsets_include = var.argocd_appsets_include
+    appsets_path = var.argocd_appsets_path
+    repo_url = var.argocd_repo_url
   })
 }
 

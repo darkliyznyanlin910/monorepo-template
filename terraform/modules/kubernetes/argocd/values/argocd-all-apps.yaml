@@ -16,8 +16,8 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    repoURL: https://github.com/darkliyznyanlin910/monorepo-template
+    repoURL: "${repo_url}"
     targetRevision: HEAD
-    path: kubernetes/appsets
+    path: "${appsets_path}"
     directory:
       include: "${appsets_include}"
