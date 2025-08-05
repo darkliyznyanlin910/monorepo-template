@@ -46,6 +46,12 @@ terraform {
       source  = "kreuzwerker/docker"
       version = "3.6.2"
     }
+
+    # https://registry.terraform.io/providers/hashicorp/time/latest
+    time = {
+      source  = "hashicorp/time"
+      version = "~> 0.9"
+    }
   }
 }
 

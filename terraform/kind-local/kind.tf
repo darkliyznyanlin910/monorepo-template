@@ -54,7 +54,7 @@ resource "kind_cluster" "this" {
 
       extra_mounts {
         host_path      = "${path.root}/../../"
-        container_path = "/mnt/voltade-os.git"
+        container_path = "/mnt/monorepo-template.git"
         read_only      = true
       }
 

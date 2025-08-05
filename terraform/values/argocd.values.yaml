@@ -1,0 +1,39 @@
+# https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
+server:
+  ingress:
+    enabled: false
+configs:
+  params:
+    # https://github.com/argoproj/argo-cd/issues/2953#issuecomment-1565944622
+    server.insecure: true
+  cm:
+    admin.enabled: true
+    users.anonymous.enabled: false
+    kustomize.buildOptions: "--enable-helm"
+    resource.exclusions: |
+      - apiGroups:
+        - cilium.io
+        kinds:
+        - CiliumIdentity
+        clusters:
+        - "*"
+  cmp:
+    create: true
+    # https://github.com/argoproj/argocd-example-apps/blob/master/plugins/kustomized-helm/README.md
+    plugins:
+      - name: kustomized-helm
+        init:
+          command: ["/bin/sh", "-c"]
+          args: ["helm dependency build"]
+        generate:
+          command: ["/bin/sh", "-c"]
+          args:
+            [
+              "helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE --kube-version $KUBE_VERSION > all.yaml && kustomize build",
+            ]
+  rbac:
+    scopes: "[groups]"
+    policy.csv: |
+      g, argocd_administrators, role:admin
+      g, argocd_users, role:readonly
+    policy.default: ""
