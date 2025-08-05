@@ -3,6 +3,9 @@ module "istio" {
   cluster_name = var.cluster_name
   cluster_domain_public = var.cluster_domain_public
   aws = false
+  enable_cni = true
+
+  depends_on = [kind_cluster.this]
 }
 
 module "metrics_server" {

@@ -33,17 +33,17 @@ module "argocd" {
 }
 
 resource "kubectl_manifest" "argocd_repo_git" {
-  depends_on = [module.argocd]
+  depends_on = [module.argocd, kind_cluster.this]
   yaml_body  = file("${path.root}/values/argocd-repo-git.yaml")
 }
 
 resource "kubectl_manifest" "argocd_repo_oci" {
-  depends_on = [module.argocd]
+  depends_on = [module.argocd, kind_cluster.this]
   yaml_body  = file("${path.root}/values/argocd-repo-oci.yaml")
 }
 
 resource "kubernetes_manifest" "argocd_all_apps" {
-  depends_on = [module.argocd]
+  depends_on = [module.argocd, kind_cluster.this]
   manifest = yamldecode(templatefile("${path.root}/../values/argocd-all-apps.yaml", {
     appsets_include = var.argocd_appsets_include
     appsets_path = var.argocd_appsets_path
@@ -52,6 +52,6 @@ resource "kubernetes_manifest" "argocd_all_apps" {
 }
 
 resource "kubernetes_manifest" "argocd_projects" {
-  depends_on = [module.argocd]
+  depends_on = [module.argocd, kind_cluster.this]
   manifest = yamldecode(file("${path.root}/../values/argocd-projects.yaml"))
 }

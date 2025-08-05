@@ -28,3 +28,14 @@ variable "istio_base_helm_version" {
   type = string
   default = "1.21.0"
 }
+
+variable "enable_cni" {
+  description = "Enable Istio CNI plugin"
+  type        = bool
+  default     = false
+}
+
+variable "istio_cni_helm_version" {
+  type = string
+  default = "1.21.0"
+}

@@ -1,1 +1,6 @@
 **/.terraform/
+kubeconfig
+certs
+
+# Ignore transient lock info files created by terraform apply
+.terraform.tfstate.lock.info

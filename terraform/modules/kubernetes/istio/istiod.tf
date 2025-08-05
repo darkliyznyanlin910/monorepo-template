@@ -11,7 +11,7 @@ resource "helm_release" "istiod" {
   version          = var.istiod_helm_version
 
   values = [
-    yamlencode({
+    yamlencode(merge({
       telemetry = {
         enabled = true
       }
@@ -22,7 +22,13 @@ resource "helm_release" "istiod" {
         ingressService = "istio-gateway"
         ingressSelector = "gateway"
       }
-    })
+    }, var.enable_cni ? {
+      pilot = {
+        cni = {
+          enabled = true
+        }
+      }
+    } : {}))
   ]
 
   # Designate "istio-gateway" as the primary ingress service.
