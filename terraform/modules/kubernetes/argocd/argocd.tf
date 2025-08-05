@@ -8,40 +8,12 @@ resource "helm_release" "argocd" {
   # https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
   values = [
     file("${path.module}/values/argocd.values.yaml"),
-    {
+    yamlencode({
       global = {
         domain = "argocd.${var.cluster_domain_public}"
       }
-    }
+    })
   ]
-}
-
-resource "kubernetes_manifest" "argocd_repositories" {
-  depends_on = [helm_release.argocd]
-  for_each   = { for repo in var.argocd_repositories : repo.name => repo }
-
-  manifest = {
-    apiVersion = "v1"
-    kind = "Secret"
-    metadata = {
-      name = each.value.name
-      namespace = "argocd"
-      labels = {
-        "argocd.argoproj.io/secret-type" = "repository"
-      }
-      annotations = {
-        "managed-by" = "argocd.argoproj.io"
-      }
-    }
-    type = "Opaque"
-    stringData = {
-      type = "git"
-      name = each.value.repo_name
-      url = each.value.url
-      username = each.value.username
-      password = each.value.password
-    }
-  }
 }
 
 resource "kubernetes_manifest" "argocd_all_apps" {
@@ -56,4 +28,11 @@ resource "kubernetes_manifest" "argocd_all_apps" {
 resource "kubernetes_manifest" "argocd_projects" {
   depends_on = [helm_release.argocd]
   manifest = file("${path.module}/values/argocd-projects.yaml")
+}
+
+resource "kubectl_manifest" "argocd_appsets" {
+  depends_on = [helm_release.argocd]
+  yaml_body = templatefile("${path.module}/argocd-appsets.yaml", {
+    appsets_include = var.argocd_appsets_include
+  })
 }

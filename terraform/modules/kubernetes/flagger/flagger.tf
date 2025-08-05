@@ -8,12 +8,12 @@ resource "helm_release" "flagger" {
   version          = var.flagger_helm_version
 
   values = [
-    {
+    yamlencode({
       crd = {
         create = false
       }
       meshProvider = "istio"
       metricsServer = "http://prometheus-operated.metrics:9090"
-    }
+    })
   ]
 }

@@ -25,24 +25,6 @@ variable "kubernetes_version" {
   default = "v1.33.2"
 }
 
-variable "argocd_repositories" {
-  type = list(object({
-    name                    = string
-    repo_name              = string
-    url                    = string
-    username = string
-    password = string
-  }))
-  description = "List of Git repositories to configure for ArgoCD"
-  default     = []
-}
-
-variable "argocd_repo_url" {
-  type        = string
-  description = "The URL of the Git repository to configure for ArgoCD"
-  nullable    = false
-}
-
 variable "argocd_appsets_path" {
   type        = string
   description = "The path to the appsets in the Git repository"

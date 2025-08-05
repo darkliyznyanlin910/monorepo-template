@@ -13,14 +13,14 @@ resource "helm_release" "kibana_gateway" {
 
   values = [
 
-    {
+    yamlencode({
       service = {
         name = "istio-kibana-gateway"
         annotations = var.aws ? {
           "service.beta.kubernetes.io/aws-load-balancer-type" = "nlb"
         } : {}
       }
-    }
+    })
   ]
 
   depends_on = [

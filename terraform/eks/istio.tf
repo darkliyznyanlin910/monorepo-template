@@ -2,8 +2,7 @@ module "istio" {
   source = "../modules/kubernetes/istio"
   cluster_name = var.cluster_name
   cluster_domain_public = var.cluster_domain_public
-  hosted_zone_id = var.hosted_zone_id
-  nlb_zone_id = var.nlb_zone_id
+  aws = true
 }
 
 resource "aws_route53_record" "istio_nlb_dns" {

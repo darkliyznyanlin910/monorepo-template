@@ -11,8 +11,8 @@ resource "helm_release" "metrics_server" {
   version    = var.metrics_server_helm_version
 
   values = [
-    {
+    yamlencode({
       args = ["--kubelet-insecure-tls"]
-    }
+    })
   ]
 }

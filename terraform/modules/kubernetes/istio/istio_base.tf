@@ -11,10 +11,10 @@ resource "helm_release" "istio_base" {
   version          = var.istio_base_helm_version
 
   values = [
-    {
+    yamlencode({
       global = {
         istioNamespace = "istio-system"
       }
-    }
+    })
   ]
 }

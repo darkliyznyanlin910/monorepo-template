@@ -3,11 +3,6 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "hosted_zone_id" {
-  description = "Hosted zone ID for the cluster"
-  type        = string
-}
-
 variable "cluster_domain_public" {
   description = "Cluster domain for public access"
   type        = string

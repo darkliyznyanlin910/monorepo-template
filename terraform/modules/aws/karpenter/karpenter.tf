@@ -10,7 +10,7 @@ resource "helm_release" "karpenter" {
 
   # provides karpenter permissions to manage nodes
   values = [
-    {
+    yamlencode({
       serviceAccount = {
         annotations = {
           "eks.amazonaws.com/role-arn" = aws_iam_role.karpenter_controller_role.arn
@@ -21,6 +21,6 @@ resource "helm_release" "karpenter" {
       aws = {
         defaultInstanceProfile = aws_iam_instance_profile.karpenter_profile.name
       }
-    }
+    })
   ]
 }

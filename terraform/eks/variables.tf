@@ -37,9 +37,35 @@ variable "nlb_zone_id" {
 variable "argocd_helm_version" {
   type        = string
   description = "ArgoCD Helm version"
+  default     = "8.2.5"
 }
 
 variable "argocd_appsets_include" {
   type        = string
   description = "ArgoCD appsets to include"
+  nullable    = false
+}
+
+variable "argocd_appsets_path" {
+  type        = string
+  description = "The path to the appsets in the Git repository"
+  nullable    = false
+}
+
+variable "argocd_repo_url" {
+  type        = string
+  description = "The URL of the Git repository to configure for ArgoCD"
+  nullable    = false
+}
+
+variable "argocd_repo_username" {
+  type        = string
+  description = "The username for the Git repository"
+  nullable    = false
+}
+
+variable "argocd_repo_password" {
+  type        = string
+  description = "The password for the Git repository"
+  nullable    = false
 }

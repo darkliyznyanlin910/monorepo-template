@@ -13,18 +13,6 @@ variable "argocd_appsets_include" {
   description = "The appsets to include in the ArgoCD project"
 }
 
-variable "argocd_repositories" {
-  type = list(object({
-    name                    = string
-    repo_name              = string
-    url                    = string
-    username = string
-    password = string
-  }))
-  description = "List of Git repositories to configure for ArgoCD"
-  default     = []
-}
-
 variable "argocd_repo_url" {
   type        = string
   description = "The URL of the Git repository to configure for ArgoCD"
@@ -34,5 +22,11 @@ variable "argocd_repo_url" {
 variable "argocd_appsets_path" {
   type        = string
   description = "The path to the appsets in the Git repository"
+  nullable    = false
+}
+
+variable "argocd_helm_values" {
+  type        = string
+  description = "The values to pass to the ArgoCD Helm chart in yaml string format"
   nullable    = false
 }

@@ -13,14 +13,14 @@ resource "helm_release" "kiali_gateway" {
 
   values = [
 
-    {
+    yamlencode({
       service = {
         name = "istio-kiali-gateway"
         annotations = var.aws ? {
           "service.beta.kubernetes.io/aws-load-balancer-type" = "nlb"
         } : {}
       }
-    }
+    })
   ]
 
 

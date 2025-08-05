@@ -51,14 +51,6 @@ module "karpenter" {
   eks_cluster_endpoint = module.eks.eks_cluster_endpoint
 }
 
-module "argocd" {
-  source = "../modules/kubernetes/argocd"
-
-  cluster_domain_public = var.cluster_domain_public
-  argocd_helm_version   = var.argocd_helm_version
-  argocd_appsets_include = var.argocd_appsets_include
-}
-
 module "metrics_server" {
   source = "../modules/kubernetes/metrics_server"
 }

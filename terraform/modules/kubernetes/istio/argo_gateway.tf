@@ -11,14 +11,14 @@ resource "helm_release" "argo_gateway" {
   create_namespace = true
   version          = var.istio_gateway_helm_version
   values = [
-    {
+    yamlencode({
       service = {
         name = "istio-argo-gateway"
         annotations = var.aws ? {
           "service.beta.kubernetes.io/aws-load-balancer-type" = "nlb"
         } : {}
       }
-    }
+    })
   ]
 
   depends_on = [
