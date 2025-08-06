@@ -9,6 +9,13 @@ import { auth } from "~/auth";
 const app = new Hono();
 
 app
+  .get("/health", (c) =>
+    c.json({
+      ok: true,
+      service: "auth-service",
+      timestamp: new Date().toISOString(),
+    }),
+  )
   .use(
     "/auth/*",
     cors({
@@ -18,13 +25,6 @@ app
       exposeHeaders: ["Content-Length"],
       maxAge: 600,
       credentials: true,
-    }),
-  )
-  .get("/health", (c) =>
-    c.json({
-      ok: true,
-      service: "auth-service",
-      timestamp: new Date().toISOString(),
     }),
   )
   .on(["POST", "GET"], "/auth/*", (c) => {

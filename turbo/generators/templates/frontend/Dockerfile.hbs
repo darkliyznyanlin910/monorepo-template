@@ -23,16 +23,16 @@ COPY --from=base /repo/out/full/ .
 RUN pnpm install
 
 # Build the project
-WORKDIR /repo/apps/{{ name }}
+WORKDIR /repo/apps/frontend/{{ name }}
 RUN pnpm turbo run build --filter=@repo/{{ name }}...
 
 # Stage 3: Run
 FROM node:22-alpine AS runner
 WORKDIR /repo
 
-COPY --from=builder /repo/apps/{{ name }}/dist /repo/apps/{{ name }}/dist
+COPY --from=builder /repo/apps/frontend/{{ name }}/dist /repo/apps/frontend/{{ name }}/dist
 
-WORKDIR /repo/apps/{{ name }}
+WORKDIR /repo/apps/frontend/{{ name }}
 
 EXPOSE {{ port }}
 CMD ["node", "./dist/index.cjs"]

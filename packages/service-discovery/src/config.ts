@@ -11,7 +11,7 @@ export const LOCAL_SERVICE_MAP: ServiceMap = {
 };
 
 export const KUBERNETES_INTERNAL_SERVICE_MAP: ServiceMap = {
-  auth: "http://auth-service.default.svc.cluster.local",
+  auth: "http://auth-service.services.svc.cluster.local",
 };
 
 export const PRODUCTION_SERVICE_MAP: ServiceMap = {

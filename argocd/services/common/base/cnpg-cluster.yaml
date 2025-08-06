@@ -27,8 +27,3 @@ spec:
         superuser: true
         passwordSecret:
           name: cnpg-cluster-admin
-  bootstrap:
-    initdb:
-      database: postgres
-      owner: admin
-      dataChecksums: true

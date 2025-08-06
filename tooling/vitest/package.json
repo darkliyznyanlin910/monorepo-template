@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@repo/tsconfig": "workspace:*",
+    "@types/minimatch": "^5.1.2",
     "@vitest/coverage-istanbul": "catalog:vitest",
     "@vitest/ui": "catalog:vitest",
     "glob": "catalog:",

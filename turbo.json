@@ -40,6 +40,14 @@
       "cache": false,
       "persistent": true
     },
+    "docker:build": {
+      "cache": false,
+      "persistent": false
+    },
+    "docker:push": {
+      "cache": false,
+      "persistent": false
+    },
     "ui-add": {
       "cache": false,
       "interactive": true

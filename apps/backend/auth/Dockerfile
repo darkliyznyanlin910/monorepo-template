@@ -23,14 +23,14 @@ COPY --from=base /repo/out/full/ .
 RUN pnpm install
 
 # Build the project
-WORKDIR /repo/apps/auth-service
+WORKDIR /repo/apps/backend/auth
 RUN pnpm turbo run build --filter=@repo/auth...
 
 # Stage 3: Run
 FROM node:22-alpine AS runner
 WORKDIR /repo
 
-COPY --from=builder /repo/apps/auth-service/dist /repo/apps/auth-service/dist
+COPY --from=builder /repo/apps/backend/auth/dist /repo/apps/backend/auth/dist
 
 EXPOSE 3000
-CMD ["node", "/repo/apps/auth-service/dist/index.cjs"]
+CMD ["node", "/repo/apps/backend/auth/dist/index.cjs"]
