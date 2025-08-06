@@ -200,32 +200,122 @@ COPY . .
 CMD ["node", "dist/index.js"]
 ```
 
+### Kubernetes Infrastructure
+
+The project uses a comprehensive Kubernetes setup with GitOps deployment:
+
+#### Infrastructure Components
+
+```
+argocd/
+├── infra/                    # Core infrastructure
+│   ├── cert-manager/         # TLS certificate management
+│   ├── external-secrets/     # External secret management
+│   ├── cnpg-system/         # PostgreSQL operator
+│   ├── maildev/             # Development email server
+│   ├── minio/               # S3-compatible object storage
+│   └── reflector/           # Secret/ConfigMap replication
+├── services/                 # Application services
+│   ├── auth/                # Authentication service resources
+│   ├── api/                 # API service resources
+│   └── common/              # Shared database and resources
+└── appsets/                 # ArgoCD ApplicationSets
+    └── dev/                 # Development environment
+        ├── infra.yaml       # Infrastructure applications
+        └── services.yaml    # Service applications
+```
+
+#### Database Architecture
+
+PostgreSQL is managed by CloudNativePG (CNPG) operator:
+
+- **High availability** with automatic failover
+- **Backup and recovery** capabilities
+- **TLS encryption** for secure connections
+- **Role-based access** with dedicated admin credentials
+
 ### Infrastructure as Code
 
-Terraform modules for AWS deployment:
+Terraform provides infrastructure across environments:
+
+#### Local Development (`terraform/kind-local/`)
 
 ```
-terraform/
-├── eks/                  # Kubernetes cluster
-├── modules/
-│   ├── aws/
-│   │   ├── eks/         # EKS cluster configuration
-│   │   ├── network/     # VPC and networking
-│   │   └── route53/     # DNS management
-│   └── kubernetes/
-│       ├── argocd/      # GitOps deployment
-│       ├── istio/       # Service mesh
-│       └── monitoring/  # Observability stack
+kind-local/
+├── kind.tf              # KIND cluster configuration
+├── cilium.tf            # Cilium CNI networking
+├── argocd.tf            # ArgoCD GitOps platform
+├── traefik.tf           # Ingress controller
+├── gateway.tf           # Gateway API resources
+├── registry.tf          # Local container registry
+└── tls.tf              # TLS certificate generation
 ```
 
-### Service Mesh
+#### Production AWS (`terraform/eks/`)
 
-Istio service mesh for:
+```
+eks/
+├── aws.tf              # EKS cluster and IAM
+├── gateway.tf          # AWS Load Balancer Controller
+├── cilium.tf           # Cilium CNI on EKS
+├── argocd.tf           # ArgoCD for production
+└── providers.tf        # AWS provider configuration
+```
 
-- **Traffic management** between services
-- **Security policies** and mTLS
-- **Observability** and monitoring
-- **Load balancing** and failover
+#### Reusable Modules (`terraform/module-aws/`)
+
+```
+module-aws/
+├── eks/                # EKS cluster module
+│   ├── cluster.tf      # EKS cluster configuration
+│   ├── nodes.tf        # Worker node groups
+│   └── iam.tf          # IAM roles and policies
+├── network/            # VPC networking module
+│   ├── vpc.tf          # VPC and subnets
+│   ├── nat.tf          # NAT gateways
+│   └── igw.tf          # Internet gateway
+└── karpenter/          # Karpenter autoscaler
+    ├── karpenter.tf    # Karpenter installation
+    └── iam.tf          # Service account roles
+```
+
+### GitOps with ArgoCD
+
+ArgoCD provides continuous deployment with:
+
+- **ApplicationSets** for managing multiple applications
+- **Automated synchronization** from Git repository
+- **Environment-specific** configurations
+- **Self-healing** and automatic pruning
+- **Wave-based deployment** ordering
+
+```mermaid
+graph LR
+    A[Git Repository] --> B[ArgoCD]
+    B --> C[Infrastructure Apps]
+    B --> D[Service Apps]
+    C --> E[cert-manager]
+    C --> F[PostgreSQL]
+    C --> G[External Secrets]
+    D --> H[Auth Service]
+    D --> I[API Service]
+```
+
+### Networking Architecture
+
+#### Local Development
+
+- **KIND cluster** with port forwarding
+- **Traefik ingress** for HTTP routing
+- **Self-signed certificates** for HTTPS
+- **Local registry** for container images
+
+#### Production (AWS)
+
+- **AWS Load Balancer Controller** for ingress
+- **Cilium CNI** for pod networking
+- **VPC with public/private subnets**
+- **NAT gateways** for outbound connectivity
 
 ## 🔒 Security Architecture
 
