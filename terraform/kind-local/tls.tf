@@ -7,7 +7,7 @@ resource "tls_self_signed_cert" "ca" {
   private_key_pem = tls_private_key.ca.private_key_pem
 
   subject {
-    organization = "Voltade"
+    organization = "Local"
     common_name  = local.wildcard_hostname
   }
 
@@ -53,7 +53,7 @@ resource "tls_private_key" "registry" {
 resource "tls_cert_request" "registry" {
   private_key_pem = tls_private_key.registry.private_key_pem
   subject {
-    organization = "Voltade"
+    organization = "Local"
     common_name  = local.wildcard_hostname
   }
   dns_names    = [local.wildcard_hostname]

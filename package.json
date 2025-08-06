@@ -13,7 +13,7 @@
     "clean:workspaces": "turbo run clean",
     "tofu:init": "cd terraform/kind-local && tofu init -upgrade",
     "tofu:apply": "cd terraform/kind-local && tofu apply && ./post-apply.sh",
-    "tofu:nuke": "cd terraform/kind-local && docker rm --force --volumes registry voltade-os-local-control-plane && rm -r certs/* terraform.tfstate* kubeconfig",
+    "tofu:nuke": "cd terraform/kind-local && docker rm --force --volumes registry monorepo-template-local-control-plane && rm -r certs/* terraform.tfstate* kubeconfig",
     "auth:generate": "turbo -F @repo/auth-common generate",
     "db:push": "turbo db:push",
     "db:studio": "turbo db:studio",

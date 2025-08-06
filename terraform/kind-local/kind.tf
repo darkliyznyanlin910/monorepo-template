@@ -54,13 +54,13 @@ resource "kind_cluster" "this" {
 
       extra_mounts {
         host_path      = "${path.root}/../../"
-        container_path = "/mnt/voltade-os.git"
+        container_path = "/mnt/monorepo-template.git"
         read_only      = true
       }
 
       extra_mounts {
         host_path      = local_file.selfsigned_ca.filename
-        container_path = "/usr/local/share/ca-certificates/voltade-ca.crt"
+        container_path = "/usr/local/share/ca-certificates/monorepo-template-ca.crt"
         read_only      = true
       }
     }

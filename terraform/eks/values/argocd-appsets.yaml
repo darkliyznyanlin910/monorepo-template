@@ -16,7 +16,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    repoURL: file:///mnt/monorepo-template.git
+    repoURL: "${git_url}"
     targetRevision: HEAD
     path: argocd/appsets
     directory:

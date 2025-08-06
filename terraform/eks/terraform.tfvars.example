@@ -1,14 +1,24 @@
+# AWS Variables
 aws_account_id = "123456789012"
-cluster_name   = "cluster-name"
-aws_profile = "monorepo-template"
+aws_profile    = "monorepo-template"
 iam_user_name  = "terraform"
-
-cluster_domain_public = "monorepo-template.local"
 hosted_zone_id = "Z00000000000000000000"
-nlb_zone_id = "Z00000000000000000000"
+nlb_zone_id    = "Z00000000000000000000"
 
+# Kubernetes Variables
+cluster_name           = "monorepo-template"
+cluster_domain_public  = "127.0.0.1.nip.io"
+kubernetes_version     = "v1.33.2"
+cilium_version         = "1.18.0"
+gateway_api_version    = "v1.3.0"
+traefik_helm_version   = "37.0.0"
+argocd_helm_version    = "8.2.5"
 argocd_appsets_include = "dev/*"
-argocd_appsets_path = "kubernetes/appsets"
-argocd_repo_url = "https://github.com/darkliyznyanlin910/monorepo-template.git"
-argocd_repo_username = "username"
-argocd_repo_password = "password"
+
+# ArgoCD Variables
+argocd_git_url      = "https://github.com/darkliyznyanlin910/monorepo-template.git"
+argocd_git_username = "your-git-username"
+argocd_git_password = "your-git-token"
+argocd_oci_url      = "your-registry.com"
+argocd_oci_username = "your-oci-username"
+argocd_oci_password = "your-oci-token"

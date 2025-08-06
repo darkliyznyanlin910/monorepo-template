@@ -11,4 +11,6 @@ type: Opaque
 stringData:
   type: git
   name: monorepo-template
-  url: file:///mnt/monorepo-template.git
+  url: "${git_url}"
+  username: "${git_username}"
+  password: "${git_password}"

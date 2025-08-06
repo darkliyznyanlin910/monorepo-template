@@ -27,14 +27,14 @@ repoServer:
     - name: SSL_CERT_DIR
       value: /mnt/ca-certificates
   volumeMounts:
-    - name: voltade-os
-      mountPath: /mnt/voltade-os.git
+    - name: monorepo-template
+      mountPath: /mnt/monorepo-template.git
     - name: extra-ca
       mountPath: /mnt/ca-certificates
   volumes:
-    - name: voltade-os
+    - name: monorepo-template
       hostPath:
-        path: /mnt/voltade-os.git
+        path: /mnt/monorepo-template.git
         type: Directory
     - name: extra-ca
       configMap:

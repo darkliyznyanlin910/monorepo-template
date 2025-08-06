@@ -26,6 +26,11 @@ resource "aws_eks_node_group" "eks_nodes" {
   labels = {
     role = "general"
   }
+  taint {
+    key = "node.cilium.io/agent-not-ready"
+    value = "true"
+    effect = "NoExecute"
+  }
 
   depends_on = [aws_iam_role_policy_attachment.eks_nodes_AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.eks_nodes_AmazonEC2ContainerRegistryReadOnly,

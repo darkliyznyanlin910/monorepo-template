@@ -1,4 +1,4 @@
-CLUSTER_NAME="kind-voltade-os-local"
+CLUSTER_NAME="kind-monorepo-template-local"
 
 tofu output -raw kubeconfig >kubeconfig
 kubecm delete $CLUSTER_NAME
