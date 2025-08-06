@@ -38,11 +38,6 @@ resource "kind_cluster" "this" {
       }
 
       extra_port_mappings {
-        container_port = 443
-        host_port      = 443
-      }
-
-      extra_port_mappings {
         container_port = 30025
         host_port      = 1025
       }
@@ -59,7 +54,7 @@ resource "kind_cluster" "this" {
 
       extra_mounts {
         host_path      = "${path.root}/../../"
-        container_path = "/mnt/monorepo-template.git"
+        container_path = "/mnt/voltade-os.git"
         read_only      = true
       }
 

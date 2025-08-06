@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: repo-monorepo-template
+  name: repo-voltade-os
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
@@ -10,5 +10,5 @@ metadata:
 type: Opaque
 stringData:
   type: git
-  name: monorepo-template
-  url: file:///mnt/monorepo-template.git
+  name: voltade-os
+  url: file:///mnt/voltade-os.git

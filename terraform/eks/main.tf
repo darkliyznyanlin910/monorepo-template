@@ -1,14 +1,14 @@
 module "network" {
-  source = "../modules/aws/network"
+  source = "../modules-aws/network"
   cluster_name = var.cluster_name
 }
 
 module "kms" {
-  source = "../modules/aws/kms"
+  source = "../modules-aws/kms"
 }
 
 module "eks" {
-  source = "../modules/aws/eks"
+  source = "../modules-aws/eks"
   cluster_name = var.cluster_name
   private_subnet_ids = module.network.private_subnet_ids
   public_subnet_ids  = module.network.public_subnet_ids
@@ -41,7 +41,7 @@ resource "kubernetes_config_map" "aws_auth" {
 
 
 module "karpenter" {
-  source = "../modules/aws/karpenter"
+  source = "../modules-aws/karpenter"
 
   eks_oidc_url = module.eks.eks_oidc_url
   eks_oidc_arn = module.eks.eks_oidc_arn
@@ -49,16 +49,4 @@ module "karpenter" {
 
   eks_cluster_id       = module.eks.eks_cluster_id
   eks_cluster_endpoint = module.eks.eks_cluster_endpoint
-}
-
-module "metrics_server" {
-  source = "../modules/kubernetes/metrics_server"
-}
-
-module "flagger" {
-  source = "../modules/kubernetes/flagger"
-}
-
-module "operations" {
-  source = "../modules/kubernetes/operations"
 }
