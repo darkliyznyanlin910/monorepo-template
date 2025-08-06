@@ -36,7 +36,6 @@
     "@repo/db-auth": "workspace:^",
     "@repo/service-discovery": "workspace:^",
     "@t3-oss/env-core": "catalog:",
-    "better-auth": "1.2.9",
     "hono": "^4.8.2",
     "nodemailer": "^7.0.5",
     "zod": "catalog:"

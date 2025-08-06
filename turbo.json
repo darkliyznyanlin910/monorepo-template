@@ -2,6 +2,11 @@
   "$schema": "https://turborepo.org/schema.json",
   "ui": "tui",
   "tasks": {
+    "auth:generate": {
+      "cache": false,
+      "persistent": false,
+      "interactive": true
+    },
     "topo": {
       "dependsOn": ["^topo"]
     },

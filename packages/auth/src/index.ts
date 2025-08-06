@@ -1,25 +1,34 @@
 import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { jwt, openAPI, organization } from "better-auth/plugins";
+import {
+  apiKey,
+  bearer,
+  jwt,
+  oidcProvider,
+  openAPI,
+  organization,
+} from "better-auth/plugins";
 import { SocialProviders } from "better-auth/social-providers";
 import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-import { db } from "@repo/db-auth/client";
-
-export function initAuth(options: {
-  baseUrl: string;
-  secret: string | undefined;
-  trustedOrigins?: string[];
-  socialProviders?: SocialProviders;
-  mailer?: nodemailer.Transporter<
-    SMTPTransport.SentMessageInfo,
-    SMTPTransport.Options
-  >;
-}) {
+export function initAuth(
+  DB: any,
+  options: {
+    baseUrl: string;
+    secret: string | undefined;
+    trustedOrigins?: string[];
+    socialProviders?: SocialProviders;
+    mailer?: nodemailer.Transporter<
+      SMTPTransport.SentMessageInfo,
+      SMTPTransport.Options
+    >;
+    getOrganizations: (userId: string) => Promise<string[]> | undefined;
+  },
+) {
   const config = {
-    database: drizzleAdapter(db, {
+    database: drizzleAdapter(DB, {
       provider: "pg",
       usePlural: true,
     }),
@@ -28,11 +37,22 @@ export function initAuth(options: {
     secret: options.secret,
 
     plugins: [
+      apiKey(),
+      bearer(),
       openAPI({
         path: "/docs",
       }),
-      jwt(),
+      jwt({
+        jwt: {
+          audience: async ({ user }) => {
+            return options.getOrganizations(user.id);
+          },
+        },
+      }),
       organization(),
+      oidcProvider({
+        loginPage: "/sign-in",
+      }),
     ],
 
     onAPIError: {

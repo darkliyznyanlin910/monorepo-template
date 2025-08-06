@@ -108,3 +108,41 @@ export const invitations = pgTable("invitations", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 });
+
+export const oauthApplications = pgTable("oauth_applications", {
+  id: text("id").primaryKey(),
+  name: text("name"),
+  icon: text("icon"),
+  metadata: text("metadata"),
+  clientId: text("client_id").unique(),
+  clientSecret: text("client_secret"),
+  redirectURLs: text("redirect_u_r_ls"),
+  type: text("type"),
+  disabled: boolean("disabled"),
+  userId: text("user_id"),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+});
+
+export const oauthAccessTokens = pgTable("oauth_access_tokens", {
+  id: text("id").primaryKey(),
+  accessToken: text("access_token").unique(),
+  refreshToken: text("refresh_token").unique(),
+  accessTokenExpiresAt: timestamp("access_token_expires_at"),
+  refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+  clientId: text("client_id"),
+  userId: text("user_id"),
+  scopes: text("scopes"),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+});
+
+export const oauthConsents = pgTable("oauth_consents", {
+  id: text("id").primaryKey(),
+  clientId: text("client_id"),
+  userId: text("user_id"),
+  scopes: text("scopes"),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+  consentGiven: boolean("consent_given"),
+});

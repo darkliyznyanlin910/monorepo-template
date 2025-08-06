@@ -5,6 +5,7 @@ import { cors } from "hono/cors";
 import { getTrustedOrigins } from "@repo/service-discovery";
 
 import { auth } from "~/auth";
+import { env } from "./env";
 
 const app = new Hono();
 
@@ -19,7 +20,7 @@ app
   .use(
     "/auth/*",
     cors({
-      origin: getTrustedOrigins(),
+      origin: getTrustedOrigins(env.NODE_ENV),
       allowHeaders: ["Content-Type", "Authorization"],
       allowMethods: ["POST", "GET", "OPTIONS"],
       exposeHeaders: ["Content-Length"],

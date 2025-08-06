@@ -39,3 +39,6 @@ helmCharts:
       envFrom:
         - secretRef:
             name: mailer-secret
+
+resources:
+  - cnpg-database.yaml

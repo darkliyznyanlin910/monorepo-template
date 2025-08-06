@@ -11,14 +11,18 @@ export const SERVICES = Object.keys(
   SERVICE_CONFIG,
 ) as (keyof typeof SERVICE_CONFIG)[];
 
-export function getTrustedOrigins() {
+export function getTrustedOrigins(ENV: typeof env.NODE_ENV) {
   return SERVICES.filter((service) => SERVICE_CONFIG[service].exposed).map(
-    (service) => getBaseUrl(service),
+    (service) => getBaseUrl(ENV, service),
   );
 }
 
-export function getBaseUrl(service: Service, internal = false) {
-  if (env.NODE_ENV === "development") {
+export function getBaseUrl(
+  ENV: typeof env.NODE_ENV,
+  service: Service,
+  internal = false,
+) {
+  if (ENV === "development") {
     return LOCAL_SERVICE_MAP[service];
   } else {
     if (internal) {

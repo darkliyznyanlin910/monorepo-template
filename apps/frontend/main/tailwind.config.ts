@@ -8,7 +8,7 @@ export default {
   darkMode: "class",
   content: [
     ...baseConfig.content,
-    "../../packages/ui/src/*.{ts,tsx}",
+    "../../../packages/ui/src/*.{ts,tsx}",
     "index.html",
   ],
   presets: [baseConfig],

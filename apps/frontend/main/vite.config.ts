@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         "~": path.resolve(__dirname, "./src"),
-        "@repo/ui": path.resolve(__dirname, "../../packages/ui/src"),
+        "@repo/ui": path.resolve(__dirname, "../../../packages/ui/src"),
       },
     },
     server: {
@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
         },
       },
+      allowedHosts: ["localhost", "127.0.0.1", "127.0.0.1.nip.io"],
     },
     define: {
       process: {

@@ -2,7 +2,13 @@
 
 import { initAuth } from "./index";
 
-export const auth = initAuth({
-  baseUrl: "http://localhost:3000",
-  secret: "secret",
-});
+export const auth = initAuth(
+  {},
+  {
+    baseUrl: "http://localhost:3000",
+    secret: "secret",
+    getOrganizations: async (userId) => {
+      return [];
+    },
+  },
+);
