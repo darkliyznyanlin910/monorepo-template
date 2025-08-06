@@ -11,6 +11,8 @@
     "build:docker": "turbo run build:docker",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
+    "charts": "tsx scripts/charts.ts",
+    "charts:patch": "tsx scripts/charts.ts --patch",
     "tofu:init": "cd terraform/kind-local && tofu init -upgrade",
     "tofu:apply": "cd terraform/kind-local && tofu apply && ./post-apply.sh",
     "tofu:nuke": "cd terraform/kind-local && docker rm --force --volumes registry monorepo-template-local-control-plane && rm -r certs/* terraform.tfstate* kubeconfig",
@@ -33,12 +35,17 @@
     "test:view": "turbo run view-report"
   },
   "devDependencies": {
+    "@inquirer/prompts": "^7.8.0",
     "@repo/prettier-config": "workspace:*",
     "@repo/vitest": "workspace:*",
     "@turbo/gen": "^2.5.4",
+    "glob": "catalog:",
     "prettier": "catalog:",
+    "semver": "^7.6.3",
+    "tsx": "catalog:",
     "turbo": "^2.5.4",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "yaml": "^2.6.1"
   },
   "prettier": "@repo/prettier-config"
 }

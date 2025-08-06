@@ -24,7 +24,7 @@
     "@repo/tsconfig": "workspace:*",
     "@vitest/coverage-istanbul": "catalog:vitest",
     "@vitest/ui": "catalog:vitest",
-    "glob": "^11.0.1",
+    "glob": "catalog:",
     "jsdom": "^26.0.0",
     "nyc": "^17.1.0",
     "typescript": "latest"
