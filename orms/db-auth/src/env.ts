@@ -5,7 +5,7 @@ export const env = createEnv({
   server: {
     AUTH_POSTGRES_URL: z.string().min(1),
   },
-  runtimeEnvStrict: {
+  runtimeEnv: {
     AUTH_POSTGRES_URL: process.env.AUTH_POSTGRES_URL,
   },
   skipValidation:

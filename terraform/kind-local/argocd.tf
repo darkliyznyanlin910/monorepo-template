@@ -73,7 +73,7 @@ resource "kubernetes_secret" "argocd_oidc_secret" {
     }
   }
   data = {
-    "oidc.better-auth.issuer"       = "https://auth.127.0.0.1.nip.io"
+    "oidc.better-auth.issuer"       = "http://socat.services.svc.cluster.local:4000/api/auth"
     "oidc.better-auth.clientID"     = "EOfMkngqCQmPeaaIQjrwHQHNIUyjPOdS"
     "oidc.better-auth.clientSecret" = "VvrMhfMJBjDHMDWNTetIQGkNykfrmPfb"
     "oidc.better-auth.allowedAudience" = "admin-org"

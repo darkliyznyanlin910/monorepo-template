@@ -26,10 +26,15 @@ export default defineConfig(({ mode }) => {
       proxy: {
         "/api": {
           target: "http://localhost:4001",
-          changeOrigin: true,
+          changeOrigin: false,
         },
       },
-      allowedHosts: ["localhost", "127.0.0.1", "127.0.0.1.nip.io"],
+      allowedHosts: [
+        "localhost",
+        "127.0.0.1",
+        "auth.127.0.0.1.nip.io",
+        "socat.services.svc.cluster.local",
+      ],
     },
     define: {
       process: {

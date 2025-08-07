@@ -1,7 +1,11 @@
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 
+import { getTrustedOrigins } from "@repo/service-discovery";
+
+import { auth } from "./auth";
 import { env } from "./env";
 
 const app = new Hono()
@@ -19,6 +23,20 @@ const app = new Hono()
       { "Content-Type": "application/javascript" },
     );
   })
+  // .use(
+  //   "/api/auth/*",
+  //   cors({
+  //     origin: getTrustedOrigins(env.NODE_ENV),
+  //     allowHeaders: ["Content-Type", "Authorization"],
+  //     allowMethods: ["POST", "GET", "OPTIONS"],
+  //     exposeHeaders: ["Content-Length"],
+  //     maxAge: 600,
+  //     credentials: true,
+  //   }),
+  // )
+  .on(["POST", "GET"], "/api/auth/*", (c) => {
+    return auth.handler(c.req.raw);
+  })
   .use(
     "/*",
     serveStatic({
@@ -35,4 +53,4 @@ serve({
   fetch: app.fetch,
 });
 
-console.log(`App is running on port $4001`);
+console.log(`App is running on port 4001`);

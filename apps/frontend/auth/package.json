@@ -1,5 +1,5 @@
 {
-  "name": "@repo/main",
+  "name": "@repo/auth",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,8 +9,8 @@
   "scripts": {
     "start": "NODE_ENV=production pnpm with-env node dist/index.cjs",
     "build": "pnpm with-env tsc -b && pnpm with-env vite build && esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
-    "docker:build": "docker build -t registry.127.0.0.1.nip.io/repo-main:latest -f Dockerfile ../../../",
-    "docker:push": "docker image push registry.127.0.0.1.nip.io/repo-main:latest",
+    "docker:build": "docker build -t registry.127.0.0.1.nip.io/repo-auth:latest -f Dockerfile ../../../",
+    "docker:push": "docker image push registry.127.0.0.1.nip.io/repo-auth:latest",
     "preview": "pnpm with-env vite preview",
     "clean": "git clean -xdf .cache .turbo dist node_modules .tanstack",
     "dev:server": "pnpm with-env tsx watch server/index.ts",
@@ -19,12 +19,13 @@
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../../env/.env --",
+    "with-env": "dotenv -e ../../../.env --",
     "test": "vitest run"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.4",
     "@repo/auth-common": "workspace:*",
+    "@repo/db-auth": "workspace:*",
     "@repo/service-discovery": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-router": "^1.121.34",

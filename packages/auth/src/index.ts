@@ -52,6 +52,9 @@ export function initAuth(
       organization(),
       oidcProvider({
         loginPage: "/sign-in",
+        metadata: {
+          issuer: "http://socat.services.svc.cluster.local:4000/api/auth",
+        },
       }),
     ],
 

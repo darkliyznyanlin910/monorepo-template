@@ -92,7 +92,7 @@ await db
     // DO NOT CHANGE THESE VALUES for the ArgoCD application to work
     clientId: "EOfMkngqCQmPeaaIQjrwHQHNIUyjPOdS",
     clientSecret: "VvrMhfMJBjDHMDWNTetIQGkNykfrmPfb",
-    redirectURLs: "http://argocd.127.0.0.1.nip.io/applications",
+    redirectURLs: "http://argocd.127.0.0.1.nip.io/auth/callback",
     type: "web",
     disabled: false,
     userId: "admin",

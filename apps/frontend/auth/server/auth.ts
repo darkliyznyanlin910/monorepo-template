@@ -4,15 +4,13 @@ import { db } from "@repo/db-auth/client";
 import { members, organizations } from "@repo/db-auth/schema";
 import { getBaseUrl, getTrustedOrigins } from "@repo/service-discovery";
 
-import { env } from "~/env";
+import { env } from "./env";
 import { mailer } from "./mailer";
 
-console.log(getTrustedOrigins(env.NODE_ENV));
-
 export const auth = initAuth(db, {
-  baseUrl: getBaseUrl(env.NODE_ENV, "auth") + "/auth",
+  baseUrl: getBaseUrl(env.NODE_ENV, "auth") + "/api/auth",
   secret: env.AUTH_SECRET,
-  trustedOrigins: getTrustedOrigins(env.NODE_ENV),
+  // trustedOrigins: getTrustedOrigins(env.NODE_ENV),
   mailer: mailer,
   getOrganizations: async (userId) => {
     const orgs = await db.query.members.findMany({

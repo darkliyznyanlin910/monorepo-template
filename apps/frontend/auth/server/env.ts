@@ -1,11 +1,25 @@
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod/v4";
+import { z } from "zod";
 
 import { env as dbAuthEnv } from "@repo/db-auth/env";
 import { env as serviceDiscoveryEnv } from "@repo/service-discovery/env";
 
 export const env = createEnv({
-  extends: [dbAuthEnv, serviceDiscoveryEnv],
+  extends: [serviceDiscoveryEnv, dbAuthEnv],
+  client: {
+    VITE_APP_URL: z.url(),
+  },
+  runtimeEnv: {
+    VITE_APP_URL: process.env.VITE_APP_URL ?? `http://localhost:4001`,
+    AUTH_POSTGRES_URL: process.env.AUTH_POSTGRES_URL,
+    AUTH_SECRET: process.env.AUTH_SECRET,
+    SMTP_HOST: process.env.SMTP_HOST,
+    SMTP_PORT: process.env.SMTP_PORT,
+    SMTP_SECURE: process.env.SMTP_SECURE,
+    SMTP_USER: process.env.SMTP_USER,
+    SMTP_PASS: process.env.SMTP_PASS,
+    SMTP_FROM: process.env.SMTP_FROM,
+  },
   server: {
     AUTH_SECRET:
       process.env.NODE_ENV === "production"
@@ -18,15 +32,9 @@ export const env = createEnv({
     SMTP_PASS: z.string().min(1),
     SMTP_FROM: z.string().min(1),
   },
-  runtimeEnvStrict: {
-    AUTH_SECRET: process.env.AUTH_SECRET,
-    SMTP_HOST: process.env.SMTP_HOST,
-    SMTP_PORT: process.env.SMTP_PORT,
-    SMTP_SECURE: process.env.SMTP_SECURE,
-    SMTP_USER: process.env.SMTP_USER,
-    SMTP_PASS: process.env.SMTP_PASS,
-    SMTP_FROM: process.env.SMTP_FROM,
-  },
+  clientPrefix: "VITE_",
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });
+
+export type Env = typeof env;
