@@ -8,9 +8,10 @@ import { env } from "./env";
 import { mailer } from "./mailer";
 
 export const auth = initAuth(db, {
+  baseDomain: env.BASE_DOMAIN,
   baseUrl: getBaseUrl(env.NODE_ENV, "auth") + "/api/auth",
   secret: env.AUTH_SECRET,
-  // trustedOrigins: getTrustedOrigins(env.NODE_ENV),
+  trustedOrigins: getTrustedOrigins(env.NODE_ENV),
   mailer: mailer,
   getOrganizations: async (userId) => {
     const orgs = await db.query.members.findMany({

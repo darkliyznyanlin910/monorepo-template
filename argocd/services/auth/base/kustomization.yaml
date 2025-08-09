@@ -10,7 +10,7 @@ helmCharts:
     valuesInline:
       image:
         pullPolicy: Always
-        repository: registry.127.0.0.1.nip.io/repo-auth-service
+        repository: registry.127.0.0.1.nip.io/repo-auth
         tag: latest
       service:
         port: 3000

@@ -62,20 +62,3 @@ resource "kubectl_manifest" "argocd_appsets" {
     appsets_include = var.argocd_appsets_include
   })
 }
-
-resource "kubernetes_secret" "argocd_oidc_secret" {
-  depends_on = [helm_release.argocd]
-  metadata {
-    name      = "argocd-oidc-secret"
-    namespace = "argocd"
-    labels = {
-      "app.kubernetes.io/part-of" = "argocd"
-    }
-  }
-  data = {
-    "oidc.better-auth.issuer"       = "http://socat.services.svc.cluster.local:4000/api/auth"
-    "oidc.better-auth.clientID"     = "EOfMkngqCQmPeaaIQjrwHQHNIUyjPOdS"
-    "oidc.better-auth.clientSecret" = "VvrMhfMJBjDHMDWNTetIQGkNykfrmPfb"
-    "oidc.better-auth.allowedAudience" = "admin-org"
-  }
-}

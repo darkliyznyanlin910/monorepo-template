@@ -19,6 +19,7 @@ export const env = createEnv({
     SMTP_USER: process.env.SMTP_USER,
     SMTP_PASS: process.env.SMTP_PASS,
     SMTP_FROM: process.env.SMTP_FROM,
+    BASE_DOMAIN: process.env.BASE_DOMAIN,
   },
   server: {
     AUTH_SECRET:
@@ -31,6 +32,7 @@ export const env = createEnv({
     SMTP_USER: z.string().min(1),
     SMTP_PASS: z.string().min(1),
     SMTP_FROM: z.string().min(1),
+    BASE_DOMAIN: z.string().min(1),
   },
   clientPrefix: "VITE_",
   skipValidation:

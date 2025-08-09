@@ -14,13 +14,6 @@ configs:
         - CiliumIdentity
         clusters:
         - "*"
-    oidc.config: |
-      name: BetterAuth
-      issuer: $argocd-oidc-secret:oidc.better-auth.issuer
-      clientSecret: $argocd-oidc-secret:oidc.better-auth.clientSecret
-      clientID: $argocd-oidc-secret:oidc.better-auth.clientID
-      allowedAudiences: 
-        - $argocd-oidc-secret:oidc.better-auth.allowedAudience
 
   secret:
     argocdServerAdminPassword: $2a$10$ekZY6VP1UuhNlhQ8.kCNqe5rn94jO4ivz2vzO1slot1X3sNmZmObe # admin

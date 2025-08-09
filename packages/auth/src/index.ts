@@ -16,6 +16,7 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 export function initAuth(
   DB: any,
   options: {
+    baseDomain: string;
     baseUrl: string;
     secret: string | undefined;
     trustedOrigins?: string[];
@@ -52,9 +53,6 @@ export function initAuth(
       organization(),
       oidcProvider({
         loginPage: "/sign-in",
-        metadata: {
-          issuer: "http://socat.services.svc.cluster.local:4000/api/auth",
-        },
       }),
     ],
 
@@ -86,6 +84,12 @@ export function initAuth(
           },
         }
       : undefined,
+    advanced: {
+      crossSubDomainCookies: {
+        enabled: true,
+        domain: options.baseDomain,
+      },
+    },
   } satisfies BetterAuthOptions;
 
   return betterAuth(config);
