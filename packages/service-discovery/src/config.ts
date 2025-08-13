@@ -1,6 +1,6 @@
 import { ServiceMap } from "./types";
 
-const PROD_DOMAIN = "jknl.dev";
+export const PROD_DOMAIN = "jknl.dev";
 
 export const SERVICE_CONFIG = {
   auth: {

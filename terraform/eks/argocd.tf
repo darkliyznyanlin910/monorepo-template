@@ -45,6 +45,11 @@ resource "kubectl_manifest" "argocd_appsets" {
   })
 }
 
+resource "random_password" "argocd_oidc_secret" {
+  length  = 64
+  special = false
+}
+
 resource "kubernetes_secret" "argocd_oidc_secret" {
   depends_on = [helm_release.argocd]
   metadata {
@@ -56,8 +61,8 @@ resource "kubernetes_secret" "argocd_oidc_secret" {
   }
   data = {
     "oidc.better-auth.issuer"       = "https://auth.${var.cluster_domain_public}/api/auth"
-    "oidc.better-auth.clientID"     = var.argocd_oidc_client_id
-    "oidc.better-auth.clientSecret" = var.argocd_oidc_client_secret
+    "oidc.better-auth.clientID"     = "argocd"
+    "oidc.better-auth.clientSecret" = random_password.argocd_oidc_secret.result
     "oidc.better-auth.allowedAudience" = var.argocd_oidc_allowed_audience
   }
 }

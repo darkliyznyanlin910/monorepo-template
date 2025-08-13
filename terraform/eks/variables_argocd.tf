@@ -34,18 +34,6 @@ variable "argocd_oci_password" {
   nullable    = false
 }
 
-variable "argocd_oidc_client_id" {
-  type        = string
-  description = "The client ID for the OIDC provider"
-  nullable    = false
-}
-
-variable "argocd_oidc_client_secret" {
-  type        = string
-  description = "The client secret for the OIDC provider"
-  nullable    = false
-}
-
 variable "argocd_oidc_allowed_audience" {
   type        = string
   description = "The allowed audience for the OIDC provider"

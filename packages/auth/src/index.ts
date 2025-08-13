@@ -4,6 +4,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import {
   apiKey,
   bearer,
+  Client,
   jwt,
   oidcProvider,
   openAPI,
@@ -26,6 +27,9 @@ export function initAuth(
       SMTPTransport.Options
     >;
     getOrganizations: (userId: string) => Promise<string[]> | undefined;
+    oidcProvider?: {
+      trustedClients: Client[];
+    };
   },
 ) {
   const config = {
@@ -53,6 +57,7 @@ export function initAuth(
       organization(),
       oidcProvider({
         loginPage: "/sign-in",
+        trustedClients: options.oidcProvider?.trustedClients,
       }),
     ],
 

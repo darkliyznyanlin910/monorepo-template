@@ -9,6 +9,24 @@ export const env = createEnv({
   client: {
     VITE_APP_URL: z.url(),
   },
+  server: {
+    ARGOCD_CLIENT_SECRET:
+      process.env.NODE_ENV === "production"
+        ? z.string().min(1)
+        : z.string().min(1).optional(),
+    TEMPORAL_CLIENT_SECRET:
+      process.env.NODE_ENV === "production"
+        ? z.string().min(1)
+        : z.string().min(1).optional(),
+    AUTH_SECRET: z.string().min(1),
+    SMTP_HOST: z.string().min(1),
+    SMTP_PORT: z.coerce.number().min(1),
+    SMTP_SECURE: z.coerce.boolean(),
+    SMTP_USER: z.string().min(1),
+    SMTP_PASS: z.string().min(1),
+    SMTP_FROM: z.string().min(1),
+    BASE_DOMAIN: z.string().min(1),
+  },
   runtimeEnv: {
     VITE_APP_URL: process.env.VITE_APP_URL ?? `http://localhost:4001`,
     AUTH_POSTGRES_URL: process.env.AUTH_POSTGRES_URL,
@@ -20,19 +38,6 @@ export const env = createEnv({
     SMTP_PASS: process.env.SMTP_PASS,
     SMTP_FROM: process.env.SMTP_FROM,
     BASE_DOMAIN: process.env.BASE_DOMAIN,
-  },
-  server: {
-    AUTH_SECRET:
-      process.env.NODE_ENV === "production"
-        ? z.string().min(1)
-        : z.string().min(1).optional(),
-    SMTP_HOST: z.string().min(1),
-    SMTP_PORT: z.coerce.number().min(1),
-    SMTP_SECURE: z.coerce.boolean(),
-    SMTP_USER: z.string().min(1),
-    SMTP_PASS: z.string().min(1),
-    SMTP_FROM: z.string().min(1),
-    BASE_DOMAIN: z.string().min(1),
   },
   clientPrefix: "VITE_",
   skipValidation:

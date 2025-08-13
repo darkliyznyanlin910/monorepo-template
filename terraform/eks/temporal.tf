@@ -20,6 +20,6 @@ resource "kubernetes_secret" "temporal_oidc_secret" {
     "clientID"     = "temporal"
     "clientSecret" = random_password.temporal_oidc_secret.result
     "scopes"       = "openid,profile,email"
-    "callbackURL"  = "https://temporal.${var.cluster_domain_public}/api/auth/callback"
+    "callbackURL"  = "https://temporal.${var.cluster_domain_public}"
   }
 }
