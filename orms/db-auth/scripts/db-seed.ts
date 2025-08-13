@@ -30,6 +30,7 @@ export const auth = initAuth(db, {
     });
     return orgSlugs.map((org) => org.slug ?? "");
   },
+  baseDomain: "localhost",
 });
 
 await db.transaction(async (tx) => {

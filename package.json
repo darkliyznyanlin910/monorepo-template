@@ -8,7 +8,6 @@
   "packageManager": "pnpm@10.11.1",
   "scripts": {
     "build": "turbo run build",
-    "build:docker": "turbo run build:docker",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
     "charts": "tsx scripts/charts.ts",
@@ -24,6 +23,7 @@
     "dev:next": "turbo watch dev -F @repo/nextjs...",
     "docker:build": "turbo run docker:build",
     "docker:push": "turbo run docker:push",
+    "docker": "docker build -t registry.127.0.0.1.nip.io/debezium-connect-postgres:latest -f docker/debezium-connect/Dockerfile docker/debezium-connect && docker image push registry.127.0.0.1.nip.io/debezium-connect-postgres:latest",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",

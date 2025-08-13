@@ -43,3 +43,9 @@ variable "argocd_appsets_include" {
   type    = string
   default = "dev/*"
 }
+
+variable "additional_registry_dns_names" {
+  type        = list(string)
+  default     = ["host.docker.internal"]
+  description = "Additional DNS names to add to the registry TLS certificate"
+}

@@ -16,6 +16,10 @@ spec:
     size: 4Gi
   postgresql:
     parameters:
+      wal_level: logical
+      max_wal_senders: "10"
+      max_replication_slots: "10"
+      wal_keep_size: "2048MB"
       pgsodium.enable_event_trigger: "off"
       pgsodium.getkey_script: /usr/share/postgresql/17/extension/pgsodium_getkey
     shared_preload_libraries:
@@ -25,5 +29,6 @@ spec:
       - name: admin
         login: true
         superuser: true
+        replication: true
         passwordSecret:
           name: cnpg-cluster-admin

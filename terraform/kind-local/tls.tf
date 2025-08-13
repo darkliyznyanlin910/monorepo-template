@@ -30,6 +30,9 @@ resource "kubernetes_secret" "selfsigned_ca" {
   metadata {
     name      = "selfsigned-ca"
     namespace = kubernetes_namespace.cert_manager.metadata[0].name
+    annotations = {
+      "reflector.v1.k8s.emberstack.com/reflection-allowed": "true"
+    }
   }
   type = "kubernetes.io/tls"
   data = {
@@ -56,7 +59,7 @@ resource "tls_cert_request" "registry" {
     organization = "Local"
     common_name  = local.wildcard_hostname
   }
-  dns_names    = [local.wildcard_hostname]
+  dns_names    = concat([local.wildcard_hostname], var.additional_registry_dns_names)
   ip_addresses = [local.registry_ip]
 }
 

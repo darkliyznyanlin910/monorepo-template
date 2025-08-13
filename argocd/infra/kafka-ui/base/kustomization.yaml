@@ -10,22 +10,14 @@ helmCharts:
     releaseName: kafka-ui
     repo: https://kafbat.github.io/helm-charts
     valuesInline:
-      # Configure via env instead of configmap to source secret password
-      envs:
-        secretMappings:
-          ADMIN_PASSWORD:
-            name: kafka-sasl-secret
-            keyName: client-password-1
-
       yamlApplicationConfig:
         kafka:
           clusters:
-            - name: dev-kafka
-              bootstrapServers: kafka.kafka.svc.cluster.local:9092
-              properties:
-                security.protocol: SASL_PLAINTEXT
-                sasl.mechanism: PLAIN
-                sasl.jaas.config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="${ADMIN_PASSWORD}";'
+            - name: kafka-cluster
+              bootstrapServers: kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
+              kafkaConnect:
+                - name: kafka-connect-cluster
+                  address: http://kafka-connect-cluster-connect-api.kafka.svc.cluster.local:8083
 
       # Service configuration
       service:

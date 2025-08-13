@@ -6,6 +6,6 @@ import { getBaseUrl } from "@repo/service-discovery";
 
 export const getAuthClient = (ENV: "development" | "production") =>
   createAuthClient({
-    baseURL: getBaseUrl(ENV, "auth") + "/auth",
+    baseURL: getBaseUrl(ENV, "auth") + "/api/auth",
     plugins: [jwt(), organizationClient(), oidcClient()],
   });

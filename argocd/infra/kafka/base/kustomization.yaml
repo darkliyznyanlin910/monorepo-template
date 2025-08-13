@@ -2,83 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - secret.yaml
-
-helmCharts:
-  - name: kafka
-    namespace: kafka
-    releaseName: kafka
-    repo: oci://registry-1.docker.io/bitnamicharts
-    valuesInline:
-      # Enable KRaft mode (no ZooKeeper)
-      kraft:
-        enabled: true
-
-      # Disable ZooKeeper since we're using KRaft
-      zookeeper:
-        enabled: false
-
-      # Controller configuration
-      controller:
-        replicaCount: 1
-        minId: 0
-
-      # Broker configuration
-      broker:
-        replicaCount: 1
-        minId: 100
-
-      # Listener configurations - critical for connectivity
-      listeners:
-        client:
-          name: CLIENT
-          containerPort: 9092
-          protocol: SASL_PLAINTEXT
-        controller:
-          name: CONTROLLER
-          containerPort: 9093
-          protocol: PLAINTEXT
-        interbroker:
-          name: INTERNAL
-          containerPort: 9094
-          protocol: SASL_PLAINTEXT
-
-      # Service configuration
-      service:
-        type: ClusterIP
-        ports:
-          client: 9092
-
-      # Enable SASL/SCRAM authentication
-      sasl:
-        enabledMechanisms: PLAIN,SCRAM-SHA-512
-        client:
-          users:
-            - admin
-            - client
-        interbroker:
-          user: inter-broker-user
-        existingSecret: kafka-sasl-secret
-
-      # Single node specific configs
-      numNetworkThreads: 3
-      numIoThreads: 3
-      socketSendBufferBytes: 102400
-      socketReceiveBufferBytes: 102400
-      socketRequestMaxBytes: 104857600
-      defaultReplicationFactor: 1
-      offsetsTopicReplicationFactor: 1
-      transactionStateLogReplicationFactor: 1
-      transactionStateLogMinIsr: 1
-
-      # Reduce logging to prevent flooding
-      logLevel: WARN
-
-      # Additional logging configuration
-      loggers:
-        "kafka.cluster": "WARN"
-        "kafka.network": "WARN"
-        "kafka.server": "WARN"
-        "kafka.coordinator": "WARN"
-        "kafka.raft": "WARN"
-        "org.apache.kafka": "WARN"
+  - kafka.yaml
+  - kafka-connect.yaml
+  - kafka-connector.yaml
+  - kafka-node-pool.yaml
+  - cluster-role.yaml
+  - cluster-role-binding.yaml
