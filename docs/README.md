@@ -15,6 +15,7 @@ Welcome to the comprehensive documentation for this TypeScript monorepo template
 | [🎨 Code Generators](generators.md)         | Using Turbo generators to scaffold new packages and applications          |
 | [🚢 ArgoCD GitOps](argocd.md)               | ArgoCD configuration, ApplicationSets, and GitOps deployment patterns     |
 | [🏗️ Terraform Infrastructure](terraform.md) | Infrastructure as Code setup for local and AWS environments               |
+| [⏱️ Temporal Workflows](temporal.md)        | Temporal code, worker, and Kubernetes setup                               |
 
 ### Quick Navigation
 
@@ -38,10 +39,11 @@ Welcome to the comprehensive documentation for this TypeScript monorepo template
 
 **Infrastructure & Deployment:**
 
-- [Kubernetes Setup](architecture.md#kubernetes-infrastructure) - Container orchestration and service mesh
+- [Kubernetes Setup](architecture.md#kubernetes-infrastructure) - Container orchestration
 - [GitOps Deployment](argocd.md#deployment-flow) - Automated deployment with ArgoCD
 - [Local Development](terraform.md#local-development-environment) - KIND cluster for development
 - [AWS Production](terraform.md#production-aws-environment) - EKS cluster for production
+- [Temporal Setup](temporal.md#kubernetes-infrastructure) - Temporal server/UI and GRPC routing
 
 **Advanced Topics:**
 
@@ -90,6 +92,7 @@ Follow this checklist to get up and running quickly:
 - [ ] **Clone and install**: Run `pnpm install` in the project root
 - [ ] **Environment setup**: Copy `.env.example` to `.env` and configure
 - [ ] **Infrastructure setup**: Deploy local Kubernetes cluster with `cd terraform/kind-local && terraform apply`
+- [ ] **Temporal setup (dev)**: `kubectl apply -k argocd/services/temporal/envs/dev` and set `TEMPORAL_SERVER=temporal-server.127.0.0.1.nip.io:80`
 - [ ] **Database setup**: Run `pnpm db:push` to initialize database schema
 - [ ] **Start development**: Run `pnpm dev` to start all services
 - [ ] **Verify setup**: Check that all services are running on their respective ports

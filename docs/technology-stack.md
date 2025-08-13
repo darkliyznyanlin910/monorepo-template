@@ -206,11 +206,11 @@ This document provides a comprehensive overview of all technologies, frameworks,
 
 ### Infrastructure as Code
 
-| Technology                             | Version | Purpose                       |
-| -------------------------------------- | ------- | ----------------------------- |
-| [Terraform](https://www.terraform.io/) | Latest  | Infrastructure provisioning   |
-| [AWS EKS](https://aws.amazon.com/eks/) | Latest  | Kubernetes cluster management |
-| [Istio](https://istio.io/)             | Latest  | Service mesh                  |
+| Technology                                      | Version | Purpose                       |
+| ----------------------------------------------- | ------- | ----------------------------- |
+| [Terraform](https://www.terraform.io/)          | Latest  | Infrastructure provisioning   |
+| [AWS EKS](https://aws.amazon.com/eks/)          | Latest  | Kubernetes cluster management |
+| [Gateway API](https://gateway-api.sigs.k8s.io/) | Latest  | Ingress/egress (HTTP/gRPC)    |
 
 **AWS Modules:**
 
@@ -233,7 +233,14 @@ This document provides a comprehensive overview of all technologies, frameworks,
 - **GitOps**: Declarative deployment with ArgoCD
 - **Auto-scaling**: Intelligent node provisioning with Karpenter
 - **Observability**: Complete metrics and monitoring stack
-- **Service Mesh**: Traffic management and security with Istio
+- **Gateway API**: HTTPRoute/GRPCRoute for app ingress
+
+### Workflow Orchestration
+
+| Technology                               | Version | Purpose                     |
+| ---------------------------------------- | ------- | --------------------------- |
+| [Temporal](https://temporal.io/)         | Latest  | Durable workflows           |
+| [Temporal UI](https://docs.temporal.io/) | Latest  | Workflow visibility/control |
 
 ## 📊 Monitoring & Observability
 

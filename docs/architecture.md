@@ -32,34 +32,34 @@ All services are registered and discovered through the `@repo/service-discovery`
 ```
 monorepo-template/
 ├── apps/                     # Application services
-│   ├── backend/             # Backend microservices
-│   │   ├── auth/           # Authentication service
-│   │   └── order/          # Order management service
-│   └── frontend/           # Frontend applications
-├── orms/              # Database configurations
-│   └── db-auth/           # Authentication database
-├── packages/              # Shared packages
-│   ├── auth/             # Authentication utilities
-│   ├── service-discovery/ # Service registry
-│   └── ui/               # Shared UI components
-└── tooling/              # Development tooling
-    ├── eslint/           # Linting configurations
-    ├── prettier/         # Code formatting
-    ├── tailwind/         # Styling configurations
-    ├── typescript/       # TypeScript configs
-    └── vitest/           # Testing framework
+│   └── frontend/            # Frontend applications
+├── orms/                    # Database configurations
+│   └── db-auth/             # Authentication database
+├── packages/                # Shared packages
+│   ├── auth/                # Authentication utilities
+│   ├── service-discovery/   # Service registry
+│   └── ui/                  # Shared UI components
+├── temporal/                # Temporal workflow stack
+│   ├── common/              # Client/connection helpers
+│   ├── activities/          # Activities
+│   ├── workflow/            # Workflows
+│   └── runner/              # Worker
+└── tooling/                 # Development tooling
+    ├── eslint/
+    ├── prettier/
+    ├── tailwind/
+    ├── typescript/
+    └── vitest/
 ```
 
 ### Service Categories
 
-#### Backend Services (`apps/backend/`)
+#### Temporal Workflows (`temporal/`)
 
-Microservices built with Hono framework:
-
-- **auth**: Authentication and authorization using Better Auth
-- **order**: Order management and processing
-- Each service is independently deployable
-- Shared patterns and configurations
+- **common**: `connectToTemporal`, `namespace`, `taskQueue`, env validation
+- **activities**: External side-effects (Stripe-like stubs in `order.ts`)
+- **workflow**: Orchestration logic with signals/conditions (see `order.ts`)
+- **runner**: Worker that bundles and runs workflows/activities
 
 #### Frontend Applications (`apps/frontend/`)
 
@@ -218,6 +218,7 @@ argocd/
 ├── services/                 # Application services
 │   ├── auth/                # Authentication service resources
 │   ├── api/                 # API service resources
+│   ├── temporal/            # Temporal server, UI, routing
 │   └── common/              # Shared database and resources
 └── appsets/                 # ArgoCD ApplicationSets
     └── dev/                 # Development environment
@@ -305,17 +306,17 @@ graph LR
 
 #### Local Development
 
-- **KIND cluster** with port forwarding
-- **Traefik ingress** for HTTP routing
-- **Self-signed certificates** for HTTPS
-- **Local registry** for container images
+- KIND cluster + Gateway API (Cilium Gateway)
+- GRPCRoute exposes Temporal on `temporal-server.127.0.0.1.nip.io:80`
+- HTTPRoute exposes Temporal UI on `temporal.127.0.0.1.nip.io`
+- Local registry for images
 
 #### Production (AWS)
 
-- **AWS Load Balancer Controller** for ingress
-- **Cilium CNI** for pod networking
-- **VPC with public/private subnets**
-- **NAT gateways** for outbound connectivity
+- AWS Load Balancer Controller with Gateway API
+- Cilium CNI for pod networking
+- VPC with public/private subnets
+- NAT gateways for outbound connectivity
 
 ## 🔒 Security Architecture
 

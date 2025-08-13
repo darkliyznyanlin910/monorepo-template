@@ -24,6 +24,7 @@ argocd/
 └── services/               # Application services
     ├── auth/               # Authentication service
     ├── api/                # API gateway service
+    ├── temporal/           # Temporal server and UI
     └── common/             # Shared resources (database)
 ```
 
@@ -152,8 +153,15 @@ spec:
 
 ### API Service
 
-- **Purpose**: API gateway and service mesh entry
+- **Purpose**: API gateway entry
 - **Resources**: Deployment, Service, HTTPRoute
+- **Namespace**: `services`
+
+### Temporal Service
+
+- **Server**: `temporalio/auto-setup` wired to CNPG via `cnpg-cluster-rw:5432`
+- **Access**: gRPC via `GRPCRoute` host `temporal-server.127.0.0.1.nip.io:80`
+- **UI**: `temporalio/ui` with `HTTPRoute` host `temporal.127.0.0.1.nip.io`
 - **Namespace**: `services`
 
 ### Common Resources
@@ -336,7 +344,6 @@ argocd app refresh <application-name>
 ### Network Policies
 
 - Restricted network access between namespaces
-- Ingress controllers with proper TLS termination
-- Service mesh for inter-service communication
+- Gateway API with proper TLS termination where applicable
 
 This GitOps setup provides a robust, automated deployment pipeline that ensures consistency between Git repository state and Kubernetes cluster resources while maintaining security and operational best practices.

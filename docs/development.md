@@ -50,6 +50,10 @@ AUTH_POSTGRES_URL=postgresql://user:password@localhost:5432/dbname
 
 # Authentication
 AUTH_SECRET=your_32_character_secret
+
+# Temporal (local runner)
+TEMPORAL_NAMESPACE=default
+TEMPORAL_SERVER=temporal-server.127.0.0.1.nip.io:80
 ```
 
 ## 🛠 Development Commands
