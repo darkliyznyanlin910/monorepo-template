@@ -9,7 +9,7 @@ spec:
   ports:
     - port: 7233
       targetPort: 7233
-      protocol: TCP
       name: temporal
+      appProtocol: kubernetes.io/h2c
   selector:
     app: temporal

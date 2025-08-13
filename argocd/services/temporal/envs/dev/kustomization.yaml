@@ -3,4 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - temporal-httproute.yaml
+  - temporal-grpcroute.yaml
+
+patchesStrategicMerge:
+  - ui-deployment-patch.yaml

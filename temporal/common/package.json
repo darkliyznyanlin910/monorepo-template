@@ -17,6 +17,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@repo/service-discovery": "workspace:^",
     "@temporalio/client": "^1.12.1",
     "@temporalio/common": "^1.12.1",
     "vitest": "catalog:vitest"

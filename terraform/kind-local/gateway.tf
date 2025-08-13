@@ -37,6 +37,8 @@ resource "kubectl_manifest" "cilium_gateway" {
     metadata:
       name: cilium-gateway
       namespace: ${kubernetes_namespace.gateway.metadata[0].name}
+      annotations:
+        cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
     spec:
       gatewayClassName: cilium
       listeners:
@@ -54,5 +56,27 @@ resource "kubectl_manifest" "cilium_gateway" {
           allowedRoutes:
             namespaces:
               from: All
+        - name: https
+          protocol: HTTPS
+          port: 8443
+          hostname: "${var.cluster_domain_public}"
+          allowedRoutes:
+            namespaces:
+              from: All
+          tls:
+            certificateRefs:
+              - kind: Secret
+                name: https-certificate
+        - name: https-wildcard
+          protocol: HTTPS
+          port: 8443
+          hostname: "*.${var.cluster_domain_public}"
+          allowedRoutes:
+            namespaces:
+              from: All
+          tls:
+            certificateRefs:
+              - kind: Secret
+                name: https-wildcard-certificate
   YAML
 }

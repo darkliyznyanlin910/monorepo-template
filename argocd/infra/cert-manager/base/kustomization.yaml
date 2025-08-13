@@ -16,3 +16,5 @@ helmCharts:
     valuesInline:
       crds:
         enabled: true
+      config:
+        enableGatewayAPI: true
