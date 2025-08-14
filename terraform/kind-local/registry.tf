@@ -42,3 +42,9 @@ resource "null_resource" "run_pnpm_charts" {
   }
 }
 
+resource "null_resource" "run_pnpm_docker" {
+  depends_on = [docker_container.registry]
+  provisioner "local-exec" {
+    command = "pnpm run docker"
+  }
+}
