@@ -12,7 +12,7 @@ import {
   FormMessage,
   Input,
   useForm,
-} from "@repo/ui/components";
+} from "@repo/ui/components/components.tsx";
 
 import { authClient } from "~/lib/auth";
 

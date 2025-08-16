@@ -33,9 +33,8 @@ export default defineConfig(({ mode }) => {
       },
       allowedHosts: [
         "localhost",
-        "127.0.0.1",
         "auth.127.0.0.1.nip.io",
-        "socat.services.svc.cluster.local",
+        "socat-auth.services.svc.cluster.local",
       ],
     },
     define: {

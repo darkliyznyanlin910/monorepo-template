@@ -1,4 +1,5 @@
 import {
+  KAFKA_CONFIG,
   KUBERNETES_INTERNAL_SERVICE_MAP,
   LOCAL_SERVICE_MAP,
   PRODUCTION_SERVICE_MAP,
@@ -30,5 +31,17 @@ export function getBaseUrl(
     } else {
       return PRODUCTION_SERVICE_MAP[service];
     }
+  }
+}
+
+export function getKafkaConfig(ENV: typeof env.NODE_ENV) {
+  if (ENV === "production") {
+    return KAFKA_CONFIG.production;
+  } else if (process.env.KUBERNETES_SERVICE_HOST) {
+    // Running inside Kubernetes
+    return KAFKA_CONFIG.kubernetes;
+  } else {
+    // Local development - requires port forward
+    return KAFKA_CONFIG.local;
   }
 }

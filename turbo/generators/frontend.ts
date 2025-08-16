@@ -118,6 +118,16 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
+        path: "apps/frontend/{{ name }}/postcss.config.mjs",
+        templateFile: "templates/frontend/postcss.config.mjs.hbs",
+      },
+      {
+        type: "add",
+        path: "apps/frontend/{{ name }}/components.json",
+        templateFile: "templates/frontend/components.json.hbs",
+      },
+      {
+        type: "add",
         path: "apps/frontend/{{ name }}/vite.config.ts",
         templateFile: "templates/frontend/vite.config.ts.hbs",
       },
@@ -125,11 +135,6 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
         type: "add",
         path: "apps/frontend/{{ name }}/src/main.tsx",
         templateFile: "templates/frontend/src/main.tsx.hbs",
-      },
-      {
-        type: "add",
-        path: "apps/frontend/{{ name }}/src/index.css",
-        templateFile: "templates/frontend/src/index.css.hbs",
       },
       {
         type: "add",
@@ -170,21 +175,6 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
         type: "add",
         path: "apps/frontend/{{ name }}/public/vite.svg",
         templateFile: "templates/frontend/public/vite.svg",
-      },
-      {
-        type: "add",
-        path: "apps/frontend/{{ name }}/public/fonts/HelveticaNeueLight.otf",
-        templateFile: "templates/frontend/public/fonts/HelveticaNeueLight.otf",
-      },
-      {
-        type: "add",
-        path: "apps/frontend/{{ name }}/public/fonts/HelveticaNeueMedium.otf",
-        templateFile: "templates/frontend/public/fonts/HelveticaNeueMedium.otf",
-      },
-      {
-        type: "add",
-        path: "apps/frontend/{{ name }}/public/fonts/HelveticaNeueThin.otf",
-        templateFile: "templates/frontend/public/fonts/HelveticaNeueThin.otf",
       },
       {
         type: "add",

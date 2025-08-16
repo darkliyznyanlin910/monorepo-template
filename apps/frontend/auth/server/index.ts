@@ -23,17 +23,17 @@ const app = new Hono()
       { "Content-Type": "application/javascript" },
     );
   })
-  // .use(
-  //   "/api/auth/*",
-  //   cors({
-  //     origin: getTrustedOrigins(env.NODE_ENV),
-  //     allowHeaders: ["Content-Type", "Authorization"],
-  //     allowMethods: ["POST", "GET", "OPTIONS"],
-  //     exposeHeaders: ["Content-Length"],
-  //     maxAge: 600,
-  //     credentials: true,
-  //   }),
-  // )
+  .use(
+    "/api/auth/*",
+    cors({
+      origin: getTrustedOrigins(env.NODE_ENV),
+      allowHeaders: ["Content-Type", "Authorization"],
+      allowMethods: ["POST", "GET", "OPTIONS"],
+      exposeHeaders: ["Content-Length"],
+      maxAge: 600,
+      credentials: true,
+    }),
+  )
   .on(["POST", "GET"], "/api/auth/*", (c) => {
     return auth.handler(c.req.raw);
   })
