@@ -26,6 +26,12 @@ ports:
     expose:
       default: true
     protocol: TCP
+  kafka:
+    port: 9094
+    nodePort: 30094
+    expose:
+      default: true
+    protocol: TCP
 
 service:
   type: NodePort
