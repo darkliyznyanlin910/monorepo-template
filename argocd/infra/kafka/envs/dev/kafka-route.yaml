@@ -14,9 +14,10 @@ spec:
       services:
         - name: kafka-cluster-kafka-external-bootstrap
           port: 9094
-    - match: HostSNI(`broker-0.127.0.0.1.nip.io`)
+    - match: HostSNI(`broker0.127.0.0.1.nip.io`)
       services:
-        - name: kafka-cluster-kafka-external-bootstrap
+        - name: kafka-cluster-dual-role-0
           port: 9094
   tls:
+    secretName: kafka-bootstrap-tls
     passthrough: true

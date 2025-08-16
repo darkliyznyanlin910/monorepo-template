@@ -18,15 +18,15 @@ export const LOCAL_SERVICE_MAP: ServiceMap = {
 
 export const KAFKA_CONFIG = {
   local: {
-    brokers: ["kafka.127.0.0.1.nip.io:80"],
+    bootstrap: ["bootstrap.127.0.0.1.nip.io:9094"],
   },
   kubernetes: {
-    brokers: ["kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"],
+    bootstrap: ["kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"],
   },
   production: {
-    brokers: ["kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"], // Update with prod brokers
+    bootstrap: ["kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"],
   },
-} as const;
+};
 
 export const KUBERNETES_INTERNAL_SERVICE_MAP: ServiceMap = {
   auth: "http://auth-service.services.svc.cluster.local",
