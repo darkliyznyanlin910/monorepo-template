@@ -23,14 +23,14 @@ export function getBaseUrl(
   service: Service,
   internal = false,
 ) {
-  if (ENV === "development") {
-    return LOCAL_SERVICE_MAP[service];
-  } else {
+  if (ENV === "production") {
     if (internal) {
       return KUBERNETES_INTERNAL_SERVICE_MAP[service];
     } else {
       return PRODUCTION_SERVICE_MAP[service];
     }
+  } else {
+    return LOCAL_SERVICE_MAP[service];
   }
 }
 

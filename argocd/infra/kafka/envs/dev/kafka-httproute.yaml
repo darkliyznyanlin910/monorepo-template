@@ -10,9 +10,5 @@ spec:
     - kafka.127.0.0.1.nip.io
   rules:
     - backendRefs:
-        - name: kafka-cluster-kafka-bootstrap
-          port: 9092
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
+        - name: kafka-cluster-kafka-external-bootstrap
+          port: 9094

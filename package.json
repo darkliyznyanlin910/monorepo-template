@@ -18,6 +18,7 @@
     "tofu:nuke": "cd terraform/kind-local && docker rm --force --volumes registry monorepo-template-local-control-plane && rm -r certs/* terraform.tfstate* kubeconfig",
     "auth:generate": "turbo -F @repo/auth-common auth:generate",
     "db:push": "turbo db:push",
+    "db:seed": "turbo db:seed",
     "db:studio": "turbo db:studio",
     "dev": "turbo watch dev --continue",
     "dev:next": "turbo watch dev -F @repo/nextjs...",
