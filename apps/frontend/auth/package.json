@@ -28,6 +28,7 @@
     "@repo/db-auth": "workspace:*",
     "@repo/service-discovery": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@tailwindcss/vite": "^4.1.12",
     "@tanstack/react-router": "^1.121.34",
     "@tanstack/react-table": "^8.21.2",
     "hono": "catalog:",
@@ -56,9 +57,9 @@
     "eslint": "catalog:",
     "eslint-plugin-react-hooks": "^5.0.0",
     "globals": "^15.14.0",
-    "postcss": "^8.5.4",
     "prettier": "catalog:",
     "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:",
     "typescript": "catalog:",
     "vite": "6.1.0",
     "wait-on": "^8.0.4"

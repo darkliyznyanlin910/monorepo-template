@@ -98,11 +98,6 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
-        path: "apps/frontend/{{ name }}/tailwind.config.ts",
-        templateFile: "templates/frontend/tailwind.config.ts.hbs",
-      },
-      {
-        type: "add",
         path: "apps/frontend/{{ name }}/tsconfig.json",
         templateFile: "templates/frontend/tsconfig.json.hbs",
       },

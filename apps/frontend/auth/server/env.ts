@@ -28,7 +28,7 @@ export const env = createEnv({
     BASE_DOMAIN: z.string().min(1),
   },
   runtimeEnv: {
-    VITE_APP_URL: process.env.VITE_APP_URL ?? `http://localhost:4001`,
+    VITE_APP_URL: process.env.VITE_APP_URL ?? `http://localhost:4000`,
     AUTH_POSTGRES_URL: process.env.AUTH_POSTGRES_URL,
     AUTH_SECRET: process.env.AUTH_SECRET,
     SMTP_HOST: process.env.SMTP_HOST,

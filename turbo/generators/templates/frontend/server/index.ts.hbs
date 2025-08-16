@@ -14,7 +14,7 @@ const app = new Hono()
   .get("/api/runtime.js", (c) => {
     return c.text(
       `
-      window.__env = ${JSON.stringify(env, null, 2)}
+      window.__env = ${JSON.stringify(Object.fromEntries(Object.entries(env).filter(([key]) => key.startsWith("VITE_"))), null, 2)}
       `.trim(),
       200,
       { "Content-Type": "application/javascript" },
