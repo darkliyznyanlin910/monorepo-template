@@ -7,3 +7,13 @@ resources:
   - cnpg-cluster-admin.yaml
   - cnpg-cluster.yaml
   - cnpg-route.yaml
+
+helmCharts:
+  - repo: oci://registry.127.0.0.1.nip.io
+    name: drizzle-gateway
+    version: 0.1.3
+    releaseName: drizzle-gateway
+    namespace: services
+    valuesInline:
+      image:
+        tag: 1.0.2

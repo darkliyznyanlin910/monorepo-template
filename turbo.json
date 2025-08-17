@@ -45,10 +45,6 @@
       "cache": false,
       "interactive": true
     },
-    "db:studio": {
-      "cache": false,
-      "persistent": true
-    },
     "docker:build": {
       "cache": false,
       "persistent": false

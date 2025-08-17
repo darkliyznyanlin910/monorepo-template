@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ../../base
   - mailer-secret.yaml
+  - drizzle-gateway-httproute.yaml
