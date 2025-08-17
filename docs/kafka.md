@@ -57,7 +57,7 @@ graph TB
         end
 
         subgraph "Services Namespace"
-            J[Applications] --> K[@repo/kafka Client]
+            J[Applications] --> K[repo/kafka Client]
             K --> B
 
             L[Auth Service] --> E
