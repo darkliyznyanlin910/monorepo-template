@@ -105,9 +105,9 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes:
-  - name: voltade-os
+  - name: monorepo-template
     hostPath:
-      path: /mnt/monorepo-template.git
+      path: /mnt/monorepo-template.git/data
       type: Directory
 # - name: foo
 #   secret:
@@ -116,7 +116,7 @@ volumes:
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
-  - name: voltade-os
+  - name: monorepo-template
     mountPath: /app
 # - name: foo
 #   mountPath: "/etc/foo"
@@ -129,5 +129,4 @@ tolerations: []
 affinity: {}
 
 environment:
-  STORE_PATH: "./app/data"
   PORT: "4983"
