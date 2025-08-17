@@ -13,6 +13,7 @@ Welcome to the comprehensive documentation for this TypeScript monorepo template
 | [🚀 Development Guide](development.md)      | Development workflow, tooling, and best practices                         |
 | [⚡ Technology Stack](technology-stack.md)  | Comprehensive overview of all technologies and frameworks                 |
 | [🎨 Code Generators](generators.md)         | Using Turbo generators to scaffold new packages and applications          |
+| [📨 Kafka Client](kafka.md)                 | Type-safe Kafka client with topic registry and message routing            |
 | [🚢 ArgoCD GitOps](argocd.md)               | ArgoCD configuration, ApplicationSets, and GitOps deployment patterns     |
 | [🏗️ Terraform Infrastructure](terraform.md) | Infrastructure as Code setup for local and AWS environments               |
 | [⏱️ Temporal Workflows](temporal.md)        | Temporal code, worker, and Kubernetes setup                               |
@@ -30,6 +31,7 @@ Welcome to the comprehensive documentation for this TypeScript monorepo template
 - [Creating New Services](generators.md#backend-service-generator) - Generate backend microservices
 - [Adding Frontend Apps](generators.md#frontend-application-generator) - Create React applications
 - [Database Integration](generators.md#database-package-generator) - Set up new databases
+- [Event-Driven Communication](kafka.md#type-safe-topic-handlers) - Implement Kafka message handling
 
 **Testing & Quality:**
 
@@ -48,6 +50,7 @@ Welcome to the comprehensive documentation for this TypeScript monorepo template
 **Advanced Topics:**
 
 - [Service Communication](architecture.md#service-communication) - Inter-service communication patterns
+- [Kafka Message Patterns](kafka.md#advanced-usage) - Advanced Kafka usage and patterns
 - [Deployment](architecture.md#deployment-architecture) - Infrastructure and deployment strategies
 - [Customization](generators.md#customizing-generators) - Extending and customizing generators
 
