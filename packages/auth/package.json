@@ -11,7 +11,7 @@
     "./auth": "./src/auth.ts"
   },
   "scripts": {
-    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules coverage.json",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "auth:generate": "dotenv -e ../../.env -- pnpx @better-auth/cli generate --output ../../orms/db-auth/src/schema.ts --config src/auth.ts",

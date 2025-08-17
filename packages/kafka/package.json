@@ -1,5 +1,5 @@
 {
-  "name": "@repo/temporal-activities",
+  "name": "@repo/kafka",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -16,9 +16,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@temporalio/activity": "^1.12.1",
-    "hono": "catalog:",
-    "vitest": "catalog:vitest"
+    "kafkajs": "catalog:"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -27,7 +25,8 @@
     "@repo/vitest": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:vitest"
   },
   "prettier": "@repo/prettier-config"
 }

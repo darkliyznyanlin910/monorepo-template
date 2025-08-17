@@ -1,16 +1,11 @@
-import { Consumer, Kafka, Producer } from "kafkajs";
-
-import { getKafkaConfig } from "@repo/service-discovery";
+import { KafkaManager, MessagePayload } from "@repo/kafka";
 
 import { env } from "./env";
 
-// Get the appropriate Kafka configuration based on environment
-const kafkaConfig = getKafkaConfig(env.NODE_ENV);
-
-// Create Kafka client
-export const kafka = new Kafka({
+// Create a single Kafka manager instance for the analytics service
+export const kafkaManager = new KafkaManager({
   clientId: "analytics-service",
-  brokers: kafkaConfig.bootstrap as string[],
+  nodeEnv: env.NODE_ENV,
   ssl: true,
   retry: {
     initialRetryTime: 100,
@@ -18,15 +13,14 @@ export const kafka = new Kafka({
   },
 });
 
-// Create producer instance
-export const producer: Producer = kafka.producer({
+// Create producer and consumer instances
+export const producer = kafkaManager.createProducer("analytics", {
   maxInFlightRequests: 1,
   idempotent: true,
   transactionTimeout: 30000,
 });
 
-// Create consumer instance
-export const consumer: Consumer = kafka.consumer({
+export const consumer = kafkaManager.createConsumer("analytics", {
   groupId: "analytics-group",
   sessionTimeout: 30000,
   heartbeatInterval: 3000,
@@ -34,62 +28,25 @@ export const consumer: Consumer = kafka.consumer({
 
 // Helper function to initialize producer
 export async function initProducer() {
-  try {
-    await producer.connect();
-    console.log("Kafka producer connected successfully");
-  } catch (error) {
-    console.error("Failed to connect Kafka producer:", error);
-    throw error;
-  }
+  await producer.connect();
 }
 
 // Helper function to initialize consumer
 export async function initConsumer() {
-  try {
-    await consumer.connect();
-    console.log("Kafka consumer connected successfully");
-  } catch (error) {
-    console.error("Failed to connect Kafka consumer:", error);
-    throw error;
-  }
+  await consumer.connect();
 }
 
 // Helper function to cleanup connections
 export async function disconnectKafka() {
-  try {
-    await producer.disconnect();
-    await consumer.disconnect();
-    console.log("Kafka connections closed");
-  } catch (error) {
-    console.error("Error disconnecting Kafka:", error);
-  }
+  await kafkaManager.disconnectAll();
 }
 
 // Helper function to send messages
-export async function sendMessage(
-  topic: string,
-  messages: Array<{ key?: string; value: string; partition?: number }>,
-) {
-  try {
-    const result = await producer.send({
-      topic,
-      messages,
-    });
-    console.log("Message sent successfully:", result);
-    return result;
-  } catch (error) {
-    console.error("Failed to send message:", error);
-    throw error;
-  }
+export async function sendMessage(topic: string, messages: MessagePayload[]) {
+  return await producer.send(topic, messages);
 }
 
 // Helper function to subscribe to topics
 export async function subscribeToTopic(topic: string) {
-  try {
-    await consumer.subscribe({ topic, fromBeginning: false });
-    console.log(`Subscribed to topic: ${topic}`);
-  } catch (error) {
-    console.error(`Failed to subscribe to topic ${topic}:`, error);
-    throw error;
-  }
+  await consumer.subscribe({ topic, fromBeginning: false });
 }

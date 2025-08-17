@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules coverage.json",
     "dev": "pnpm with-env tsx src/index.ts --watch",
     "start": "pnpm with-env tsx src/index.ts",
     "format": "prettier --check . --ignore-path ../../.gitignore",

@@ -5,7 +5,13 @@ import { glob } from "glob";
 async function collectCoverageFiles() {
   try {
     // Define the patterns to search
-    const patterns = ["../../apps/*", "../../packages/*"];
+    const patterns = [
+      "../../apps/backend/*",
+      "../../apps/frontend/*",
+      "../../apps/internal/*",
+      "../../packages/*",
+      "../../temporal/*",
+    ];
 
     // Define the destination directory (you can change this as needed)
     const destinationDir = path.join(process.cwd(), "coverage/raw");
@@ -41,7 +47,7 @@ async function collectCoverageFiles() {
             const directoryName = path.basename(match);
             const destinationFile = path.join(
               destinationDir,
-              `${directoryName}.json`
+              `${directoryName}.json`,
             );
 
             await fs.copyFile(coverageFilePath, destinationFile);
@@ -59,7 +65,7 @@ async function collectCoverageFiles() {
       console.log(
         `Found coverage.json in: ${directoriesWithCoverage
           .map(replaceDotPatterns)
-          .join(", ")}`
+          .join(", ")}`,
       );
     }
 

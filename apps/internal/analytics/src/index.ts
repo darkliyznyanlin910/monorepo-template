@@ -1,12 +1,8 @@
-import type { EachMessagePayload } from "kafkajs";
+// Import the topic registry to register types
+import { sessions } from "@repo/db-auth/schema";
+import { DatabaseEvent } from "@repo/kafka";
 
-import {
-  consumer,
-  disconnectKafka,
-  initConsumer,
-  initProducer,
-  subscribeToTopic,
-} from "./kafka";
+import { consumer, disconnectKafka, initConsumer, initProducer } from "./kafka";
 
 async function main() {
   console.log("Starting Analytics Service...");
@@ -16,33 +12,28 @@ async function main() {
     await initProducer();
     await initConsumer();
 
-    // Example: Subscribe to a topic (adjust topic name as needed)
-    await subscribeToTopic("auth.public.sessions");
+    // Register typed handlers for specific topics
+    consumer.registerHandler<DatabaseEvent<typeof sessions.$inferSelect>>(
+      "auth.public.sessions",
+      async (message) => {
+        // Process analytics message here with type safety for sessions
+        console.log("Sessions event:", message);
 
-    // Start consuming messages
-    await consumer.run({
-      eachMessage: async ({
-        topic,
-        partition,
-        message,
-      }: EachMessagePayload) => {
-        console.log({
-          topic,
-          partition,
-          offset: message.offset,
-          key: message.key?.toString(),
-          value: message.value?.toString(),
-        });
-
-        // Process analytics message here
-        // Add your analytics logic
+        // Add your typed analytics logic here
+        // You now have full TypeScript intellisense for the sessions structure
       },
-    });
+    );
 
-    // Example: Send a test message
-    // await sendMessage("analytics-events", [
-    //   { value: JSON.stringify({ event: "service_started", timestamp: Date.now() }) }
-    // ]);
+    // You can register more handlers for different topics with different types
+    // consumer.registerHandler<DatabaseEvent<SomeOtherType>>(
+    //   "some.other.topic",
+    //   async (message) => {
+    //     // Handle different topic with different type
+    //   }
+    // );
+
+    // Start consuming all registered topics
+    await consumer.startWithHandlers();
 
     console.log("Analytics service is running...");
   } catch (error) {

@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 4000,
-      open: false,
+      open: "http://auth.127.0.0.1.nip.io",
       proxy: {
         "/api": {
           target: "http://localhost:4001",

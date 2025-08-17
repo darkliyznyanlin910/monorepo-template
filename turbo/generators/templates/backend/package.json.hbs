@@ -10,7 +10,7 @@
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.cjs",
     "docker:build": "docker build -t registry.127.0.0.1.nip.io/repo-{{name}}:latest -f Dockerfile ../../../",
     "docker:push": "docker image push registry.127.0.0.1.nip.io/repo-{{name}}:latest",
-    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules coverage.json",
     "dev": "pnpm with-env tsx watch src/index.ts",
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",

@@ -23,7 +23,8 @@
     "collect-json-reports": "node dist/scripts/collect-json-outputs.js",
     "merge-json-reports": "nyc merge coverage/raw coverage/merged/merged-coverage.json",
     "report": "nyc report -t coverage/merged --report-dir coverage/report --reporter=html --exclude-after-remap false",
-    "view-report": "open coverage/report/index.html"
+    "view-report": "pnpm merge-json-reports && pnpm report && open coverage/report/index.html",
+    "clean": "git clean -xdf .cache .turbo node_modules coverage.json coverage"
   },
   "dependencies": {
     "vite-tsconfig-paths": "^5.1.4",

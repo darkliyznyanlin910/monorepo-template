@@ -15,11 +15,27 @@ export default defineConfig({
         },
       },
       {
-        root: "./apps",
+        root: "./apps/backend",
+        test: {
+          ...sharedConfig.test,
+          // Project-specific configuration for apps
+          environment: "node",
+        },
+      },
+      {
+        root: "./apps/frontend",
         test: {
           ...sharedConfig.test,
           // Project-specific configuration for apps
           environment: "jsdom",
+        },
+      },
+      {
+        root: "./temporal",
+        test: {
+          ...sharedConfig.test,
+          // Project-specific configuration for apps
+          environment: "node",
         },
       },
     ],
