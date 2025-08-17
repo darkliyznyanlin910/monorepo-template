@@ -45,7 +45,6 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@repo/auth-common": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/tsconfig": "workspace:*",
