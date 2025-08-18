@@ -54,7 +54,16 @@ export function initAuth(
           },
         },
       }),
-      organization(),
+      organization({
+        sendInvitationEmail: async (data) => {
+          const inviteLink = `${new URL(options.baseUrl).origin}/accept-invitation/${data.id}`;
+          await options.mailer?.sendMail({
+            to: data.email,
+            subject: "Invitation to join organization",
+            text: `Click the link to join the organization: ${inviteLink}`,
+          });
+        },
+      }),
       oidcProvider({
         loginPage: "/sign-in",
         trustedClients: options.oidcProvider?.trustedClients,

@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { Button } from "@repo/ui/components/button.tsx";
 import {
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  useForm,
-} from "@repo/ui/components/components.tsx";
+} from "@repo/ui/components/form.tsx";
+import { Input } from "@repo/ui/components/input.tsx";
+import { toast } from "@repo/ui/components/sonner.tsx";
 
 import { authClient } from "~/lib/auth";
 
@@ -25,15 +27,18 @@ type SignInForm = z.infer<typeof signInSchema>;
 
 export const Route = createFileRoute("/sign-in/")({
   component: RouteComponent,
+  validateSearch: (search: Record<string, unknown>) => ({
+    redirect: (search.redirect as string) || undefined,
+  }),
 });
 
 function RouteComponent() {
   const router = useRouter();
+  const { redirect } = Route.useSearch();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  const form = useForm<SignInForm, SignInForm>({
-    schema: signInSchema,
+  const form = useForm<SignInForm>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -42,7 +47,6 @@ function RouteComponent() {
 
   const onSubmit = async (data: SignInForm) => {
     setIsLoading(true);
-    setError(null);
 
     try {
       const result = await authClient.signIn.email({
@@ -51,14 +55,15 @@ function RouteComponent() {
       });
 
       if (result.error) {
-        setError(result.error.message ?? "An error occurred");
+        toast.error(result.error.message ?? "An error occurred");
         return;
       }
 
-      // Redirect to home page or dashboard after successful sign in
-      router.navigate({ to: "/" });
+      toast.success("Signed in successfully!");
+      // Redirect to the specified URL or home page after successful sign in
+      router.navigate({ to: redirect || "/" });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      toast.error(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -71,16 +76,20 @@ function RouteComponent() {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Or{" "}
+            <Link
+              to="/sign-up"
+              search={{ redirect }}
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              create a new account
+            </Link>
+          </p>
         </div>
         <div className="mt-8 space-y-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {error && (
-                <div className="rounded-md bg-red-50 p-4">
-                  <div className="text-sm text-red-700">{error}</div>
-                </div>
-              )}
-
               <FormField
                 control={form.control}
                 name="email"

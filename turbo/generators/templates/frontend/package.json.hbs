@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=production pnpm with-env node dist/index.cjs",
-    "build": "pnpm with-env tsc -b && pnpm with-env vite build && esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
+    "build": "pnpm with-env vite build && esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
     "docker:build": "docker build -t registry.127.0.0.1.nip.io/repo-{{ name }}:latest -f Dockerfile ../../../",
     "docker:push": "docker image push registry.127.0.0.1.nip.io/repo-{{ name }}:latest",
     "preview": "pnpm with-env vite preview",
