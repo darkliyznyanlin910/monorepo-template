@@ -49,8 +49,12 @@ export function initAuth(
       }),
       jwt({
         jwt: {
-          audience: async ({ user }) => {
-            return options.getOrganizations(user.id);
+          definePayload: async ({ user }) => {
+            const orgs = await options.getOrganizations(user.id);
+            return {
+              user,
+              aud: orgs,
+            };
           },
         },
       }),

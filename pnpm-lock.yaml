@@ -16,8 +16,8 @@ catalogs:
       specifier: ^5.80.7
       version: 5.84.1
     better-auth:
-      specifier: 1.3.4
-      version: 1.3.4
+      specifier: ^1.3.7
+      version: 1.3.7
     dotenv-cli:
       specifier: ^8.0.0
       version: 8.0.0
@@ -74,11 +74,6 @@ catalogs:
     vitest:
       specifier: ^3.2.4
       version: 3.2.4
-
-patchedDependencies:
-  better-auth@1.3.4:
-    hash: 58cf672ce2c5b88429f94a4b9b08b1bdd8a1225b9e206c33d198e1cd1a94303a
-    path: patches/better-auth@1.3.4.patch
 
 importers:
 
@@ -292,10 +287,10 @@ importers:
         version: 0.13.8(typescript@5.8.3)(zod@4.0.10)
       drizzle-orm:
         specifier: ^0.44.2
-        version: 0.44.2(kysely@0.28.2)(postgres@3.4.7)
+        version: 0.44.2(kysely@0.28.5)(postgres@3.4.7)
       drizzle-zod:
         specifier: ^0.8.2
-        version: 0.8.2(drizzle-orm@0.44.2(kysely@0.28.2)(postgres@3.4.7))(zod@4.0.10)
+        version: 0.8.2(drizzle-orm@0.44.2(kysely@0.28.5)(postgres@3.4.7))(zod@4.0.10)
       postgres:
         specifier: ^3.4.7
         version: 3.4.7
@@ -338,7 +333,7 @@ importers:
         version: 0.13.8(typescript@5.8.3)(zod@4.0.10)
       better-auth:
         specifier: 'catalog:'
-        version: 1.3.4(patch_hash=58cf672ce2c5b88429f94a4b9b08b1bdd8a1225b9e206c33d198e1cd1a94303a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 1.3.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zod@4.0.10)
       dotenv-cli:
         specifier: 'catalog:'
         version: 8.0.0
@@ -1029,8 +1024,8 @@ packages:
     resolution: {integrity: sha512-ruv7Ae4J5dUYULmeXw1gmb7rYRz57OWCPM57pHojnLq/3Z1CK2lNSLTCVjxVk1F/TZHwOZZrOWi0ur95BbLxNQ==}
     engines: {node: '>=6.9.0'}
 
-  '@better-auth/utils@0.2.5':
-    resolution: {integrity: sha512-uI2+/8h/zVsH8RrYdG8eUErbuGBk16rZKQfz8CjxQOyCE6v7BqFYEbFwvOkvl1KbUdxhqOnXp78+uE5h8qVEgQ==}
+  '@better-auth/utils@0.2.6':
+    resolution: {integrity: sha512-3y/vaL5Ox33dBwgJ6ub3OPkVqr6B5xL2kgxNHG8eHZuryLyG/4JSPGqjbdRSgjuy9kALUZYDFl+ORIAxlWMSuA==}
 
   '@better-fetch/fetch@1.1.18':
     resolution: {integrity: sha512-rEFOE1MYIsBmoMJtQbl32PGHHXuG2hDxvEd7rUHE0vCBoFQVSDqaVs9hkZEtHCxRoY+CljXKFCOuJ8uxqw1LcA==}
@@ -3078,11 +3073,11 @@ packages:
   '@sideway/pinpoint@2.0.0':
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
 
-  '@simplewebauthn/browser@13.1.0':
-    resolution: {integrity: sha512-WuHZ/PYvyPJ9nxSzgHtOEjogBhwJfC8xzYkPC+rR/+8chl/ft4ngjiK8kSU5HtRJfczupyOh33b25TjYbvwAcg==}
+  '@simplewebauthn/browser@13.1.2':
+    resolution: {integrity: sha512-aZnW0KawAM83fSBUgglP5WofbrLbLyr7CoPqYr66Eppm7zO86YX6rrCjRB3hQKPrL7ATvY4FVXlykZ6w6FwYYw==}
 
-  '@simplewebauthn/server@13.1.1':
-    resolution: {integrity: sha512-1hsLpRHfSuMB9ee2aAdh0Htza/X3f4djhYISrggqGe3xopNjOcePiSDkDDoPzDYaaMCrbqGP1H2TYU7bgL9PmA==}
+  '@simplewebauthn/server@13.1.2':
+    resolution: {integrity: sha512-VwoDfvLXSCaRiD+xCIuyslU0HLxVggeE5BL06+GbsP2l1fGf5op8e0c3ZtKoi+vSg1q4ikjtAghC23ze2Q3H9g==}
     engines: {node: '>=20.0.0'}
 
   '@standard-schema/utils@0.3.0':
@@ -3893,11 +3888,12 @@ packages:
     resolution: {integrity: sha512-4Bcg1P8xhUuqcii/S0Z9wiHIrQVPMermM1any+MX5GeGD7faD3/msQUDGLol9wOcz4/jbg/WJnGqoJF6LiBdtg==}
     engines: {node: '>=10.0.0'}
 
-  better-auth@1.3.4:
-    resolution: {integrity: sha512-JbZYam6Cs3Eu5CSoMK120zSshfaKvrCftSo/+v7524H1RvhryQ7UtMbzagBcXj0Digjj8hZtVkkR4tTZD/wK2g==}
+  better-auth@1.3.7:
+    resolution: {integrity: sha512-/1fEyx2SGgJQM5ujozDCh9eJksnVkNU/J7Fk/tG5Y390l8nKbrPvqiFlCjlMM+scR+UABJbQzA6An7HT50LHyQ==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
+      zod: ^3.25.0 || ^4.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5318,9 +5314,9 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  kysely@0.28.2:
-    resolution: {integrity: sha512-4YAVLoF0Sf0UTqlhgQMFU9iQECdah7n+13ANkiuVfRvlK+uI0Etbgd7bVP36dKlG+NXWbhGua8vnGt+sdhvT7A==}
-    engines: {node: '>=18.0.0'}
+  kysely@0.28.5:
+    resolution: {integrity: sha512-rlB0I/c6FBDWPcQoDtkxi9zIvpmnV5xoIalfCMSMCa7nuA6VGA3F54TW9mEgX4DVf10sXAWCF5fDbamI/5ZpKA==}
+    engines: {node: '>=20.0.0'}
 
   language-subtag-registry@0.3.23:
     resolution: {integrity: sha512-0K65Lea881pHotoGEa5gDlMxt3pctLi2RplBb7Ezh4rRdLEOtgi7n4EwK9lamnUCkKBqaeKRVebTq6BAxSkpXQ==}
@@ -7252,9 +7248,8 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@better-auth/utils@0.2.5':
+  '@better-auth/utils@0.2.6':
     dependencies:
-      typescript: 5.9.2
       uncrypto: 0.1.3
 
   '@better-fetch/fetch@1.1.18': {}
@@ -9210,9 +9205,9 @@ snapshots:
 
   '@sideway/pinpoint@2.0.0': {}
 
-  '@simplewebauthn/browser@13.1.0': {}
+  '@simplewebauthn/browser@13.1.2': {}
 
-  '@simplewebauthn/server@13.1.1':
+  '@simplewebauthn/server@13.1.2':
     dependencies:
       '@hexagon/base64': 1.1.28
       '@levischuck/tiny-cbor': 0.2.11
@@ -10181,18 +10176,18 @@ snapshots:
 
   basic-ftp@5.0.5: {}
 
-  better-auth@1.3.4(patch_hash=58cf672ce2c5b88429f94a4b9b08b1bdd8a1225b9e206c33d198e1cd1a94303a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  better-auth@1.3.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(zod@4.0.10):
     dependencies:
-      '@better-auth/utils': 0.2.5
+      '@better-auth/utils': 0.2.6
       '@better-fetch/fetch': 1.1.18
       '@noble/ciphers': 0.6.0
       '@noble/hashes': 1.8.0
-      '@simplewebauthn/browser': 13.1.0
-      '@simplewebauthn/server': 13.1.1
+      '@simplewebauthn/browser': 13.1.2
+      '@simplewebauthn/server': 13.1.2
       better-call: 1.0.13
       defu: 6.1.4
       jose: 5.10.0
-      kysely: 0.28.2
+      kysely: 0.28.5
       nanostores: 0.11.4
       zod: 4.0.10
     optionalDependencies:
@@ -10635,14 +10630,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.44.2(kysely@0.28.2)(postgres@3.4.7):
+  drizzle-orm@0.44.2(kysely@0.28.5)(postgres@3.4.7):
     optionalDependencies:
-      kysely: 0.28.2
+      kysely: 0.28.5
       postgres: 3.4.7
 
-  drizzle-zod@0.8.2(drizzle-orm@0.44.2(kysely@0.28.2)(postgres@3.4.7))(zod@4.0.10):
+  drizzle-zod@0.8.2(drizzle-orm@0.44.2(kysely@0.28.5)(postgres@3.4.7))(zod@4.0.10):
     dependencies:
-      drizzle-orm: 0.44.2(kysely@0.28.2)(postgres@3.4.7)
+      drizzle-orm: 0.44.2(kysely@0.28.5)(postgres@3.4.7)
       zod: 4.0.10
 
   dunder-proto@1.0.1:
@@ -11806,7 +11801,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kysely@0.28.2: {}
+  kysely@0.28.5: {}
 
   language-subtag-registry@0.3.23: {}
 
