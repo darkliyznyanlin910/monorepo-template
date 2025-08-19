@@ -1,4 +1,4 @@
-import { Consumer, EachMessagePayload, Kafka } from "kafkajs";
+import type { Consumer, EachMessagePayload, Kafka } from "kafkajs";
 
 export interface ConsumerOptions {
   groupId: string;
@@ -28,11 +28,9 @@ export type TypedMessageHandler<T> = (
 ) => Promise<void>;
 
 // Topic registry types
-export type TopicHandler<T = any> = (message: T) => Promise<void>;
+export type TopicHandler<T = unknown> = (message: T) => Promise<void> | void;
 
-export interface TopicHandlerRegistry {
-  [topic: string]: TopicHandler;
-}
+export type TopicHandlerRegistry = Record<string, TopicHandler>;
 
 function parseMessageValue<T>(value: Buffer | null): T {
   if (!value) return null as T;
@@ -41,7 +39,7 @@ function parseMessageValue<T>(value: Buffer | null): T {
 
   try {
     // Parse JSON and let TypeScript infer the type
-    const parsed = JSON.parse(stringValue);
+    const parsed: T = JSON.parse(stringValue) as T;
     return parsed;
   } catch {
     // If JSON parsing fails, return the string value
@@ -51,9 +49,9 @@ function parseMessageValue<T>(value: Buffer | null): T {
 
 export class KafkaConsumer {
   private consumer: Consumer;
-  private connected: boolean = false;
+  private connected = false;
   private topicHandlers: TopicHandlerRegistry = {};
-  private isRunningWithHandlers: boolean = false;
+  private isRunningWithHandlers = false;
 
   constructor(kafka: Kafka, options: ConsumerOptions) {
     this.consumer = kafka.consumer({
@@ -134,9 +132,9 @@ export class KafkaConsumer {
             partition: payload.partition,
             message: {
               offset: payload.message.offset,
-              key: payload.message.key?.toString() || null,
+              key: payload.message.key?.toString() ?? null,
               value: parseMessageValue<T>(payload.message.value),
-              rawValue: payload.message.value?.toString() || null,
+              rawValue: payload.message.value?.toString() ?? null,
             },
           };
 
@@ -251,7 +249,7 @@ export class KafkaConsumer {
     }
 
     try {
-      const parsedValue = this.parseMessageValue(message.value);
+      const parsedValue: unknown = this.parseMessageValue(message.value);
       await handler(parsedValue);
     } catch (error) {
       console.error(`Error processing message from topic ${topic}:`, error);
@@ -265,7 +263,7 @@ export class KafkaConsumer {
    * @param value - The raw message value
    * @returns Parsed message value
    */
-  private parseMessageValue(value: Buffer): any {
+  private parseMessageValue(value: Buffer): unknown {
     try {
       const stringValue = value.toString();
       return JSON.parse(stringValue);

@@ -238,7 +238,7 @@ export function MembersDialog({
                 >
                   <div>
                     <p className="font-medium">
-                      {member.user.name || member.user.email}
+                      {member.user.name ?? member.user.email}
                     </p>
                     <p className="text-sm text-gray-500">{member.user.email}</p>
                   </div>

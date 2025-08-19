@@ -1,4 +1,4 @@
-export type DatabaseEvent<T> = {
+export interface DatabaseEvent<T> {
   before: T | null;
   after: T;
   source: {
@@ -22,4 +22,4 @@ export type DatabaseEvent<T> = {
   ts_ms: number;
   ts_us: number;
   ts_ns: number;
-};
+}

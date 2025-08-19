@@ -8,186 +8,186 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as MainRouteImport } from './routes/_main'
-import { Route as SignUpIndexRouteImport } from './routes/sign-up.index'
-import { Route as SignInIndexRouteImport } from './routes/sign-in.index'
-import { Route as MainIndexRouteImport } from './routes/_main.index'
-import { Route as AcceptInvitationInviteIdRouteImport } from './routes/accept-invitation.$inviteId'
-import { Route as MainProfileIndexRouteImport } from './routes/_main.profile.index'
-import { Route as MainOrganizationsIndexRouteImport } from './routes/_main.organizations.index'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as MainRouteImport } from "./routes/_main";
+import { Route as MainIndexRouteImport } from "./routes/_main.index";
+import { Route as MainOrganizationsIndexRouteImport } from "./routes/_main.organizations.index";
+import { Route as MainProfileIndexRouteImport } from "./routes/_main.profile.index";
+import { Route as AcceptInvitationInviteIdRouteImport } from "./routes/accept-invitation.$inviteId";
+import { Route as SignInIndexRouteImport } from "./routes/sign-in.index";
+import { Route as SignUpIndexRouteImport } from "./routes/sign-up.index";
 
 const MainRoute = MainRouteImport.update({
-  id: '/_main',
+  id: "/_main",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const SignUpIndexRoute = SignUpIndexRouteImport.update({
-  id: '/sign-up/',
-  path: '/sign-up/',
+  id: "/sign-up/",
+  path: "/sign-up/",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const SignInIndexRoute = SignInIndexRouteImport.update({
-  id: '/sign-in/',
-  path: '/sign-in/',
+  id: "/sign-in/",
+  path: "/sign-in/",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MainIndexRoute = MainIndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => MainRoute,
-} as any)
+} as any);
 const AcceptInvitationInviteIdRoute =
   AcceptInvitationInviteIdRouteImport.update({
-    id: '/accept-invitation/$inviteId',
-    path: '/accept-invitation/$inviteId',
+    id: "/accept-invitation/$inviteId",
+    path: "/accept-invitation/$inviteId",
     getParentRoute: () => rootRouteImport,
-  } as any)
+  } as any);
 const MainProfileIndexRoute = MainProfileIndexRouteImport.update({
-  id: '/profile/',
-  path: '/profile/',
+  id: "/profile/",
+  path: "/profile/",
   getParentRoute: () => MainRoute,
-} as any)
+} as any);
 const MainOrganizationsIndexRoute = MainOrganizationsIndexRouteImport.update({
-  id: '/organizations/',
-  path: '/organizations/',
+  id: "/organizations/",
+  path: "/organizations/",
   getParentRoute: () => MainRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/accept-invitation/$inviteId': typeof AcceptInvitationInviteIdRoute
-  '/': typeof MainIndexRoute
-  '/sign-in': typeof SignInIndexRoute
-  '/sign-up': typeof SignUpIndexRoute
-  '/organizations': typeof MainOrganizationsIndexRoute
-  '/profile': typeof MainProfileIndexRoute
+  "/accept-invitation/$inviteId": typeof AcceptInvitationInviteIdRoute;
+  "/": typeof MainIndexRoute;
+  "/sign-in": typeof SignInIndexRoute;
+  "/sign-up": typeof SignUpIndexRoute;
+  "/organizations": typeof MainOrganizationsIndexRoute;
+  "/profile": typeof MainProfileIndexRoute;
 }
 export interface FileRoutesByTo {
-  '/accept-invitation/$inviteId': typeof AcceptInvitationInviteIdRoute
-  '/': typeof MainIndexRoute
-  '/sign-in': typeof SignInIndexRoute
-  '/sign-up': typeof SignUpIndexRoute
-  '/organizations': typeof MainOrganizationsIndexRoute
-  '/profile': typeof MainProfileIndexRoute
+  "/accept-invitation/$inviteId": typeof AcceptInvitationInviteIdRoute;
+  "/": typeof MainIndexRoute;
+  "/sign-in": typeof SignInIndexRoute;
+  "/sign-up": typeof SignUpIndexRoute;
+  "/organizations": typeof MainOrganizationsIndexRoute;
+  "/profile": typeof MainProfileIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_main': typeof MainRouteWithChildren
-  '/accept-invitation/$inviteId': typeof AcceptInvitationInviteIdRoute
-  '/_main/': typeof MainIndexRoute
-  '/sign-in/': typeof SignInIndexRoute
-  '/sign-up/': typeof SignUpIndexRoute
-  '/_main/organizations/': typeof MainOrganizationsIndexRoute
-  '/_main/profile/': typeof MainProfileIndexRoute
+  __root__: typeof rootRouteImport;
+  "/_main": typeof MainRouteWithChildren;
+  "/accept-invitation/$inviteId": typeof AcceptInvitationInviteIdRoute;
+  "/_main/": typeof MainIndexRoute;
+  "/sign-in/": typeof SignInIndexRoute;
+  "/sign-up/": typeof SignUpIndexRoute;
+  "/_main/organizations/": typeof MainOrganizationsIndexRoute;
+  "/_main/profile/": typeof MainProfileIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/accept-invitation/$inviteId'
-    | '/'
-    | '/sign-in'
-    | '/sign-up'
-    | '/organizations'
-    | '/profile'
-  fileRoutesByTo: FileRoutesByTo
+    | "/accept-invitation/$inviteId"
+    | "/"
+    | "/sign-in"
+    | "/sign-up"
+    | "/organizations"
+    | "/profile";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/accept-invitation/$inviteId'
-    | '/'
-    | '/sign-in'
-    | '/sign-up'
-    | '/organizations'
-    | '/profile'
+    | "/accept-invitation/$inviteId"
+    | "/"
+    | "/sign-in"
+    | "/sign-up"
+    | "/organizations"
+    | "/profile";
   id:
-    | '__root__'
-    | '/_main'
-    | '/accept-invitation/$inviteId'
-    | '/_main/'
-    | '/sign-in/'
-    | '/sign-up/'
-    | '/_main/organizations/'
-    | '/_main/profile/'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/_main"
+    | "/accept-invitation/$inviteId"
+    | "/_main/"
+    | "/sign-in/"
+    | "/sign-up/"
+    | "/_main/organizations/"
+    | "/_main/profile/";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  MainRoute: typeof MainRouteWithChildren
-  AcceptInvitationInviteIdRoute: typeof AcceptInvitationInviteIdRoute
-  SignInIndexRoute: typeof SignInIndexRoute
-  SignUpIndexRoute: typeof SignUpIndexRoute
+  MainRoute: typeof MainRouteWithChildren;
+  AcceptInvitationInviteIdRoute: typeof AcceptInvitationInviteIdRoute;
+  SignInIndexRoute: typeof SignInIndexRoute;
+  SignUpIndexRoute: typeof SignUpIndexRoute;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/_main': {
-      id: '/_main'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof MainRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sign-up/': {
-      id: '/sign-up/'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sign-in/': {
-      id: '/sign-in/'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof SignInIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_main/': {
-      id: '/_main/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof MainIndexRouteImport
-      parentRoute: typeof MainRoute
-    }
-    '/accept-invitation/$inviteId': {
-      id: '/accept-invitation/$inviteId'
-      path: '/accept-invitation/$inviteId'
-      fullPath: '/accept-invitation/$inviteId'
-      preLoaderRoute: typeof AcceptInvitationInviteIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_main/profile/': {
-      id: '/_main/profile/'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof MainProfileIndexRouteImport
-      parentRoute: typeof MainRoute
-    }
-    '/_main/organizations/': {
-      id: '/_main/organizations/'
-      path: '/organizations'
-      fullPath: '/organizations'
-      preLoaderRoute: typeof MainOrganizationsIndexRouteImport
-      parentRoute: typeof MainRoute
-    }
+    "/_main": {
+      id: "/_main";
+      path: "";
+      fullPath: "";
+      preLoaderRoute: typeof MainRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/sign-up/": {
+      id: "/sign-up/";
+      path: "/sign-up";
+      fullPath: "/sign-up";
+      preLoaderRoute: typeof SignUpIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/sign-in/": {
+      id: "/sign-in/";
+      path: "/sign-in";
+      fullPath: "/sign-in";
+      preLoaderRoute: typeof SignInIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_main/": {
+      id: "/_main/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof MainIndexRouteImport;
+      parentRoute: typeof MainRoute;
+    };
+    "/accept-invitation/$inviteId": {
+      id: "/accept-invitation/$inviteId";
+      path: "/accept-invitation/$inviteId";
+      fullPath: "/accept-invitation/$inviteId";
+      preLoaderRoute: typeof AcceptInvitationInviteIdRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_main/profile/": {
+      id: "/_main/profile/";
+      path: "/profile";
+      fullPath: "/profile";
+      preLoaderRoute: typeof MainProfileIndexRouteImport;
+      parentRoute: typeof MainRoute;
+    };
+    "/_main/organizations/": {
+      id: "/_main/organizations/";
+      path: "/organizations";
+      fullPath: "/organizations";
+      preLoaderRoute: typeof MainOrganizationsIndexRouteImport;
+      parentRoute: typeof MainRoute;
+    };
   }
 }
 
 interface MainRouteChildren {
-  MainIndexRoute: typeof MainIndexRoute
-  MainOrganizationsIndexRoute: typeof MainOrganizationsIndexRoute
-  MainProfileIndexRoute: typeof MainProfileIndexRoute
+  MainIndexRoute: typeof MainIndexRoute;
+  MainOrganizationsIndexRoute: typeof MainOrganizationsIndexRoute;
+  MainProfileIndexRoute: typeof MainProfileIndexRoute;
 }
 
 const MainRouteChildren: MainRouteChildren = {
   MainIndexRoute: MainIndexRoute,
   MainOrganizationsIndexRoute: MainOrganizationsIndexRoute,
   MainProfileIndexRoute: MainProfileIndexRoute,
-}
+};
 
-const MainRouteWithChildren = MainRoute._addFileChildren(MainRouteChildren)
+const MainRouteWithChildren = MainRoute._addFileChildren(MainRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   MainRoute: MainRouteWithChildren,
   AcceptInvitationInviteIdRoute: AcceptInvitationInviteIdRoute,
   SignInIndexRoute: SignInIndexRoute,
   SignUpIndexRoute: SignUpIndexRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();

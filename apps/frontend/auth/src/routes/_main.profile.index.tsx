@@ -101,7 +101,7 @@ function RouteComponent() {
     try {
       await authClient.signOut();
       router.navigate({ to: "/sign-in" });
-    } catch (err) {
+    } catch {
       toast.error("Failed to sign out");
     }
   };
@@ -109,7 +109,7 @@ function RouteComponent() {
   const handleCancelEdit = () => {
     setIsEditing(false);
     form.reset({
-      name: user?.name || "",
+      name: user?.name ?? "",
     });
   };
 
@@ -257,14 +257,13 @@ function RouteComponent() {
                   <label className="mb-2 block text-sm font-medium text-gray-700">
                     Active Organization
                   </label>
-                  {sessionData?.session?.activeOrganizationId ? (
+                  {sessionData.session.activeOrganizationId ? (
                     <div className="space-y-2">
                       <Badge variant="default">
                         {organizations.find(
                           (org) =>
-                            org.id ===
-                            sessionData.session?.activeOrganizationId,
-                        )?.name || sessionData.session.activeOrganizationId}
+                            org.id === sessionData.session.activeOrganizationId,
+                        )?.name ?? sessionData.session.activeOrganizationId}
                       </Badge>
                       <Select
                         value={sessionData.session.activeOrganizationId}

@@ -57,7 +57,7 @@ export function EditOrganizationDialog({
     if (open && organization) {
       form.reset({
         name: organization.name,
-        slug: organization.slug || "",
+        slug: organization.slug ?? "",
       });
     }
     if (!open) {

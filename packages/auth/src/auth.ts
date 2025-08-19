@@ -8,8 +8,8 @@ export const auth = initAuth(
     baseDomain: "localhost",
     baseUrl: "http://localhost:3000",
     secret: "secret",
-    getOrganizations: async (userId) => {
-      return [];
+    getOrganizations: (_userId) => {
+      return [] as string[];
     },
   },
 );

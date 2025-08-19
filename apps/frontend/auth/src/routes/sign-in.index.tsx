@@ -61,7 +61,7 @@ function RouteComponent() {
 
       toast.success("Signed in successfully!");
       // Redirect to the specified URL or home page after successful sign in
-      router.navigate({ to: redirect || "/" });
+      await router.navigate({ to: redirect ?? "/" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "An error occurred");
     } finally {

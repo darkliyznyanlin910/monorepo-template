@@ -1,21 +1,21 @@
 import type { BetterAuthOptions } from "better-auth";
+import type { Client } from "better-auth/plugins";
+import type { SocialProviders } from "better-auth/social-providers";
+import type nodemailer from "nodemailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import {
   apiKey,
   bearer,
-  Client,
   jwt,
   oidcProvider,
   openAPI,
   organization,
 } from "better-auth/plugins";
-import { SocialProviders } from "better-auth/social-providers";
-import nodemailer from "nodemailer";
-import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export function initAuth(
-  DB: any,
+  DB: unknown,
   options: {
     baseDomain: string;
     baseUrl: string;
@@ -26,14 +26,16 @@ export function initAuth(
       SMTPTransport.SentMessageInfo,
       SMTPTransport.Options
     >;
-    getOrganizations: (userId: string) => Promise<string[]> | undefined;
+    getOrganizations: (
+      userId: string,
+    ) => Promise<string[]> | undefined | string[];
     oidcProvider?: {
       trustedClients: Client[];
     };
   },
 ) {
   const config = {
-    database: drizzleAdapter(DB, {
+    database: drizzleAdapter(DB as Parameters<typeof drizzleAdapter>[0], {
       provider: "pg",
       usePlural: true,
     }),
@@ -93,7 +95,7 @@ export function initAuth(
     socialProviders: options.socialProviders,
     emailVerification: options.mailer
       ? {
-          sendVerificationEmail: async ({ user, url, token }, request) => {
+          sendVerificationEmail: async ({ user, url }, _request) => {
             await options.mailer?.sendMail({
               to: user.email,
               subject: "Verify your email address",

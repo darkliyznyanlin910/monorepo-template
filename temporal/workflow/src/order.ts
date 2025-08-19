@@ -6,17 +6,16 @@ import {
 } from "@temporalio/workflow";
 
 import type * as activities from "@repo/temporal-activities";
-import { Duration } from "@repo/temporal-common";
 
-type Order = {
+interface Order {
   id: string;
   amount: number;
   email: string;
-};
+}
 
-const PAYMENT_TIMEOUT: Duration = "5m";
-const ACTIVITY_TIMEOUT: Duration = "1m";
-const ACTIVITY_RETRY_MAX_INTERVAL: Duration = "1m";
+const PAYMENT_TIMEOUT = "5m";
+const ACTIVITY_TIMEOUT = "1m";
+const ACTIVITY_RETRY_MAX_INTERVAL = "1m";
 
 const paymentSucceededSignal = defineSignal<[string]>("paymentSucceeded");
 
@@ -45,7 +44,7 @@ export async function order(order: Order) {
 
   const isPaymentSuccessful = await condition(
     () => paymentStatus === "complete",
-    PAYMENT_TIMEOUT as Duration,
+    PAYMENT_TIMEOUT,
   );
 
   const stripePaymentStatus = await getStripePaymentStatus(session.id);

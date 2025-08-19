@@ -1,4 +1,4 @@
-import * as utils from "./utils";
+import type * as utils from "./utils";
 
 export type Service = (typeof utils.SERVICES)[number];
 

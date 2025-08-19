@@ -1,5 +1,5 @@
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 import { env as serviceDiscoveryEnv } from "@repo/service-discovery/env";
 

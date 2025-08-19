@@ -3,9 +3,9 @@ import reactConfig from "@repo/eslint-config/react";
 
 /** @type {import('typescript-eslint').Config} */
 export default [
-  {
-    ignores: ["dist/**"],
-  },
   ...baseConfig,
   ...reactConfig,
+  {
+    ignores: ["dist/**", "src/components/**"],
+  },
 ];

@@ -1,4 +1,4 @@
-import { Kafka, Producer } from "kafkajs";
+import type { Kafka, Producer } from "kafkajs";
 
 export interface ProducerOptions {
   maxInFlightRequests?: number;
@@ -14,7 +14,7 @@ export interface MessagePayload {
 
 export class KafkaProducer {
   private producer: Producer;
-  private connected: boolean = false;
+  private connected = false;
 
   constructor(kafka: Kafka, options: ProducerOptions = {}) {
     this.producer = kafka.producer({
@@ -50,7 +50,7 @@ export class KafkaProducer {
     }
   }
 
-  async send(topic: string, messages: MessagePayload[]): Promise<any> {
+  async send(topic: string, messages: MessagePayload[]): Promise<unknown> {
     if (!this.connected) {
       throw new Error("Producer is not connected");
     }
@@ -78,7 +78,7 @@ export async function sendMessage(
   producer: Producer,
   topic: string,
   messages: MessagePayload[],
-): Promise<any> {
+): Promise<unknown> {
   try {
     const result = await producer.send({
       topic,

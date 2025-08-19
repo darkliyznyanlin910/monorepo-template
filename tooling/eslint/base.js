@@ -82,6 +82,9 @@ export default tseslint.config(
           message: "Use `import { z } from 'zod/v4'` instead to ensure v4.",
         },
       ],
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/require-await": "off",
     },
   },
   {

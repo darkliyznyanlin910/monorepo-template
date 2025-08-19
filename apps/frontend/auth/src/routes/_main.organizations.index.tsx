@@ -21,10 +21,10 @@ import {
 } from "~/hooks";
 import { authClient } from "~/lib/auth";
 
-type OrganizationForm = {
+interface OrganizationForm {
   name: string;
   slug?: string;
-};
+}
 
 export const Route = createFileRoute("/_main/organizations/")({
   component: RouteComponent,
@@ -74,11 +74,11 @@ function RouteComponent() {
         organizationId: selectedOrg.id,
         data: {
           name: data.name,
-          slug: data.slug || undefined,
+          slug: data.slug ?? undefined,
         },
       });
       setIsEditDialogOpen(false);
-    } catch (error) {
+    } catch {
       // Error is handled by the mutation in the hook
     }
   };
@@ -88,7 +88,7 @@ function RouteComponent() {
       return;
     }
 
-    if (!session?.user?.id) {
+    if (!session?.user.id) {
       toast.error("User ID not available");
       return;
     }
@@ -156,7 +156,7 @@ function RouteComponent() {
           {/* Organizations List */}
           <OrganizationsList
             organizations={organizations}
-            activeOrganizationId={session?.session?.activeOrganizationId}
+            activeOrganizationId={session?.session.activeOrganizationId}
             userMemberships={userMemberships}
             onSetActive={handleSetActiveOrganization}
             onEdit={handleEditOrganization}

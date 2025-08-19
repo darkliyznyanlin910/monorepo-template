@@ -1,12 +1,14 @@
-import { ServiceMap } from "./types";
+import type { ServiceMap } from "./types";
 
 export const PROD_DOMAIN = "jknl.dev";
 
-export const SERVICE_CONFIG = {
+type ServiceConfig = Record<string, { exposed: boolean }>;
+
+export const SERVICE_CONFIG: ServiceConfig = {
   auth: {
     exposed: true,
   },
-} as const;
+};
 
 export const LOCAL_SERVICE_MAP: ServiceMap = {
   auth: "http://auth.127.0.0.1.nip.io",

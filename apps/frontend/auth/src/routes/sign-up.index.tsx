@@ -72,7 +72,7 @@ function RouteComponent() {
       toast.success("Account created successfully! Redirecting to sign in...");
       // Redirect to sign-in page or dashboard after successful sign up
       setTimeout(() => {
-        router.navigate({ to: "/sign-in", search: { redirect } });
+        void router.navigate({ to: "/sign-in", search: { redirect } });
       }, 2000);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "An error occurred");

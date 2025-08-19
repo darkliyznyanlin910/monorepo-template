@@ -1,6 +1,6 @@
 // Import the topic registry to register types
-import { sessions } from "@repo/db-auth/schema";
-import { DatabaseEvent } from "@repo/kafka";
+import type { sessions } from "@repo/db-auth/schema";
+import type { DatabaseEvent } from "@repo/kafka";
 
 import { consumer, disconnectKafka, initConsumer, initProducer } from "./kafka";
 
@@ -15,7 +15,7 @@ async function main() {
     // Register typed handlers for specific topics
     consumer.registerHandler<DatabaseEvent<typeof sessions.$inferSelect>>(
       "auth.public.sessions",
-      async (message) => {
+      (message) => {
         // Process analytics message here with type safety for sessions
         console.log("Sessions event:", message);
 
@@ -43,16 +43,20 @@ async function main() {
 }
 
 // Graceful shutdown
-process.on("SIGTERM", async () => {
+process.on("SIGTERM", () => {
   console.log("Received SIGTERM, shutting down gracefully...");
-  await disconnectKafka();
-  process.exit(0);
+  void (async () => {
+    await disconnectKafka();
+    process.exit(0);
+  })();
 });
 
-process.on("SIGINT", async () => {
+process.on("SIGINT", () => {
   console.log("Received SIGINT, shutting down gracefully...");
-  await disconnectKafka();
-  process.exit(0);
+  void (async () => {
+    await disconnectKafka();
+    process.exit(0);
+  })();
 });
 
 main().catch((error) => {

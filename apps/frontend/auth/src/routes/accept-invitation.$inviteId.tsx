@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 
 import { Button } from "@repo/ui/components/button.tsx";
@@ -22,17 +22,12 @@ function RouteComponent() {
   const { inviteId } = Route.useParams();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [invitation, setInvitation] = useState<any>(null);
+  const [invitation, setInvitation] = useState<{ id: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const acceptInvitationMutation = useAcceptInvitation();
 
-  useEffect(() => {
-    // Check if user is already authenticated
-    checkAuthAndLoadInvitation();
-  }, [inviteId]);
-
-  const checkAuthAndLoadInvitation = async () => {
+  const checkAuthAndLoadInvitation = useCallback(async () => {
     setIsLoading(true);
     try {
       const session = await authClient.getSession();
@@ -57,7 +52,12 @@ function RouteComponent() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [inviteId, router]);
+
+  useEffect(() => {
+    // Check if user is already authenticated
+    checkAuthAndLoadInvitation();
+  }, [checkAuthAndLoadInvitation]);
 
   const handleAcceptInvitation = async () => {
     try {

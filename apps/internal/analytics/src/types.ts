@@ -3,7 +3,7 @@ export interface AnalyticsEvent {
   event: string;
   timestamp: number;
   userId?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface KafkaMessage {

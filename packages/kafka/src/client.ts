@@ -17,7 +17,7 @@ export function createKafkaClient(options: KafkaClientOptions): Kafka {
 
   return new Kafka({
     clientId: options.clientId,
-    brokers: kafkaConfig.bootstrap as string[],
+    brokers: kafkaConfig.bootstrap,
     ssl: options.ssl ?? true,
     retry: {
       initialRetryTime: options.retry?.initialRetryTime ?? 100,

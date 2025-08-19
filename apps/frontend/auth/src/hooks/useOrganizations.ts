@@ -58,7 +58,7 @@ export function useOrganizations() {
       if (result.error) {
         throw new Error(result.error.message ?? "Failed to load organizations");
       }
-      return result.data ?? [];
+      return result.data;
     },
   });
 }
@@ -71,7 +71,7 @@ export function useOrganizationMembers(organizationId: string, enabled = true) {
       if (result.error) {
         throw new Error(result.error.message ?? "Failed to load members");
       }
-      return result.data?.members ?? [];
+      return result.data.members;
     },
     enabled,
   });
@@ -222,7 +222,7 @@ export function useUserMemberships() {
     queryKey: [...organizationKeys.all, "userMemberships"],
     queryFn: async () => {
       const session = await authClient.getSession();
-      if (!session.data?.user?.id) {
+      if (!session.data?.user.id) {
         throw new Error("User not authenticated");
       }
 
@@ -233,7 +233,7 @@ export function useUserMemberships() {
         );
       }
 
-      const organizations = organizationsResult.data ?? [];
+      const organizations = organizationsResult.data;
       const membershipsMap: Record<string, string> = {};
 
       // Get role for each organization the user is part of
@@ -246,7 +246,7 @@ export function useUserMemberships() {
           },
         );
 
-        if (!membersResult.error && membersResult.data?.members) {
+        if (!membersResult.error) {
           const userMember = membersResult.data.members.find(
             (member) => member.userId === session.data?.user.id,
           );
@@ -310,7 +310,7 @@ export function useListInvitations(organizationId?: string) {
       if (result.error) {
         throw new Error(result.error.message ?? "Failed to load invitations");
       }
-      return result.data ?? [];
+      return result.data;
     },
     enabled: !!organizationId,
   });

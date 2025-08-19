@@ -1,4 +1,5 @@
-import { KafkaManager, MessagePayload } from "@repo/kafka";
+import type { MessagePayload } from "@repo/kafka";
+import { KafkaManager } from "@repo/kafka";
 
 import { env } from "./env";
 
@@ -42,8 +43,11 @@ export async function disconnectKafka() {
 }
 
 // Helper function to send messages
-export async function sendMessage(topic: string, messages: MessagePayload[]) {
-  return await producer.send(topic, messages);
+export async function sendMessage(
+  topic: string,
+  messages: MessagePayload[],
+): Promise<void> {
+  await producer.send(topic, messages);
 }
 
 // Helper function to subscribe to topics

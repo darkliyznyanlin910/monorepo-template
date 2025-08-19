@@ -40,15 +40,15 @@ function Index() {
             {/* Welcome Message */}
             <div className="rounded-lg bg-white p-6 shadow">
               <h2 className="mb-2 text-2xl font-semibold text-gray-900">
-                Welcome back, {data.user?.name || data.user?.email}!
+                Welcome back, {data.user.name || data.user.email}!
               </h2>
-              {data.session?.activeOrganizationId && (
+              {data.session.activeOrganizationId && (
                 <div className="mb-4">
                   <p className="text-sm text-gray-600">Active Organization:</p>
                   <Badge variant="default" className="mt-1">
                     {organizations.find(
-                      (org) => org.id === data.session?.activeOrganizationId,
-                    )?.name || data.session.activeOrganizationId}
+                      (org) => org.id === data.session.activeOrganizationId,
+                    )?.name ?? data.session.activeOrganizationId}
                   </Badge>
                 </div>
               )}
@@ -88,7 +88,7 @@ function Index() {
                   Email Status
                 </h3>
                 <p className="text-3xl font-bold text-blue-600">
-                  {data.user?.emailVerified ? "Verified" : "Pending"}
+                  {data.user.emailVerified ? "Verified" : "Pending"}
                 </p>
               </div>
 
@@ -97,9 +97,7 @@ function Index() {
                   Member Since
                 </h3>
                 <p className="text-sm font-medium text-gray-900">
-                  {data.user?.createdAt
-                    ? new Date(data.user.createdAt).toLocaleDateString()
-                    : "Unknown"}
+                  {new Date(data.user.createdAt).toLocaleDateString()}
                 </p>
               </div>
             </div>
