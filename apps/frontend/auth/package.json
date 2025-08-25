@@ -28,7 +28,7 @@
     "@repo/db-auth": "workspace:*",
     "@repo/service-discovery": "workspace:*",
     "@repo/ui": "workspace:*",
-    "@tailwindcss/vite": "^4.1.12",
+    "@tailwindcss/vite": "catalog:",
     "@tanstack/react-router": "^1.121.34",
     "@tanstack/react-table": "^8.21.2",
     "hono": "catalog:",

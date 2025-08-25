@@ -93,11 +93,6 @@ export default function frontendGenerator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
-        path: "apps/frontend/{{ name }}/postcss.config.cjs",
-        templateFile: "templates/frontend/postcss.config.cjs.hbs",
-      },
-      {
-        type: "add",
         path: "apps/frontend/{{ name }}/tsconfig.json",
         templateFile: "templates/frontend/tsconfig.json.hbs",
       },
