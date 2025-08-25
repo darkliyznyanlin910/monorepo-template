@@ -6,6 +6,7 @@ import type SMTPTransport from "nodemailer/lib/smtp-transport";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import {
+  admin,
   apiKey,
   bearer,
   jwt,
@@ -13,6 +14,9 @@ import {
   openAPI,
   organization,
 } from "better-auth/plugins";
+
+import { ac as adminAc } from "./plugins/admin";
+import { ac as organizationAc } from "./plugins/organization";
 
 export function initAuth(
   DB: unknown,
@@ -46,6 +50,9 @@ export function initAuth(
     plugins: [
       apiKey(),
       bearer(),
+      admin({
+        ac: adminAc,
+      }),
       openAPI({
         path: "/docs",
       }),
@@ -69,6 +76,7 @@ export function initAuth(
             text: `Click the link to join the organization: ${inviteLink}`,
           });
         },
+        accessControl: organizationAc,
       }),
       oidcProvider({
         loginPage: "/sign-in",
@@ -86,6 +94,15 @@ export function initAuth(
 
     emailAndPassword: {
       enabled: true,
+      sendResetPassword: options.mailer
+        ? async ({ user, url }, _request) => {
+            await options.mailer?.sendMail({
+              to: user.email,
+              subject: "Reset your password",
+              text: `Click the link to reset your password: ${url}`,
+            });
+          }
+        : undefined,
     },
 
     // Reference: https://www.better-auth.com/docs/reference/options#user
