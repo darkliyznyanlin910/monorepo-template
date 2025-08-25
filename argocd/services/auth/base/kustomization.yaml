@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
   - repo: oci://registry.127.0.0.1.nip.io
     name: service
-    version: 0.1.1-6af0d55
+    version: 0.1.1
     releaseName: auth
     namespace: services
     valuesInline:
